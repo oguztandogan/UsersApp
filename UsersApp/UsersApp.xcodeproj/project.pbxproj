@@ -26,6 +26,17 @@
 		4518F5F82AA4AB6B00332DB6 /* UsersListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F5F72AA4AB6B00332DB6 /* UsersListViewModel.swift */; };
 		4518F5FA2AA4AB7400332DB6 /* BookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F5F92AA4AB7400332DB6 /* BookmarksViewController.swift */; };
 		4518F5FC2AA4AB7B00332DB6 /* BookmarksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F5FB2AA4AB7B00332DB6 /* BookmarksViewModel.swift */; };
+		4518F60A2AA4FC4500332DB6 /* GetUsersUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F6092AA4FC4500332DB6 /* GetUsersUsecase.swift */; };
+		4518F60D2AA4FDE400332DB6 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F60C2AA4FDE400332DB6 /* Users.swift */; };
+		4518F6102AA4FFF500332DB6 /* GetUsersDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F60F2AA4FFF500332DB6 /* GetUsersDataSource.swift */; };
+		4518F6132AA5007C00332DB6 /* GetUsersError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F6122AA5007C00332DB6 /* GetUsersError.swift */; };
+		4518F6152AA5055E00332DB6 /* UsersListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F6142AA5055E00332DB6 /* UsersListTableViewCell.swift */; };
+		4518F6182AA505B000332DB6 /* ColorAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F6172AA505B000332DB6 /* ColorAssets.swift */; };
+		4518F61B2AA5248C00332DB6 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 4518F61A2AA5248C00332DB6 /* Kingfisher */; };
+		4518F61F2AA52EFD00332DB6 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F61E2AA52EFD00332DB6 /* Color+Extensions.swift */; };
+		4518F6212AA5366200332DB6 /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F6202AA5366200332DB6 /* UserDetailsViewController.swift */; };
+		4518F6232AA5366800332DB6 /* UserDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F6222AA5366800332DB6 /* UserDetailsViewModel.swift */; };
+		4518F6262AA53E1900332DB6 /* UserDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F6252AA53E1900332DB6 /* UserDetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +80,16 @@
 		4518F5F72AA4AB6B00332DB6 /* UsersListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListViewModel.swift; sourceTree = "<group>"; };
 		4518F5F92AA4AB7400332DB6 /* BookmarksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewController.swift; sourceTree = "<group>"; };
 		4518F5FB2AA4AB7B00332DB6 /* BookmarksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewModel.swift; sourceTree = "<group>"; };
+		4518F6092AA4FC4500332DB6 /* GetUsersUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUsersUsecase.swift; sourceTree = "<group>"; };
+		4518F60C2AA4FDE400332DB6 /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
+		4518F60F2AA4FFF500332DB6 /* GetUsersDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUsersDataSource.swift; sourceTree = "<group>"; };
+		4518F6122AA5007C00332DB6 /* GetUsersError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUsersError.swift; sourceTree = "<group>"; };
+		4518F6142AA5055E00332DB6 /* UsersListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListTableViewCell.swift; sourceTree = "<group>"; };
+		4518F6172AA505B000332DB6 /* ColorAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorAssets.swift; sourceTree = "<group>"; };
+		4518F61E2AA52EFD00332DB6 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		4518F6202AA5366200332DB6 /* UserDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
+		4518F6222AA5366800332DB6 /* UserDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewModel.swift; sourceTree = "<group>"; };
+		4518F6252AA53E1900332DB6 /* UserDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4518F61B2AA5248C00332DB6 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +141,10 @@
 		4504386A2AA295A100E44E89 /* UsersApp */ = {
 			isa = PBXGroup;
 			children = (
+				4518F61C2AA52EEE00332DB6 /* Extensions */,
+				4518F6162AA505A100332DB6 /* Resources */,
+				4518F6032AA4F82E00332DB6 /* Data */,
+				4518F6022AA4F82900332DB6 /* Domain */,
 				4518F5E62AA4868E00332DB6 /* Coordinators */,
 				4518F5DC2AA3543500332DB6 /* Models */,
 				4518F5D82AA3541E00332DB6 /* Networking */,
@@ -166,6 +192,7 @@
 			children = (
 				4518F5F52AA4AB6100332DB6 /* UsersListViewController.swift */,
 				4518F5F72AA4AB6B00332DB6 /* UsersListViewModel.swift */,
+				4518F6142AA5055E00332DB6 /* UsersListTableViewCell.swift */,
 			);
 			path = Users;
 			sourceTree = "<group>";
@@ -173,6 +200,9 @@
 		450438A02AA296A500E44E89 /* UserDetails */ = {
 			isa = PBXGroup;
 			children = (
+				4518F6242AA53E0A00332DB6 /* Subviews */,
+				4518F6202AA5366200332DB6 /* UserDetailsViewController.swift */,
+				4518F6222AA5366800332DB6 /* UserDetailsViewModel.swift */,
 			);
 			path = UserDetails;
 			sourceTree = "<group>";
@@ -245,6 +275,104 @@
 			path = Coordinators;
 			sourceTree = "<group>";
 		};
+		4518F6022AA4F82900332DB6 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				4518F60E2AA4FFEA00332DB6 /* Data Sources */,
+				4518F6052AA4F83900332DB6 /* Entities */,
+				4518F6042AA4F83400332DB6 /* Use Cases */,
+				4518F6092AA4FC4500332DB6 /* GetUsersUsecase.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		4518F6032AA4F82E00332DB6 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				4518F6082AA4F8E200332DB6 /* Local */,
+				4518F6072AA4F8DC00332DB6 /* Remote */,
+				4518F6062AA4F8D800332DB6 /* Repository */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		4518F6042AA4F83400332DB6 /* Use Cases */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Use Cases";
+			sourceTree = "<group>";
+		};
+		4518F6052AA4F83900332DB6 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				4518F6112AA5007100332DB6 /* Errors */,
+				4518F60C2AA4FDE400332DB6 /* Users.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		4518F6062AA4F8D800332DB6 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		4518F6072AA4F8DC00332DB6 /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Remote;
+			sourceTree = "<group>";
+		};
+		4518F6082AA4F8E200332DB6 /* Local */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		4518F60E2AA4FFEA00332DB6 /* Data Sources */ = {
+			isa = PBXGroup;
+			children = (
+				4518F60F2AA4FFF500332DB6 /* GetUsersDataSource.swift */,
+			);
+			path = "Data Sources";
+			sourceTree = "<group>";
+		};
+		4518F6112AA5007100332DB6 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				4518F6122AA5007C00332DB6 /* GetUsersError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		4518F6162AA505A100332DB6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4518F6172AA505B000332DB6 /* ColorAssets.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		4518F61C2AA52EEE00332DB6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4518F61E2AA52EFD00332DB6 /* Color+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4518F6242AA53E0A00332DB6 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				4518F6252AA53E1900332DB6 /* UserDetailsView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -262,6 +390,9 @@
 			dependencies = (
 			);
 			name = UsersApp;
+			packageProductDependencies = (
+				4518F61A2AA5248C00332DB6 /* Kingfisher */,
+			);
 			productName = UsersApp;
 			productReference = 450438682AA295A100E44E89 /* UsersApp.app */;
 			productType = "com.apple.product-type.application";
@@ -334,6 +465,9 @@
 				Base,
 			);
 			mainGroup = 4504385F2AA295A100E44E89;
+			packageReferences = (
+				4518F6192AA5248C00332DB6 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 450438692AA295A100E44E89 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -400,11 +534,21 @@
 				4518F5F42AA4A4F200332DB6 /* BookmarksCoordinator.swift in Sources */,
 				4518F5F82AA4AB6B00332DB6 /* UsersListViewModel.swift in Sources */,
 				450438762AA295A100E44E89 /* UsersApp.xcdatamodeld in Sources */,
+				4518F6152AA5055E00332DB6 /* UsersListTableViewCell.swift in Sources */,
 				450438702AA295A100E44E89 /* ViewController.swift in Sources */,
 				4518F5EA2AA486B100332DB6 /* AppCoordinator.swift in Sources */,
+				4518F6232AA5366800332DB6 /* UserDetailsViewModel.swift in Sources */,
 				4518F5EE2AA4958D00332DB6 /* TabBarCoordinator.swift in Sources */,
+				4518F6212AA5366200332DB6 /* UserDetailsViewController.swift in Sources */,
 				4518F5FA2AA4AB7400332DB6 /* BookmarksViewController.swift in Sources */,
+				4518F6102AA4FFF500332DB6 /* GetUsersDataSource.swift in Sources */,
+				4518F60D2AA4FDE400332DB6 /* Users.swift in Sources */,
+				4518F61F2AA52EFD00332DB6 /* Color+Extensions.swift in Sources */,
+				4518F6132AA5007C00332DB6 /* GetUsersError.swift in Sources */,
+				4518F60A2AA4FC4500332DB6 /* GetUsersUsecase.swift in Sources */,
+				4518F6262AA53E1900332DB6 /* UserDetailsView.swift in Sources */,
 				4518F5EC2AA48E8D00332DB6 /* TabBarController.swift in Sources */,
+				4518F6182AA505B000332DB6 /* ColorAssets.swift in Sources */,
 				4518F5F22AA4A4EA00332DB6 /* UserDetailsCoordinator.swift in Sources */,
 				4504386C2AA295A100E44E89 /* AppDelegate.swift in Sources */,
 				4518F5F62AA4AB6100332DB6 /* UsersListViewController.swift in Sources */,
@@ -747,6 +891,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4518F6192AA5248C00332DB6 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4518F61A2AA5248C00332DB6 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4518F6192AA5248C00332DB6 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		450438742AA295A100E44E89 /* UsersApp.xcdatamodeld */ = {

@@ -23,7 +23,7 @@ class TabBarCoordinator: Coordinator {
         initializeHomeTabBar()
     }
 
-    func initializeHomeTabBar(){
+    func initializeHomeTabBar() {
         let tabbarController = TabBarController()
 
         let userListNavigationController = UINavigationController()

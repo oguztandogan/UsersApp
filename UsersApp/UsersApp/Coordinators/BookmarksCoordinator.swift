@@ -16,7 +16,7 @@ class BookmarksCoordinator: Coordinator {
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
-    
+
     func start() {
         let viewModel = BookmarksViewModel(nav: self)
         let bookmarksVC = BookmarksViewController(viewModel: viewModel)

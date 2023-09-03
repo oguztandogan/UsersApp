@@ -8,8 +8,6 @@
 import Foundation
 import UIKit
 
-
-
 class UsersListCoordinator: Coordinator {
     var parentCoordinator: Coordinator?
     var childCoordinators = [Coordinator]()
@@ -31,6 +29,10 @@ class UsersListCoordinator: Coordinator {
 }
 
 extension UsersListCoordinator: UserListNavigation {
-    func navigateToUserDetails() {
+    func navigateToUserDetails(selectedUserData: User) {
+        let userDetailsCoordinator = UserDetailsCoordinator(navigationController: navigationController, userData: selectedUserData)
+        userDetailsCoordinator.parentCoordinator = self
+        childCoordinators.append(userDetailsCoordinator)
+        userDetailsCoordinator.start()
     }
 }
