@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4504386C2AA295A100E44E89 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4504386B2AA295A100E44E89 /* AppDelegate.swift */; };
-		4504386E2AA295A100E44E89 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4504386D2AA295A100E44E89 /* SceneDelegate.swift */; };
 		450438702AA295A100E44E89 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4504386F2AA295A100E44E89 /* ViewController.swift */; };
 		450438762AA295A100E44E89 /* UsersApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 450438742AA295A100E44E89 /* UsersApp.xcdatamodeld */; };
 		450438782AA295A200E44E89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 450438772AA295A200E44E89 /* Assets.xcassets */; };
@@ -16,6 +15,17 @@
 		450438862AA295A200E44E89 /* UsersAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450438852AA295A200E44E89 /* UsersAppTests.swift */; };
 		450438902AA295A200E44E89 /* UsersAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4504388F2AA295A200E44E89 /* UsersAppUITests.swift */; };
 		450438922AA295A200E44E89 /* UsersAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450438912AA295A200E44E89 /* UsersAppUITestsLaunchTests.swift */; };
+		4518F5E82AA4869A00332DB6 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F5E72AA4869A00332DB6 /* BaseCoordinator.swift */; };
+		4518F5EA2AA486B100332DB6 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F5E92AA486B100332DB6 /* AppCoordinator.swift */; };
+		4518F5EC2AA48E8D00332DB6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F5EB2AA48E8D00332DB6 /* TabBarController.swift */; };
+		4518F5EE2AA4958D00332DB6 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F5ED2AA4958D00332DB6 /* TabBarCoordinator.swift */; };
+		4518F5F02AA4A4E100332DB6 /* UsersListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F5EF2AA4A4E100332DB6 /* UsersListCoordinator.swift */; };
+		4518F5F22AA4A4EA00332DB6 /* UserDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F5F12AA4A4EA00332DB6 /* UserDetailsCoordinator.swift */; };
+		4518F5F42AA4A4F200332DB6 /* BookmarksCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F5F32AA4A4F200332DB6 /* BookmarksCoordinator.swift */; };
+		4518F5F62AA4AB6100332DB6 /* UsersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F5F52AA4AB6100332DB6 /* UsersListViewController.swift */; };
+		4518F5F82AA4AB6B00332DB6 /* UsersListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F5F72AA4AB6B00332DB6 /* UsersListViewModel.swift */; };
+		4518F5FA2AA4AB7400332DB6 /* BookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F5F92AA4AB7400332DB6 /* BookmarksViewController.swift */; };
+		4518F5FC2AA4AB7B00332DB6 /* BookmarksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F5FB2AA4AB7B00332DB6 /* BookmarksViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +48,6 @@
 /* Begin PBXFileReference section */
 		450438682AA295A100E44E89 /* UsersApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UsersApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4504386B2AA295A100E44E89 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4504386D2AA295A100E44E89 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4504386F2AA295A100E44E89 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		450438752AA295A100E44E89 /* UsersApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UsersApp.xcdatamodel; sourceTree = "<group>"; };
 		450438772AA295A200E44E89 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +58,17 @@
 		4504388B2AA295A200E44E89 /* UsersAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UsersAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4504388F2AA295A200E44E89 /* UsersAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersAppUITests.swift; sourceTree = "<group>"; };
 		450438912AA295A200E44E89 /* UsersAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4518F5E72AA4869A00332DB6 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
+		4518F5E92AA486B100332DB6 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		4518F5EB2AA48E8D00332DB6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		4518F5ED2AA4958D00332DB6 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
+		4518F5EF2AA4A4E100332DB6 /* UsersListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListCoordinator.swift; sourceTree = "<group>"; };
+		4518F5F12AA4A4EA00332DB6 /* UserDetailsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsCoordinator.swift; sourceTree = "<group>"; };
+		4518F5F32AA4A4F200332DB6 /* BookmarksCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksCoordinator.swift; sourceTree = "<group>"; };
+		4518F5F52AA4AB6100332DB6 /* UsersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListViewController.swift; sourceTree = "<group>"; };
+		4518F5F72AA4AB6B00332DB6 /* UsersListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListViewModel.swift; sourceTree = "<group>"; };
+		4518F5F92AA4AB7400332DB6 /* BookmarksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewController.swift; sourceTree = "<group>"; };
+		4518F5FB2AA4AB7B00332DB6 /* BookmarksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,9 +119,11 @@
 		4504386A2AA295A100E44E89 /* UsersApp */ = {
 			isa = PBXGroup;
 			children = (
-				4504389E2AA2963000E44E89 /* Screens */,
+				4518F5E62AA4868E00332DB6 /* Coordinators */,
+				4518F5DC2AA3543500332DB6 /* Models */,
+				4518F5D82AA3541E00332DB6 /* Networking */,
+				4504389E2AA2963000E44E89 /* UI */,
 				4504386B2AA295A100E44E89 /* AppDelegate.swift */,
-				4504386D2AA295A100E44E89 /* SceneDelegate.swift */,
 				4504386F2AA295A100E44E89 /* ViewController.swift */,
 				450438772AA295A200E44E89 /* Assets.xcassets */,
 				450438792AA295A200E44E89 /* LaunchScreen.storyboard */,
@@ -128,7 +150,7 @@
 			path = UsersAppUITests;
 			sourceTree = "<group>";
 		};
-		4504389E2AA2963000E44E89 /* Screens */ = {
+		4504389E2AA2963000E44E89 /* UI */ = {
 			isa = PBXGroup;
 			children = (
 				450438A12AA296A900E44E89 /* TabController */,
@@ -136,12 +158,14 @@
 				450438A22AA296B300E44E89 /* Bookmarks */,
 				450438A02AA296A500E44E89 /* UserDetails */,
 			);
-			path = Screens;
+			path = UI;
 			sourceTree = "<group>";
 		};
 		4504389F2AA2965400E44E89 /* Users */ = {
 			isa = PBXGroup;
 			children = (
+				4518F5F52AA4AB6100332DB6 /* UsersListViewController.swift */,
+				4518F5F72AA4AB6B00332DB6 /* UsersListViewModel.swift */,
 			);
 			path = Users;
 			sourceTree = "<group>";
@@ -156,6 +180,7 @@
 		450438A12AA296A900E44E89 /* TabController */ = {
 			isa = PBXGroup;
 			children = (
+				4518F5EB2AA48E8D00332DB6 /* TabBarController.swift */,
 			);
 			path = TabController;
 			sourceTree = "<group>";
@@ -163,8 +188,61 @@
 		450438A22AA296B300E44E89 /* Bookmarks */ = {
 			isa = PBXGroup;
 			children = (
+				4518F5F92AA4AB7400332DB6 /* BookmarksViewController.swift */,
+				4518F5FB2AA4AB7B00332DB6 /* BookmarksViewModel.swift */,
 			);
 			path = Bookmarks;
+			sourceTree = "<group>";
+		};
+		4518F5D82AA3541E00332DB6 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				4518F5DB2AA3542D00332DB6 /* Services */,
+				4518F5DA2AA3542800332DB6 /* Endpoints */,
+				4518F5D92AA3542300332DB6 /* Base */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		4518F5D92AA3542300332DB6 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		4518F5DA2AA3542800332DB6 /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Endpoints;
+			sourceTree = "<group>";
+		};
+		4518F5DB2AA3542D00332DB6 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		4518F5DC2AA3543500332DB6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4518F5E62AA4868E00332DB6 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				4518F5E72AA4869A00332DB6 /* BaseCoordinator.swift */,
+				4518F5E92AA486B100332DB6 /* AppCoordinator.swift */,
+				4518F5ED2AA4958D00332DB6 /* TabBarCoordinator.swift */,
+				4518F5EF2AA4A4E100332DB6 /* UsersListCoordinator.swift */,
+				4518F5F32AA4A4F200332DB6 /* BookmarksCoordinator.swift */,
+				4518F5F12AA4A4EA00332DB6 /* UserDetailsCoordinator.swift */,
+			);
+			path = Coordinators;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,10 +396,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4518F5FC2AA4AB7B00332DB6 /* BookmarksViewModel.swift in Sources */,
+				4518F5F42AA4A4F200332DB6 /* BookmarksCoordinator.swift in Sources */,
+				4518F5F82AA4AB6B00332DB6 /* UsersListViewModel.swift in Sources */,
 				450438762AA295A100E44E89 /* UsersApp.xcdatamodeld in Sources */,
 				450438702AA295A100E44E89 /* ViewController.swift in Sources */,
+				4518F5EA2AA486B100332DB6 /* AppCoordinator.swift in Sources */,
+				4518F5EE2AA4958D00332DB6 /* TabBarCoordinator.swift in Sources */,
+				4518F5FA2AA4AB7400332DB6 /* BookmarksViewController.swift in Sources */,
+				4518F5EC2AA48E8D00332DB6 /* TabBarController.swift in Sources */,
+				4518F5F22AA4A4EA00332DB6 /* UserDetailsCoordinator.swift in Sources */,
 				4504386C2AA295A100E44E89 /* AppDelegate.swift in Sources */,
-				4504386E2AA295A100E44E89 /* SceneDelegate.swift in Sources */,
+				4518F5F62AA4AB6100332DB6 /* UsersListViewController.swift in Sources */,
+				4518F5E82AA4869A00332DB6 /* BaseCoordinator.swift in Sources */,
+				4518F5F02AA4A4E100332DB6 /* UsersListCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
