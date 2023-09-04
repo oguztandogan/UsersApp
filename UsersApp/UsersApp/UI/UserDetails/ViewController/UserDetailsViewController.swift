@@ -14,7 +14,6 @@ class UserDetailsViewController: UIViewController {
     var viewModel: UserDetailsViewModel!
     var cancellables: Set<AnyCancellable> = []
 
-//    let contentView: UIView = UserDetailsView()
     public lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -82,9 +81,5 @@ class UserDetailsViewController: UIViewController {
         nationality.text = viewModel.user.nationality
         age.text = viewModel.user.dateOfBirth?.age?.description
         phoneNumber.text = viewModel.user.phone
-    }
-
-    deinit {
-        print("TransactionCoordinator deinit")
     }
 }

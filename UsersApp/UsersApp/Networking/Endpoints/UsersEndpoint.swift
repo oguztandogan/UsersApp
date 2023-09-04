@@ -8,7 +8,7 @@
 import Foundation
 
 enum UsersEndpoint {
-    case userList
+    case userList(String?)
 }
 
 extension UsersEndpoint: Endpoint {
@@ -35,14 +35,17 @@ extension UsersEndpoint: Endpoint {
             ]
         }
     }
-    
+
     var queries: [URLQueryItem]? {
         switch self {
-        case .userList:
-            return [URLQueryItem(name: "results", value: "25")]
+        case .userList(let pageNumber):
+            return [
+                URLQueryItem(name: "results", value: "25"),
+                URLQueryItem(name: "page", value: pageNumber)
+            ]
         }
     }
-    
+
     var body: [String: String]? {
         switch self {
         case .userList:

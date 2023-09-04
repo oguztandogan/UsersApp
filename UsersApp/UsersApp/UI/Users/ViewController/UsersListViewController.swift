@@ -12,10 +12,13 @@ import Kingfisher
 
 class UsersListViewController: UIViewController {
     var viewModel: UsersListViewModel!
+    var refreshControl = UIRefreshControl()
     var cancellables: Set<AnyCancellable> = []
 
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: self.view.frame, style: .insetGrouped)
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        tableView.refreshControl = refreshControl
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(UsersListTableViewCell.self, forCellReuseIdentifier: "UsersListTableViewCell")
         return tableView
@@ -43,12 +46,6 @@ class UsersListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
     }
-}
-
-extension UsersListViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.users.count
-    }
 
     private func bindTableView() {
         viewModel.$users
@@ -59,6 +56,17 @@ extension UsersListViewController: UITableViewDelegate, UITableViewDataSource {
             .store(in: &cancellables)
     }
 
+    @objc func refreshData() {
+        viewModel.fetchUsers(isPagination: false, isRefreshing: false)
+        refreshControl.endRefreshing()
+    }
+}
+
+extension UsersListViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.users.count
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = self.tableView.dequeueReusableCell(
             withIdentifier: "UsersListTableViewCell") as? UsersListTableViewCell
@@ -67,6 +75,11 @@ extension UsersListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.age.text = viewModel.users[indexPath.row].dateOfBirth?.age?.description
         cell.nationality.text = viewModel.users[indexPath.row].nationality
         cell.userImageView.kf.setImage(with: URL(string: (viewModel.users[indexPath.row].picture?.medium)!))
+
+        let lastIndex = self.viewModel.users.count - 3
+        if indexPath.row == lastIndex {
+            viewModel.fetchUsers(isPagination: true, isRefreshing: false)
+        }
         return cell
     }
 

@@ -39,6 +39,7 @@
 		4518F6302AA54EAA00332DB6 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F62F2AA54EAA00332DB6 /* RequestError.swift */; };
 		4518F6322AA54EBF00332DB6 /* UsersEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F6312AA54EBF00332DB6 /* UsersEndpoint.swift */; };
 		4518F6342AA54EC800332DB6 /* UsersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F6332AA54EC800332DB6 /* UsersService.swift */; };
+		4518F6402AA55B4800332DB6 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F63F2AA55B4800332DB6 /* String+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		4518F62F2AA54EAA00332DB6 /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
 		4518F6312AA54EBF00332DB6 /* UsersEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersEndpoint.swift; sourceTree = "<group>"; };
 		4518F6332AA54EC800332DB6 /* UsersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersService.swift; sourceTree = "<group>"; };
+		4518F63F2AA55B4800332DB6 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -294,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				4518F61E2AA52EFD00332DB6 /* Color+Extensions.swift */,
+				4518F63F2AA55B4800332DB6 /* String+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -549,6 +552,7 @@
 				4518F5EE2AA4958D00332DB6 /* TabBarCoordinator.swift in Sources */,
 				4518F6212AA5366200332DB6 /* UserDetailsViewController.swift in Sources */,
 				4518F5FA2AA4AB7400332DB6 /* BookmarksViewController.swift in Sources */,
+				4518F6402AA55B4800332DB6 /* String+Extensions.swift in Sources */,
 				4518F60D2AA4FDE400332DB6 /* Users.swift in Sources */,
 				4518F61F2AA52EFD00332DB6 /* Color+Extensions.swift in Sources */,
 				4518F6342AA54EC800332DB6 /* UsersService.swift in Sources */,

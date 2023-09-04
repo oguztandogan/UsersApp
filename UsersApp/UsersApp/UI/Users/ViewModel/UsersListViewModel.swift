@@ -14,6 +14,7 @@ protocol UserListNavigation: AnyObject {
 class UsersListViewModel {
     weak var navigation: UserListNavigation!
     var service: UsersService
+    var pageNumber: Int = 1
     @Published var users: [User] = []
 
     init(nav: UserListNavigation,
@@ -23,11 +24,21 @@ class UsersListViewModel {
     }
 
     func onAppear() {
+        fetchUsers(isPagination: false, isRefreshing: false)
+    }
+
+    func fetchUsers(isPagination: Bool, isRefreshing: Bool) {
         Task(priority: .background) {
-          let result = await service.getUsers()
+            let result = await service.getUsers(pageNumber: pageNumber.description)
           switch result {
           case .success(let usersResponse):
-              users = usersResponse.results
+              if isPagination {
+                  pageNumber += 1
+                  users += usersResponse.results
+              } else {
+                  pageNumber = 1
+                  users = usersResponse.results
+              }
           case .failure(let error):
               print(error)
           }
