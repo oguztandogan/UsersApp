@@ -64,8 +64,8 @@ extension UsersListViewController: UITableViewDelegate, UITableViewDataSource {
             withIdentifier: "UsersListTableViewCell") as? UsersListTableViewCell
         else { return UITableViewCell() }
         cell.username.text = viewModel.users[indexPath.row].fullName
-        cell.age.text = viewModel.users[indexPath.row].dob?.age?.description
-        cell.nationality.text = viewModel.users[indexPath.row].nat
+        cell.age.text = viewModel.users[indexPath.row].dateOfBirth?.age?.description
+        cell.nationality.text = viewModel.users[indexPath.row].nationality
         cell.userImageView.kf.setImage(with: URL(string: (viewModel.users[indexPath.row].picture?.medium)!))
         return cell
     }

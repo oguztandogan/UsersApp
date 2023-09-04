@@ -79,8 +79,8 @@ class UserDetailsViewController: UIViewController {
     private func setupViews() {
         imageView.kf.setImage(with: URL(string: (viewModel.user.picture?.large)!))
         username.text = viewModel.user.fullName
-        nationality.text = viewModel.user.nat
-        age.text = viewModel.user.dob?.age?.description
+        nationality.text = viewModel.user.nationality
+        age.text = viewModel.user.dateOfBirth?.age?.description
         phoneNumber.text = viewModel.user.phone
     }
 

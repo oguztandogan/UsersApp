@@ -13,7 +13,6 @@ class UserDetailsCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     var userData: User
-//    lazy var userDetailsViewModel = UserDetailsViewModel(nav: self)
 
     init(navigationController: UINavigationController,
          userData: User) {
@@ -22,12 +21,10 @@ class UserDetailsCoordinator: Coordinator {
     }
 
     func start() {
-        print("TransactionCoordinator Start")
         goToUserDetails()
     }
 
     deinit {
-        print("TransactionCoordinator deinit")
     }
 }
 

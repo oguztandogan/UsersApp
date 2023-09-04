@@ -18,8 +18,9 @@ class UsersListCoordinator: Coordinator {
     }
     
     func start() {
+        let usersService = UsersService()
         let userListVC = UsersListViewController()
-        userListVC.viewModel = UsersListViewModel(nav: self)
+        userListVC.viewModel = UsersListViewModel(nav: self, service: usersService)
         navigationController.pushViewController(userListVC, animated: true)
     }
 
