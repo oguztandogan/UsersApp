@@ -10,9 +10,9 @@ import CoreData
 
 protocol CoreDataServiceable {
     var viewContext: NSManagedObjectContext { get }
-    func saveContext() async throws
-    func fetchSavedItems() async throws -> [SavedUser]
-    func deleteItem(deletedTask: NSManagedObject) async throws
+    func saveContext() throws
+    func fetchSavedItems() throws -> [SavedUser]
+    func deleteItem(deletedTask: NSManagedObject) throws
 }
 
 extension CoreDataServiceable {

@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 class CoreDataService: CoreDataServiceable {
-    func saveContext() async throws {
+    func saveContext() throws {
         if viewContext.hasChanges {
             do {
                 try viewContext.save()
@@ -19,25 +19,27 @@ class CoreDataService: CoreDataServiceable {
         }
     }
 
-    func fetchSavedItems() async throws -> [SavedUser] {
-        let fetchRequest = NSFetchRequest<SavedUser>(entityName: String(describing: SavedUser.self))
-        fetchRequest.returnsObjectsAsFaults = false
-        do {
-            let fetchResults = try viewContext.fetch(fetchRequest)
-            return fetchResults
-        } catch {
-            throw error
+    func fetchSavedItems() throws -> [SavedUser] {
+        var fetchResults: [SavedUser] = []
+        try viewContext.performAndWait {
+            let fetchRequest = NSFetchRequest<SavedUser>(entityName: String(describing: SavedUser.self))
+            do {
+                fetchResults = try self.viewContext.fetch(fetchRequest)
+            } catch {
+                throw error
+            }
         }
+        return fetchResults
     }
 
-    func deleteItem(deletedTask: NSManagedObject) async throws {
-        let fetchedRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "SavedUser")
-        fetchedRequest.returnsObjectsAsFaults = false
-        viewContext.delete(deletedTask)
-        do {
-            try await saveContext()
-        } catch {
-            throw error
+    func deleteItem(deletedTask: NSManagedObject) throws {
+        try viewContext.performAndWait {
+            self.viewContext.delete(deletedTask)
+            do {
+                try self.viewContext.save()
+            } catch {
+                throw error
+            }
         }
     }
 }
