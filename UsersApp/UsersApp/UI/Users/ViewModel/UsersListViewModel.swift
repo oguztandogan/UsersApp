@@ -13,13 +13,13 @@ protocol UserListNavigation: AnyObject {
 }
 class UsersListViewModel: BaseViewModel {
     weak var navigation: UserListNavigation!
-    var service: UsersService
+    var service: UsersServiceable
     var pageNumber: Int = 1
     @Published var users: [User] = []
     @Published var savedUsers = [SavedUser]()
 
     init(nav: UserListNavigation,
-         service: UsersService) {
+         service: UsersServiceable) {
         self.navigation = nav
         self.service = service
     }

@@ -42,28 +42,28 @@ class BookmarksViewModel: BaseViewModel {
 
     func setCellData(index: Int) -> UserTableViewCellData {
         let usernameData = InformationItemLabelData(
-            title: "Name:",
-            text: savedUsers[index].userName ?? "Not specified",
+            title: savedUsers[index].userName ?? "Not specified",
+            text: "",
             backgroundColor: .white,
             textColor: .purple,
-            titleFontSize: 15,
-            textFontSize: 15
+            titleFontSize: 13,
+            textFontSize: 12
         )
         let nationalityData = InformationItemLabelData(
             title: "Nationality:",
             text: savedUsers[index].userNationality ?? "Not specified",
             backgroundColor: .white,
             textColor: .purple,
-            titleFontSize: 15,
-            textFontSize: 15
+            titleFontSize: 13,
+            textFontSize: 12
         )
         let ageData = InformationItemLabelData(
             title: "Age:",
             text: savedUsers[index].userAge ?? "Not specified",
             backgroundColor: .white,
             textColor: .purple,
-            titleFontSize: 15,
-            textFontSize: 15
+            titleFontSize: 13,
+            textFontSize: 12
         )
         let imageUrl = savedUsers[index].userPictureUrl ?? "Not specified"
         let cellData = UserTableViewCellData(

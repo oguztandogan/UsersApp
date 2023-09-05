@@ -8,11 +8,8 @@
 import Foundation
 import CoreData
 
-class CoreDataService {
-
-    let viewContext = PersistenceStore.shared.persistentContainer.viewContext
-
-    func saveContext () async throws {
+class CoreDataService: CoreDataServiceable {
+    func saveContext() async throws {
         if viewContext.hasChanges {
             do {
                 try viewContext.save()

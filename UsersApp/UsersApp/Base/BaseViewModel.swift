@@ -8,5 +8,5 @@
 import Foundation
 
 class BaseViewModel {
-    var coreDataService: CoreDataService = CoreDataService()
+    var coreDataService: CoreDataServiceable = CoreDataService()
 }
