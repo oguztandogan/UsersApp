@@ -25,7 +25,8 @@ struct User: Codable {
     let id: Id?
     let picture: Picture?
     let nationality: String?
-
+    var isSaved: Bool = false
+    let uuid: UUID = UUID()
     var fullName: String {
         guard let name = self.name else {
             return ""

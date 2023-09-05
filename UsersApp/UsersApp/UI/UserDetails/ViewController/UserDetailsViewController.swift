@@ -14,72 +14,33 @@ class UserDetailsViewController: UIViewController {
     var viewModel: UserDetailsViewModel!
     var cancellables: Set<AnyCancellable> = []
 
-    public lazy var imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleToFill
-        return imageView
+    private lazy var contentView: UserDetailsContentView = {
+        let contentView = UserDetailsContentView()
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        return contentView
     }()
 
-    lazy var username: UILabel = {
-        let username = UILabel()
-        username.translatesAutoresizingMaskIntoConstraints = false
-        return username
-    }()
-
-    lazy var nationality: UILabel = {
-        let nationality = UILabel()
-        nationality.translatesAutoresizingMaskIntoConstraints = false
-        return nationality
-    }()
-
-    lazy var age: UILabel = {
-        let age = UILabel()
-        age.translatesAutoresizingMaskIntoConstraints = false
-        return age
-    }()
-
-    lazy var phoneNumber: UILabel = {
-        let phoneNumber = UILabel()
-        phoneNumber.translatesAutoresizingMaskIntoConstraints = false
-        return phoneNumber
-    }()
-    
-    private lazy var stackView: UIStackView = {
-       let stackView = UIStackView(arrangedSubviews: [username, nationality, age, phoneNumber])
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.spacing = 20
-        stackView.axis = .vertical
-        stackView.alignment = .leading
-        return stackView
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(imageView)
-        view.addSubview(stackView)
-        view.backgroundColor = .green
-        setupConstraints()
         setupViews()
+        setupConstraints()
+        self.navigationItem.title = "User Details"
     }
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -20),
-            
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20)
         ])
     }
 
     private func setupViews() {
-        imageView.kf.setImage(with: URL(string: (viewModel.user.picture?.large)!))
-        username.text = viewModel.user.fullName
-        nationality.text = viewModel.user.nationality
-        age.text = viewModel.user.dateOfBirth?.age?.description
-        phoneNumber.text = viewModel.user.phone
+        view.backgroundColor = .systemMint
+        view.addSubview(contentView)
+        contentView.data = viewModel.getContentViewData()
+    }
+
+    @objc private func favouriteButtonAction() {
+        viewModel.favouriteButtonAction()
     }
 }

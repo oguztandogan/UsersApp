@@ -27,7 +27,6 @@ extension UsersEndpoint: Endpoint {
     }
 
     var header: [String: String]? {
-        // Access Token to use in Bearer header
         switch self {
         case .userList:
             return [

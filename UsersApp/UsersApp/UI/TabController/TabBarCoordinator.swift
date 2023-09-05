@@ -32,17 +32,16 @@ class TabBarCoordinator: Coordinator {
 
         let userListItem = UITabBarItem()
         userListItem.title = "Users"
-        userListItem.image = UIImage.init(systemName: "house.fill")
+        userListItem.image = UIImage.init(systemName: "person.3")
         userListNavigationController.tabBarItem = userListItem
 
-        // Setup for profile tab
         let bookmarksNavigationController = UINavigationController()
         let bookmarksCoordinator = BookmarksCoordinator.init(navigationController: bookmarksNavigationController)
         bookmarksCoordinator.parentCoordinator = parentCoordinator
 
         let bookmarksItem = UITabBarItem()
         bookmarksItem.title = "Bookmarks"
-        bookmarksItem.image = UIImage.init(systemName: "person.fill")
+        bookmarksItem.image = UIImage.init(systemName: "heart.circle.fill")
         bookmarksNavigationController.tabBarItem = bookmarksItem
         parentCoordinator?.childCoordinators.append(userListCoordinator)
         parentCoordinator?.childCoordinators.append(bookmarksCoordinator)

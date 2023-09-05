@@ -8,15 +8,15 @@
 import UIKit
 
 enum ColorAssets {
-    
+
     typealias Value = UIColor
-    
+
     case russianViolet
     case violetCrayola
     case fuschiaCrayola
     case persianPink
     case congoPink
-    
+
     var value: UIColor {
         switch self {
         case .russianViolet:

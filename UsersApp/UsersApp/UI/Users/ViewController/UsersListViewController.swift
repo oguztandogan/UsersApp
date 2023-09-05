@@ -20,16 +20,22 @@ class UsersListViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         tableView.refreshControl = refreshControl
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(UsersListTableViewCell.self, forCellReuseIdentifier: "UsersListTableViewCell")
+        tableView.register(UserTableViewCell.self, forCellReuseIdentifier: "UserTableViewCell")
         return tableView
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blue
+
         setupTableView()
         viewModel.onAppear()
         bindTableView()
+        self.navigationItem.title = "Users"
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.viewWillAppear()
     }
 
     private func setupConstraints() {
@@ -43,6 +49,7 @@ class UsersListViewController: UIViewController {
 
     private func setupTableView() {
         view.addSubview(tableView)
+        tableView.backgroundColor = .systemMint
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -69,13 +76,13 @@ extension UsersListViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = self.tableView.dequeueReusableCell(
-            withIdentifier: "UsersListTableViewCell") as? UsersListTableViewCell
+            withIdentifier: "UserTableViewCell") as? UserTableViewCell
         else { return UITableViewCell() }
-        cell.username.text = viewModel.users[indexPath.row].fullName
-        cell.age.text = viewModel.users[indexPath.row].dateOfBirth?.age?.description
-        cell.nationality.text = viewModel.users[indexPath.row].nationality
-        cell.userImageView.kf.setImage(with: URL(string: (viewModel.users[indexPath.row].picture?.medium)!))
-
+        cell.setData(cellData: viewModel.setCellData(index: indexPath.row))
+        cell.buttonTapCallback = {
+            self.viewModel.favouriteButtonAction(index: indexPath.row)
+            cell.setFavouriteButtonsImage(isSaved: self.viewModel.users[indexPath.row].isSaved)
+        }
         let lastIndex = self.viewModel.users.count - 3
         if indexPath.row == lastIndex {
             viewModel.fetchUsers(isPagination: true, isRefreshing: false)

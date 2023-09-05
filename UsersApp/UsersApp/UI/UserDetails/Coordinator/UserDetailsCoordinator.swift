@@ -30,9 +30,11 @@ class UserDetailsCoordinator: Coordinator {
 
 extension UserDetailsCoordinator: UserDetailsNavigation {
     func goToUserDetails() {
+        let coreDataService = CoreDataService()
         let userDetailsVC = UserDetailsViewController()
-        let userDetailsViewModel = UserDetailsViewModel(nav: self, user: userData)
+        let userDetailsViewModel = UserDetailsViewModel(nav: self, user: userData, coreDataService: coreDataService)
         userDetailsVC.viewModel = userDetailsViewModel
+        customizeNavigationBar()
         navigationController.pushViewController(userDetailsVC, animated: true)
     }
 

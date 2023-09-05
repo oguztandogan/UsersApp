@@ -18,8 +18,11 @@ class BookmarksCoordinator: Coordinator {
     }
 
     func start() {
-        let viewModel = BookmarksViewModel(nav: self)
-        let bookmarksVC = BookmarksViewController(viewModel: viewModel)
+        let viewModel = BookmarksViewModel(
+            nav: self)
+        let bookmarksVC = BookmarksViewController()
+        bookmarksVC.viewModel = viewModel
+        customizeNavigationBar()
         navigationController.pushViewController(bookmarksVC, animated: true)
     }
 

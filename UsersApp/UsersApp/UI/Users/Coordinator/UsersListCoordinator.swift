@@ -16,11 +16,14 @@ class UsersListCoordinator: Coordinator {
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
-    
+
     func start() {
         let usersService = UsersService()
         let userListVC = UsersListViewController()
-        userListVC.viewModel = UsersListViewModel(nav: self, service: usersService)
+        userListVC.viewModel = UsersListViewModel(
+            nav: self,
+            service: usersService)
+        customizeNavigationBar()
         navigationController.pushViewController(userListVC, animated: true)
     }
 
@@ -31,7 +34,10 @@ class UsersListCoordinator: Coordinator {
 
 extension UsersListCoordinator: UserListNavigation {
     func navigateToUserDetails(selectedUserData: User) {
-        let userDetailsCoordinator = UserDetailsCoordinator(navigationController: navigationController, userData: selectedUserData)
+        let userDetailsCoordinator = UserDetailsCoordinator(
+            navigationController: navigationController,
+            userData: selectedUserData
+        )
         userDetailsCoordinator.parentCoordinator = self
         childCoordinators.append(userDetailsCoordinator)
         userDetailsCoordinator.start()
