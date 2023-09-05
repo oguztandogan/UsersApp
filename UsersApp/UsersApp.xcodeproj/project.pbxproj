@@ -84,6 +84,7 @@
 		4518F6BC2AA7202C00332DB6 /* users_response.json in Sources */ = {isa = PBXBuildFile; fileRef = 4518F6BB2AA7202C00332DB6 /* users_response.json */; };
 		4518F6BD2AA722FF00332DB6 /* users_response.json in Resources */ = {isa = PBXBuildFile; fileRef = 4518F6BB2AA7202C00332DB6 /* users_response.json */; };
 		4518F6C32AA7315000332DB6 /* CoreDataServiceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F6C22AA7315000332DB6 /* CoreDataServiceable.swift */; };
+		4518F6C92AA7400000332DB6 /* CoreDataServiceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F6C22AA7315000332DB6 /* CoreDataServiceable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -686,6 +687,7 @@
 				4518F6982AA717CA00332DB6 /* HTTPMethod.swift in Sources */,
 				4518F6992AA717DC00332DB6 /* Users.swift in Sources */,
 				4518F69D2AA71D7600332DB6 /* UsersListTableViewCell.swift in Sources */,
+				4518F6C92AA7400000332DB6 /* CoreDataServiceable.swift in Sources */,
 				4518F6972AA717CA00332DB6 /* Endpoint.swift in Sources */,
 				4518F6AE2AA71DA000332DB6 /* UsersListCoordinator.swift in Sources */,
 				4518F6A82AA71D8F00332DB6 /* SavedUser+CoreDataProperties.swift in Sources */,
