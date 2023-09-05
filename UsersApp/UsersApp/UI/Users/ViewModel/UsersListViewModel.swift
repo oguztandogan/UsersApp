@@ -88,10 +88,12 @@ class UsersListViewModel: BaseViewModel {
     }
 
     func fetchSavedUsers() {
-        Task(priority: .background) {
-           savedUsers = try await coreDataService.fetchSavedItems()
-            compareSavedUsersAndFetchedUsers()
+        do {
+            savedUsers = try coreDataService.fetchSavedItems()
+        } catch {
+            print("asdf")
         }
+            compareSavedUsersAndFetchedUsers()
     }
 
     func compareSavedUsersAndFetchedUsers() {
@@ -108,42 +110,41 @@ class UsersListViewModel: BaseViewModel {
     func favouriteButtonAction(index: Int) {
         if users[index].isSaved {
             users[index].isSaved = false
-            Task {
-                await self.deleteUser(index: index)
-            }
+            self.deleteUser(index: index)
         } else {
             users[index].isSaved = true
-            Task {
-                await self.saveUser(index: index)
-            }
+            self.saveUser(index: index)
         }
     }
 
-    func deleteUser(index: Int) async {
+    func deleteUser(index: Int) {
         if let matchingItem = savedUsers.first(where: { $0.id == users[index].uuid }) {
             do {
-                try await coreDataService.deleteItem(deletedTask: matchingItem)
+                try coreDataService.deleteItem(deletedTask: matchingItem)
             } catch {
                 print(error.localizedDescription)
             }
         }
     }
 
-    func saveUser(index: Int) async {
+    func saveUser(index: Int) {
         let managedContext = coreDataService.viewContext
         users[index].isSaved = true
-        let newUser = SavedUser(context: managedContext)
-        newUser.id = users[index].uuid
-        newUser.userName = users[index].fullName
-        newUser.userAge = users[index].dateOfBirth?.age?.description
-        newUser.userNationality = users[index].nationality
-        newUser.userPictureUrl = users[index].picture?.medium
-        self.savedUsers.append(newUser)
-        do {
-            try await coreDataService.saveContext()
-        } catch {
-            print(error.localizedDescription)
+         managedContext.perform {
+            let newUser = SavedUser(context: managedContext)
+             newUser.id = self.users[index].uuid
+             newUser.userName = self.users[index].fullName
+             newUser.userAge = self.users[index].dateOfBirth?.age?.description
+             newUser.userNationality = self.users[index].nationality
+             newUser.userPictureUrl = self.users[index].picture?.medium
+            self.savedUsers.append(newUser)
+            do {
+                try self.coreDataService.saveContext()
+            } catch {
+                print(error.localizedDescription)
+            }
         }
+
     }
 
 }

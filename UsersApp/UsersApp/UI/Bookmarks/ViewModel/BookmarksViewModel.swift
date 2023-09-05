@@ -20,20 +20,23 @@ class BookmarksViewModel: BaseViewModel {
     }
 
     func onAppear() {
-        Task {
-            savedUsers = try await coreDataService.fetchSavedItems()
+
+        do {
+            savedUsers = try coreDataService.fetchSavedItems()
+        } catch {
+            print("asdf")
         }
     }
 
     func favouriteButtonAction(index: Int) {
         Task {
-            await self.deleteUser(index: index)
+            self.deleteUser(index: index)
         }
     }
 
-    func deleteUser(index: Int) async {
+    func deleteUser(index: Int) {
         do {
-            try await coreDataService.deleteItem(deletedTask: savedUsers[index])
+            try coreDataService.deleteItem(deletedTask: savedUsers[index])
             savedUsers.remove(at: index)
         } catch {
             print(error.localizedDescription)

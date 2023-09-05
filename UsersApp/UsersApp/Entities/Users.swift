@@ -22,7 +22,6 @@ struct User: Codable {
     let name: Name?
     let dateOfBirth: DateOfBirth?
     let phone: String?
-    let id: Id?
     let picture: Picture?
     let nationality: String?
     var isSaved: Bool = false
@@ -51,7 +50,6 @@ struct User: Codable {
         case name
         case dateOfBirth = "dob"
         case phone
-        case id
         case picture
         case nationality = "nat"
     }
@@ -102,15 +100,5 @@ struct DateOfBirth: Codable {
     enum CodingKeys: String, CodingKey {
         case date
         case age
-    }
-}
-
-struct Id: Codable {
-    let name: String?
-    let value: String?
-
-    enum CodingKeys: String, CodingKey {
-        case name
-        case value
     }
 }

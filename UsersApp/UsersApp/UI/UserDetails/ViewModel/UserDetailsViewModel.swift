@@ -73,28 +73,24 @@ class UserDetailsViewModel {
     func favouriteButtonAction() {
         if user.isSaved {
             user.isSaved = false
-            Task {
-                await self.deleteUser()
-            }
+            self.deleteUser()
         } else {
             user.isSaved = true
-            Task {
-                await self.saveUser()
-            }
+            self.saveUser()
         }
     }
 
-    func deleteUser() async {
+    func deleteUser() {
         if let matchingItem = savedUsers.first(where: { $0.id == user.uuid }) {
             do {
-                try await coreDataService.deleteItem(deletedTask: matchingItem)
+                try coreDataService.deleteItem(deletedTask: matchingItem)
             } catch {
                 print(error.localizedDescription)
             }
         }
     }
 
-    func saveUser() async {
+    func saveUser() {
         let managedContext = coreDataService.viewContext
         user.isSaved = true
         let newUser = SavedUser(context: managedContext)
@@ -105,7 +101,7 @@ class UserDetailsViewModel {
         newUser.userPictureUrl = user.picture?.medium
         self.savedUsers.append(newUser)
         do {
-            try await coreDataService.saveContext()
+            try coreDataService.saveContext()
         } catch {
             print(error.localizedDescription)
         }
