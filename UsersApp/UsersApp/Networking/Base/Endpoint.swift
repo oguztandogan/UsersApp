@@ -23,6 +23,7 @@ extension Endpoint {
     }
 
     var host: String {
-        return "randomuser.me"
+        let baseURL = EnvironmentManager.shared.baseURL
+        return URL(string: baseURL)?.host ?? "randomuser.me"
     }
 }

@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        // Setup Environment
+        setupEnvironment()
+        
         // Configure Swinject Dependencies
         DependencyContainer.shared.configureDependencies()
 
@@ -28,5 +31,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appCoordinator?.start()
         window!.makeKeyAndVisible()
         return true
+    }
+    
+    private func setupEnvironment() {
+        let environmentManager = EnvironmentManager.shared
+        environmentManager.infoLog("🚀 App launching with environment: \(environmentManager.currentEnvironment.rawValue)")
+        
+        // Log environment info in debug mode
+        if environmentManager.isDebugMode {
+            let envInfo = environmentManager.getEnvironmentInfo()
+            environmentManager.debugLog("🔧 Environment Configuration:")
+            for (key, value) in envInfo {
+                environmentManager.debugLog("   \(key): \(value)")
+            }
+        }
     }
 }
