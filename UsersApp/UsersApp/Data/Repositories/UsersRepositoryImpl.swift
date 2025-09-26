@@ -20,9 +20,7 @@ class UsersRepositoryImpl: UsersRepository {
         let result = await remoteDataSource.getUsers(pageNumber: pageNumber)
 
         switch result {
-        case .success(let usersDTO):
-            let usersResponse = usersDTO.toDomainEntity()
-
+        case .success(let usersResponse):
             // Check which users are saved locally and update the isSaved flag
             var updatedUsers: [UserEntity] = []
             for user in usersResponse.users {

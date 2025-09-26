@@ -48,5 +48,7 @@
 	</array>
 	<key>EnvironmentType</key>
 	<string>Development</string>
+	<key>API_TIMEOUT</key>
+	<string>$(API_TIMEOUT)</string>
 </dict>
 </plist>

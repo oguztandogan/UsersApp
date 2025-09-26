@@ -98,14 +98,11 @@ enum Environment: String, CaseIterable {
     }
 
     var apiTimeout: TimeInterval {
-        switch self {
-        case .development:
-            return 30.0
-        case .qa:
-            return 20.0
-        case .production:
-            return 15.0
+        if let timeoutString = Bundle.main.object(forInfoDictionaryKey: "API_TIMEOUT") as? String,
+           let timeout = TimeInterval(timeoutString) {
+            return timeout
         }
+        return 30.0 // Default fallback
     }
 }
 

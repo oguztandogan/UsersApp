@@ -24,9 +24,11 @@ enum CoreDataError: Error {
 
 class UsersLocalDataSource: UsersLocalDataSourceProtocol, @unchecked Sendable {
     private let coreDataService: CoreDataServiceable
+    private let mapper: UserMapperProtocol
 
-    init(coreDataService: CoreDataServiceable) {
+    init(coreDataService: CoreDataServiceable, mapper: UserMapperProtocol) {
         self.coreDataService = coreDataService
+        self.mapper = mapper
     }
 
     func getSavedUsers() async -> Result<[SavedUser], CoreDataError> {
@@ -46,16 +48,22 @@ class UsersLocalDataSource: UsersLocalDataSourceProtocol, @unchecked Sendable {
             let coreDataService = self.coreDataService
             let managedContext = coreDataService.viewContext
             managedContext.perform {
-                let newUser = SavedUser(context: managedContext)
-                newUser.id = user.id
-                newUser.userName = user.fullName
-                newUser.userAge = user.dateOfBirth?.age?.description
-                newUser.userNationality = user.nationality
-                newUser.userPictureUrl = user.picture?.medium
-
                 do {
-                    try coreDataService.saveContext()
-                    continuation.resume(returning: .success(()))
+                    // Check if user already exists
+                    let fetchRequest = NSFetchRequest<SavedUser>(entityName: "SavedUser")
+                    fetchRequest.predicate = NSPredicate(format: "id == %@", user.id as CVarArg)
+                    
+                    let existingUsers = try managedContext.fetch(fetchRequest)
+                    
+                    if existingUsers.isEmpty {
+                        // Create new SavedUser entity
+                        _ = self.mapper.mapToCoreData(user, context: managedContext)
+                        try coreDataService.saveContext()
+                        continuation.resume(returning: .success(()))
+                    } else {
+                        // User already exists, no need to save again
+                        continuation.resume(returning: .success(()))
+                    }
                 } catch {
                     continuation.resume(returning: .failure(.saveError(error.localizedDescription)))
                 }
@@ -98,15 +106,6 @@ class UsersLocalDataSource: UsersLocalDataSourceProtocol, @unchecked Sendable {
 // MARK: - Core Data Entity to Domain Entity Mapper
 extension SavedUser {
     func toDomainEntity() -> UserEntity {
-        return UserEntity(
-            id: id ?? UUID(),
-            gender: nil,
-            name: UserName(title: nil, first: userName, last: nil),
-            dateOfBirth: UserDateOfBirth(date: nil, age: Int(userAge ?? "")),
-            phone: nil,
-            picture: UserPicture(large: nil, medium: userPictureUrl, thumbnail: nil),
-            nationality: userNationality,
-            isSaved: true
-        )
+        return UserMapper.mapFromCoreData(self)
     }
 }
