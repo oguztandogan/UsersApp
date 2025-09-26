@@ -1,4 +1,5 @@
 {
+  "originHash" : "28615e2a4d4807562a33972ae44bbb83aee7f711d2e230ece0cb6f810e5211eb",
   "pins" : [
     {
       "identity" : "kingfisher",
@@ -8,7 +9,25 @@
         "revision" : "b6f62758f21a8c03cd64f4009c037cfa580a256e",
         "version" : "7.9.1"
       }
+    },
+    {
+      "identity" : "swiftlintplugins",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SimplyDanny/SwiftLintPlugins",
+      "state" : {
+        "revision" : "6166499ede0efe43c3809f101d2c3cd409e2b77a",
+        "version" : "0.61.0"
+      }
+    },
+    {
+      "identity" : "swinject",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Swinject/Swinject.git",
+      "state" : {
+        "revision" : "b685b549fe4d8ae265fc7a2f27d0789720425d69",
+        "version" : "2.10.0"
+      }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

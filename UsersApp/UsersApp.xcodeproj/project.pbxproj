@@ -85,6 +85,22 @@
 		4518F6BD2AA722FF00332DB6 /* users_response.json in Resources */ = {isa = PBXBuildFile; fileRef = 4518F6BB2AA7202C00332DB6 /* users_response.json */; };
 		4518F6C32AA7315000332DB6 /* CoreDataServiceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F6C22AA7315000332DB6 /* CoreDataServiceable.swift */; };
 		4518F6C92AA7400000332DB6 /* CoreDataServiceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F6C22AA7315000332DB6 /* CoreDataServiceable.swift */; };
+		459B01AB2E869D3F0039952E /* UsersLocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B01962E869D3F0039952E /* UsersLocalDataSource.swift */; };
+		459B01AC2E869D3F0039952E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B01A02E869D3F0039952E /* User.swift */; };
+		459B01AD2E869D3F0039952E /* UsersRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B019D2E869D3F0039952E /* UsersRepositoryImpl.swift */; };
+		459B01AE2E869D3F0039952E /* UsersRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B01A22E869D3F0039952E /* UsersRepository.swift */; };
+		459B01AF2E869D3F0039952E /* GetUsersUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B01A62E869D3F0039952E /* GetUsersUseCase.swift */; };
+		459B01B02E869D3F0039952E /* UseCaseProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B01A82E869D3F0039952E /* UseCaseProtocols.swift */; };
+		459B01B12E869D3F0039952E /* DeleteUserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B01A42E869D3F0039952E /* DeleteUserUseCase.swift */; };
+		459B01B22E869D3F0039952E /* UsersRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B01982E869D3F0039952E /* UsersRemoteDataSource.swift */; };
+		459B01B32E869D3F0039952E /* GetSavedUsersUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B01A52E869D3F0039952E /* GetSavedUsersUseCase.swift */; };
+		459B01B42E869D3F0039952E /* SaveUserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B01A72E869D3F0039952E /* SaveUserUseCase.swift */; };
+		459B01B52E869D3F0039952E /* UserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B019B2E869D3F0039952E /* UserDTO.swift */; };
+		459B01C62E86A16B0039952E /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 459B01C52E86A16B0039952E /* Swinject */; };
+		459B01D12E86A25E0039952E /* PresentationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B01CC2E86A25E0039952E /* PresentationAssembly.swift */; };
+		459B01D22E86A25E0039952E /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B01CF2E86A25E0039952E /* DependencyContainer.swift */; };
+		459B01D32E86A25E0039952E /* DataAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B01CA2E86A25E0039952E /* DataAssembly.swift */; };
+		459B01D52E86A25E0039952E /* DomainAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B01CB2E86A25E0039952E /* DomainAssembly.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +158,21 @@
 		4518F69B2AA7189200332DB6 /* UsersListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListTests.swift; sourceTree = "<group>"; };
 		4518F6BB2AA7202C00332DB6 /* users_response.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = users_response.json; sourceTree = "<group>"; };
 		4518F6C22AA7315000332DB6 /* CoreDataServiceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataServiceable.swift; sourceTree = "<group>"; };
+		459B01962E869D3F0039952E /* UsersLocalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersLocalDataSource.swift; sourceTree = "<group>"; };
+		459B01982E869D3F0039952E /* UsersRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersRemoteDataSource.swift; sourceTree = "<group>"; };
+		459B019B2E869D3F0039952E /* UserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
+		459B019D2E869D3F0039952E /* UsersRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersRepositoryImpl.swift; sourceTree = "<group>"; };
+		459B01A02E869D3F0039952E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		459B01A22E869D3F0039952E /* UsersRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersRepository.swift; sourceTree = "<group>"; };
+		459B01A42E869D3F0039952E /* DeleteUserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserUseCase.swift; sourceTree = "<group>"; };
+		459B01A52E869D3F0039952E /* GetSavedUsersUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSavedUsersUseCase.swift; sourceTree = "<group>"; };
+		459B01A62E869D3F0039952E /* GetUsersUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUsersUseCase.swift; sourceTree = "<group>"; };
+		459B01A72E869D3F0039952E /* SaveUserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveUserUseCase.swift; sourceTree = "<group>"; };
+		459B01A82E869D3F0039952E /* UseCaseProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseProtocols.swift; sourceTree = "<group>"; };
+		459B01CA2E86A25E0039952E /* DataAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataAssembly.swift; sourceTree = "<group>"; };
+		459B01CB2E86A25E0039952E /* DomainAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainAssembly.swift; sourceTree = "<group>"; };
+		459B01CC2E86A25E0039952E /* PresentationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationAssembly.swift; sourceTree = "<group>"; };
+		459B01CF2E86A25E0039952E /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4518F61B2AA5248C00332DB6 /* Kingfisher in Frameworks */,
+				459B01C62E86A16B0039952E /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +216,9 @@
 		4504386A2AA295A100E44E89 /* UsersApp */ = {
 			isa = PBXGroup;
 			children = (
+				459B01D02E86A25E0039952E /* DependencyInjection */,
+				459B019F2E869D3F0039952E /* Data */,
+				459B01AA2E869D3F0039952E /* Domain */,
 				4518F67B2AA6A7A700332DB6 /* Components */,
 				4518F6782AA6A60D00332DB6 /* Base */,
 				4518F6412AA5C72300332DB6 /* CoreData */,
@@ -493,6 +528,114 @@
 			path = MockResponses;
 			sourceTree = "<group>";
 		};
+		459B01972E869D3F0039952E /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				459B01962E869D3F0039952E /* UsersLocalDataSource.swift */,
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		459B01992E869D3F0039952E /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				459B01982E869D3F0039952E /* UsersRemoteDataSource.swift */,
+			);
+			path = Remote;
+			sourceTree = "<group>";
+		};
+		459B019A2E869D3F0039952E /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				459B01972E869D3F0039952E /* Local */,
+				459B01992E869D3F0039952E /* Remote */,
+			);
+			path = DataSources;
+			sourceTree = "<group>";
+		};
+		459B019C2E869D3F0039952E /* DTOs */ = {
+			isa = PBXGroup;
+			children = (
+				459B019B2E869D3F0039952E /* UserDTO.swift */,
+			);
+			path = DTOs;
+			sourceTree = "<group>";
+		};
+		459B019E2E869D3F0039952E /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				459B019D2E869D3F0039952E /* UsersRepositoryImpl.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		459B019F2E869D3F0039952E /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				459B019A2E869D3F0039952E /* DataSources */,
+				459B019C2E869D3F0039952E /* DTOs */,
+				459B019E2E869D3F0039952E /* Repositories */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		459B01A12E869D3F0039952E /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				459B01A02E869D3F0039952E /* User.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		459B01A32E869D3F0039952E /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				459B01A22E869D3F0039952E /* UsersRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		459B01A92E869D3F0039952E /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				459B01A42E869D3F0039952E /* DeleteUserUseCase.swift */,
+				459B01A52E869D3F0039952E /* GetSavedUsersUseCase.swift */,
+				459B01A62E869D3F0039952E /* GetUsersUseCase.swift */,
+				459B01A72E869D3F0039952E /* SaveUserUseCase.swift */,
+				459B01A82E869D3F0039952E /* UseCaseProtocols.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		459B01AA2E869D3F0039952E /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				459B01A12E869D3F0039952E /* Entities */,
+				459B01A32E869D3F0039952E /* Repositories */,
+				459B01A92E869D3F0039952E /* UseCases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		459B01CD2E86A25E0039952E /* Assemblies */ = {
+			isa = PBXGroup;
+			children = (
+				459B01CA2E86A25E0039952E /* DataAssembly.swift */,
+				459B01CB2E86A25E0039952E /* DomainAssembly.swift */,
+				459B01CC2E86A25E0039952E /* PresentationAssembly.swift */,
+			);
+			path = Assemblies;
+			sourceTree = "<group>";
+		};
+		459B01D02E86A25E0039952E /* DependencyInjection */ = {
+			isa = PBXGroup;
+			children = (
+				459B01CD2E86A25E0039952E /* Assemblies */,
+				459B01CF2E86A25E0039952E /* DependencyContainer.swift */,
+			);
+			path = DependencyInjection;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -512,6 +655,7 @@
 			name = UsersApp;
 			packageProductDependencies = (
 				4518F61A2AA5248C00332DB6 /* Kingfisher */,
+				459B01C52E86A16B0039952E /* Swinject */,
 			);
 			productName = UsersApp;
 			productReference = 450438682AA295A100E44E89 /* UsersApp.app */;
@@ -565,6 +709,8 @@
 			mainGroup = 4504385F2AA295A100E44E89;
 			packageReferences = (
 				4518F6192AA5248C00332DB6 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				459B01C42E86A16B0039952E /* XCRemoteSwiftPackageReference "Swinject" */,
+				459B01D62E86A50E0039952E /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
 			);
 			productRefGroup = 450438692AA295A100E44E89 /* Products */;
 			projectDirPath = "";
@@ -634,6 +780,21 @@
 				4518F5EA2AA486B100332DB6 /* AppCoordinator.swift in Sources */,
 				4518F6232AA5366800332DB6 /* UserDetailsViewModel.swift in Sources */,
 				4518F5EE2AA4958D00332DB6 /* TabBarCoordinator.swift in Sources */,
+				459B01D12E86A25E0039952E /* PresentationAssembly.swift in Sources */,
+				459B01D22E86A25E0039952E /* DependencyContainer.swift in Sources */,
+				459B01D32E86A25E0039952E /* DataAssembly.swift in Sources */,
+				459B01D52E86A25E0039952E /* DomainAssembly.swift in Sources */,
+				459B01AB2E869D3F0039952E /* UsersLocalDataSource.swift in Sources */,
+				459B01AC2E869D3F0039952E /* User.swift in Sources */,
+				459B01AD2E869D3F0039952E /* UsersRepositoryImpl.swift in Sources */,
+				459B01AE2E869D3F0039952E /* UsersRepository.swift in Sources */,
+				459B01AF2E869D3F0039952E /* GetUsersUseCase.swift in Sources */,
+				459B01B02E869D3F0039952E /* UseCaseProtocols.swift in Sources */,
+				459B01B12E869D3F0039952E /* DeleteUserUseCase.swift in Sources */,
+				459B01B22E869D3F0039952E /* UsersRemoteDataSource.swift in Sources */,
+				459B01B32E869D3F0039952E /* GetSavedUsersUseCase.swift in Sources */,
+				459B01B42E869D3F0039952E /* SaveUserUseCase.swift in Sources */,
+				459B01B52E869D3F0039952E /* UserDTO.swift in Sources */,
 				4518F67A2AA6A61400332DB6 /* BaseViewModel.swift in Sources */,
 				4518F6212AA5366200332DB6 /* UserDetailsViewController.swift in Sources */,
 				4518F6772AA69CFF00332DB6 /* UserDetailsContentView.swift in Sources */,
@@ -982,6 +1143,22 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		459B01C42E86A16B0039952E /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.10.0;
+			};
+		};
+		459B01D62E86A50E0039952E /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimplyDanny/SwiftLintPlugins";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.61.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -989,6 +1166,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4518F6192AA5248C00332DB6 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		459B01C52E86A16B0039952E /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 459B01C42E86A16B0039952E /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
 		};
 /* End XCSwiftPackageProductDependency section */
 
