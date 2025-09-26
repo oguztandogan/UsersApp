@@ -18,8 +18,7 @@ class BookmarksCoordinator: Coordinator {
     }
 
     func start() {
-        let viewModel = BookmarksViewModel(
-            nav: self)
+        let viewModel = DependencyContainer.shared.makeBookmarksViewModel(navigation: self)
         let bookmarksVC = BookmarksViewController()
         bookmarksVC.viewModel = viewModel
         customizeNavigationBar()

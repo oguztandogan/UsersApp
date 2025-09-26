@@ -12,10 +12,10 @@ class UserDetailsCoordinator: Coordinator {
     var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
-    var userData: User
+    var userData: UserEntity
 
     init(navigationController: UINavigationController,
-         userData: User) {
+         userData: UserEntity) {
         self.navigationController = navigationController
         self.userData = userData
     }
@@ -30,9 +30,8 @@ class UserDetailsCoordinator: Coordinator {
 
 extension UserDetailsCoordinator: UserDetailsNavigation {
     func goToUserDetails() {
-        let coreDataService = CoreDataService()
         let userDetailsVC = UserDetailsViewController()
-        let userDetailsViewModel = UserDetailsViewModel(nav: self, user: userData, coreDataService: coreDataService)
+        let userDetailsViewModel = DependencyContainer.shared.makeUserDetailsViewModel(navigation: self, user: userData)
         userDetailsVC.viewModel = userDetailsViewModel
         customizeNavigationBar()
         navigationController.pushViewController(userDetailsVC, animated: true)

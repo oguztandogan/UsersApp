@@ -12,40 +12,68 @@ protocol BookmarksNavigation: AnyObject {}
 
 class BookmarksViewModel: BaseViewModel {
     weak var navigation: BookmarksNavigation!
-    @Published var users: [User] = []
-    @Published var savedUsers = [SavedUser]()
 
-    init(nav: BookmarksNavigation) {
-        self.navigation = nav
+    // Use Cases
+    private let getSavedUsersUseCase: GetSavedUsersUseCaseProtocol
+    private let deleteUserUseCase: DeleteUserUseCaseProtocol
+
+    // State
+    @Published var savedUsers: [UserEntity] = []
+
+    init(navigation: BookmarksNavigation,
+         getSavedUsersUseCase: GetSavedUsersUseCaseProtocol,
+         deleteUserUseCase: DeleteUserUseCaseProtocol) {
+        self.navigation = navigation
+        self.getSavedUsersUseCase = getSavedUsersUseCase
+        self.deleteUserUseCase = deleteUserUseCase
+        super.init()
     }
 
     func onAppear() {
+        fetchSavedUsers()
+    }
 
-        do {
-            savedUsers = try coreDataService.fetchSavedItems()
-        } catch {
-            print("asdf")
+    private func fetchSavedUsers() {
+        Task {
+            let result = await getSavedUsersUseCase.execute()
+
+            await MainActor.run {
+                switch result {
+                case .success(let users):
+                    savedUsers = users
+                case .failure(let error):
+                    print("Error fetching saved users: \(error)")
+                }
+            }
         }
     }
 
     func favouriteButtonAction(index: Int) {
         Task {
-            self.deleteUser(index: index)
+            await deleteUser(index: index)
         }
     }
 
-    func deleteUser(index: Int) {
-        do {
-            try coreDataService.deleteItem(deletedTask: savedUsers[index])
-            savedUsers.remove(at: index)
-        } catch {
-            print(error.localizedDescription)
+    func deleteUser(index: Int) async {
+        let userId = savedUsers[index].id
+
+        let result = await deleteUserUseCase.execute(userId: userId)
+
+        await MainActor.run {
+            switch result {
+            case .success:
+                savedUsers.remove(at: index)
+            case .failure(let error):
+                print("Error deleting user: \(error)")
+            }
         }
     }
 
     func setCellData(index: Int) -> UserTableViewCellData {
+        let user = savedUsers[index]
+
         let usernameData = InformationItemLabelData(
-            title: savedUsers[index].userName ?? "Not specified",
+            title: user.fullName,
             text: "",
             backgroundColor: .white,
             textColor: .purple,
@@ -54,7 +82,7 @@ class BookmarksViewModel: BaseViewModel {
         )
         let nationalityData = InformationItemLabelData(
             title: "Nationality:",
-            text: savedUsers[index].userNationality ?? "Not specified",
+            text: user.nationality ?? "Not specified",
             backgroundColor: .white,
             textColor: .purple,
             titleFontSize: 13,
@@ -62,13 +90,14 @@ class BookmarksViewModel: BaseViewModel {
         )
         let ageData = InformationItemLabelData(
             title: "Age:",
-            text: savedUsers[index].userAge ?? "Not specified",
+            text: user.dateOfBirth?.age?.description ?? "Not specified",
             backgroundColor: .white,
             textColor: .purple,
             titleFontSize: 13,
             textFontSize: 12
         )
-        let imageUrl = savedUsers[index].userPictureUrl ?? "Not specified"
+        let imageUrl = user.picture?.medium ?? "Not specified"
+
         let cellData = UserTableViewCellData(
             imageUrl: imageUrl,
             userNameData: usernameData,

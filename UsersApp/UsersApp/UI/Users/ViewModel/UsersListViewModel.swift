@@ -9,19 +9,34 @@ import Foundation
 import Combine
 
 protocol UserListNavigation: AnyObject {
-    func navigateToUserDetails(selectedUserData: User)
+    func navigateToUserDetails(selectedUserData: UserEntity)
 }
+
 class UsersListViewModel: BaseViewModel {
     weak var navigation: UserListNavigation!
-    var service: UsersServiceable
-    var pageNumber: Int = 1
-    @Published var users: [User] = []
-    @Published var savedUsers = [SavedUser]()
 
-    init(nav: UserListNavigation,
-         service: UsersServiceable) {
-        self.navigation = nav
-        self.service = service
+    // Use Cases
+    private let getUsersUseCase: GetUsersUseCaseProtocol
+    private let getSavedUsersUseCase: GetSavedUsersUseCaseProtocol
+    private let saveUserUseCase: SaveUserUseCaseProtocol
+    private let deleteUserUseCase: DeleteUserUseCaseProtocol
+
+    // State
+    var pageNumber: Int = 1
+    @Published var users: [UserEntity] = []
+    @Published var savedUsers: [UserEntity] = []
+
+    init(navigation: UserListNavigation,
+         getUsersUseCase: GetUsersUseCaseProtocol,
+         getSavedUsersUseCase: GetSavedUsersUseCaseProtocol,
+         saveUserUseCase: SaveUserUseCaseProtocol,
+         deleteUserUseCase: DeleteUserUseCaseProtocol) {
+        self.navigation = navigation
+        self.getUsersUseCase = getUsersUseCase
+        self.getSavedUsersUseCase = getSavedUsersUseCase
+        self.saveUserUseCase = saveUserUseCase
+        self.deleteUserUseCase = deleteUserUseCase
+        super.init()
     }
 
     func onAppear() {
@@ -33,8 +48,10 @@ class UsersListViewModel: BaseViewModel {
     }
 
     func setCellData(index: Int) -> UserTableViewCellData {
+        let user = users[index]
+
         let usernameData = InformationItemLabelData(
-            title: users[index].fullName,
+            title: user.fullName,
             text: "",
             backgroundColor: .white,
             textColor: .purple,
@@ -43,7 +60,7 @@ class UsersListViewModel: BaseViewModel {
         )
         let nationalityData = InformationItemLabelData(
             title: "Nationality:",
-            text: users[index].nationality ?? "Not specified",
+            text: user.nationality ?? "Not specified",
             backgroundColor: .white,
             textColor: .purple,
             titleFontSize: 13,
@@ -51,14 +68,15 @@ class UsersListViewModel: BaseViewModel {
         )
         let ageData = InformationItemLabelData(
             title: "Age:",
-            text: users[index].dateOfBirth?.age?.description ?? "Not specified",
+            text: user.dateOfBirth?.age?.description ?? "Not specified",
             backgroundColor: .white,
             textColor: .purple,
             titleFontSize: 13,
             textFontSize: 12
         )
-        let imageUrl = users[index].picture?.medium ?? "Not specified"
-        let isSaved = users[index].isSaved
+        let imageUrl = user.picture?.medium ?? "Not specified"
+        let isSaved = user.isSaved
+
         let cellData = UserTableViewCellData(
             imageUrl: imageUrl,
             userNameData: usernameData,
@@ -71,35 +89,45 @@ class UsersListViewModel: BaseViewModel {
 
     func fetchUsers(isPagination: Bool, isRefreshing: Bool) {
         Task(priority: .background) {
-            let result = await service.getUsers(pageNumber: pageNumber.description)
-          switch result {
-          case .success(let usersResponse):
-              if isPagination {
-                  pageNumber += 1
-                  users += usersResponse.results
-              } else {
-                  pageNumber = 1
-                  users = usersResponse.results
-              }
-          case .failure(let error):
-              print(error)
-          }
+            let result = await getUsersUseCase.execute(pageNumber: pageNumber.description)
+
+            await MainActor.run {
+                switch result {
+                case .success(let usersResponse):
+                    if isPagination {
+                        pageNumber += 1
+                        users += usersResponse.users
+                    } else {
+                        pageNumber = 1
+                        users = usersResponse.users
+                    }
+                case .failure(let error):
+                    print("Error fetching users: \(error)")
+                }
+            }
         }
     }
 
     func fetchSavedUsers() {
-        do {
-            savedUsers = try coreDataService.fetchSavedItems()
-        } catch {
-            print("asdf")
+        Task {
+            let result = await getSavedUsersUseCase.execute()
+
+            await MainActor.run {
+                switch result {
+                case .success(let savedUsersResult):
+                    savedUsers = savedUsersResult
+                case .failure(let error):
+                    print("Error fetching saved users: \(error)")
+                }
+                compareSavedUsersAndFetchedUsers()
+            }
         }
-            compareSavedUsersAndFetchedUsers()
     }
 
     func compareSavedUsersAndFetchedUsers() {
-        for user in 0..<users.count {
-            let matchingUUIDs = savedUsers.map { $0.id }
-            users[user].isSaved = matchingUUIDs.contains(users[user].uuid)
+        let savedUserIds = Set(savedUsers.map { $0.id })
+        for index in 0..<users.count {
+            users[index].isSaved = savedUserIds.contains(users[index].id)
         }
     }
 
@@ -110,41 +138,50 @@ class UsersListViewModel: BaseViewModel {
     func favouriteButtonAction(index: Int) {
         if users[index].isSaved {
             users[index].isSaved = false
-            self.deleteUser(index: index)
+            deleteUser(index: index)
         } else {
             users[index].isSaved = true
-            self.saveUser(index: index)
+            saveUser(index: index)
         }
     }
 
-    func deleteUser(index: Int) {
-        if let matchingItem = savedUsers.first(where: { $0.id == users[index].uuid }) {
-            do {
-                try coreDataService.deleteItem(deletedTask: matchingItem)
-            } catch {
-                print(error.localizedDescription)
+    private func deleteUser(index: Int) {
+        let userId = users[index].id
+
+        Task {
+            let result = await deleteUserUseCase.execute(userId: userId)
+
+            await MainActor.run {
+                switch result {
+                case .success:
+                    // Remove from saved users array
+                    savedUsers.removeAll { $0.id == userId }
+                case .failure(let error):
+                    print("Error deleting user: \(error)")
+                    // Revert the UI state
+                    users[index].isSaved = true
+                }
             }
         }
     }
 
-    func saveUser(index: Int) {
-        let managedContext = coreDataService.viewContext
-        users[index].isSaved = true
-         managedContext.perform {
-            let newUser = SavedUser(context: managedContext)
-             newUser.id = self.users[index].uuid
-             newUser.userName = self.users[index].fullName
-             newUser.userAge = self.users[index].dateOfBirth?.age?.description
-             newUser.userNationality = self.users[index].nationality
-             newUser.userPictureUrl = self.users[index].picture?.medium
-            self.savedUsers.append(newUser)
-            do {
-                try self.coreDataService.saveContext()
-            } catch {
-                print(error.localizedDescription)
+    private func saveUser(index: Int) {
+        let user = users[index]
+
+        Task {
+            let result = await saveUserUseCase.execute(user)
+
+            await MainActor.run {
+                switch result {
+                case .success:
+                    // Add to saved users array
+                    savedUsers.append(user)
+                case .failure(let error):
+                    print("Error saving user: \(error)")
+                    // Revert the UI state
+                    users[index].isSaved = false
+                }
             }
         }
-
     }
-
 }

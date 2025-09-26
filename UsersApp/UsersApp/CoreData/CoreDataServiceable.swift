@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-protocol CoreDataServiceable {
+protocol CoreDataServiceable: Sendable {
     var viewContext: NSManagedObjectContext { get }
     func saveContext() throws
     func fetchSavedItems() throws -> [SavedUser]

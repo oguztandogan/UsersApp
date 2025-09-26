@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class CoreDataService: CoreDataServiceable {
+class CoreDataService: CoreDataServiceable, @unchecked Sendable {
     func saveContext() throws {
         if viewContext.hasChanges {
             do {

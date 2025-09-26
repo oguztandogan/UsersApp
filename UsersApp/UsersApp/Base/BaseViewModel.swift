@@ -8,5 +8,6 @@
 import Foundation
 
 class BaseViewModel {
-    var coreDataService: CoreDataServiceable = CoreDataService()
+    // Dependencies will be injected through constructor in each specific ViewModel
+    // This base class can contain common functionality for all ViewModels
 }

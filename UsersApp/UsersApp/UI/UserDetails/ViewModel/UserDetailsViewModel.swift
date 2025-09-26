@@ -13,18 +13,29 @@ protocol UserDetailsNavigation: AnyObject {
     func goBackToHome()
 }
 
-class UserDetailsViewModel {
+class UserDetailsViewModel: BaseViewModel {
     weak var navigation: UserDetailsNavigation!
-    var coreDataService: CoreDataService
-    @Published var user: User
-    @Published var savedUsers = [SavedUser]()
 
-    init(nav: UserDetailsNavigation,
-         user: User,
-         coreDataService: CoreDataService) {
-        self.navigation = nav
+    // Use Cases
+    private let saveUserUseCase: SaveUserUseCaseProtocol
+    private let deleteUserUseCase: DeleteUserUseCaseProtocol
+    private let getSavedUsersUseCase: GetSavedUsersUseCaseProtocol
+
+    // State
+    @Published var user: UserEntity
+    @Published var savedUsers: [UserEntity] = []
+
+    init(navigation: UserDetailsNavigation,
+         user: UserEntity,
+         saveUserUseCase: SaveUserUseCaseProtocol,
+         deleteUserUseCase: DeleteUserUseCaseProtocol,
+         getSavedUsersUseCase: GetSavedUsersUseCaseProtocol) {
+        self.navigation = navigation
         self.user = user
-        self.coreDataService = coreDataService
+        self.saveUserUseCase = saveUserUseCase
+        self.deleteUserUseCase = deleteUserUseCase
+        self.getSavedUsersUseCase = getSavedUsersUseCase
+        super.init()
     }
 
     func getContentViewData() -> UserDetailsContentViewData {
@@ -36,7 +47,7 @@ class UserDetailsViewModel {
             titleFontSize: 17,
             textFontSize: 15
         )
-        let nationalityDaya = InformationItemLabelData(
+        let nationalityData = InformationItemLabelData(
             title: "Nationality: ",
             text: user.nationality ?? "Not specified",
             backgroundColor: .purple,
@@ -63,7 +74,7 @@ class UserDetailsViewModel {
         let contentViewData = UserDetailsContentViewData(
             imageUrl: user.picture?.large ?? "",
             username: usernameData,
-            nationality: nationalityDaya,
+            nationality: nationalityData,
             age: ageData,
             phoneNumber: phoneNumberData
         )
@@ -73,37 +84,46 @@ class UserDetailsViewModel {
     func favouriteButtonAction() {
         if user.isSaved {
             user.isSaved = false
-            self.deleteUser()
+            deleteUser()
         } else {
             user.isSaved = true
-            self.saveUser()
+            saveUser()
         }
     }
 
-    func deleteUser() {
-        if let matchingItem = savedUsers.first(where: { $0.id == user.uuid }) {
-            do {
-                try coreDataService.deleteItem(deletedTask: matchingItem)
-            } catch {
-                print(error.localizedDescription)
+    private func deleteUser() {
+        Task {
+            let result = await deleteUserUseCase.execute(userId: user.id)
+
+            await MainActor.run {
+                switch result {
+                case .success:
+                    // Remove from saved users array
+                    savedUsers.removeAll { $0.id == user.id }
+                case .failure(let error):
+                    print("Error deleting user: \(error)")
+                    // Revert the UI state
+                    user.isSaved = true
+                }
             }
         }
     }
 
-    func saveUser() {
-        let managedContext = coreDataService.viewContext
-        user.isSaved = true
-        let newUser = SavedUser(context: managedContext)
-        newUser.id = user.uuid
-        newUser.userName = user.fullName
-        newUser.userAge = user.dateOfBirth?.age?.description
-        newUser.userNationality = user.nationality
-        newUser.userPictureUrl = user.picture?.medium
-        self.savedUsers.append(newUser)
-        do {
-            try coreDataService.saveContext()
-        } catch {
-            print(error.localizedDescription)
+    private func saveUser() {
+        Task {
+            let result = await saveUserUseCase.execute(user)
+
+            await MainActor.run {
+                switch result {
+                case .success:
+                    // Add to saved users array
+                    savedUsers.append(user)
+                case .failure(let error):
+                    print("Error saving user: \(error)")
+                    // Revert the UI state
+                    user.isSaved = false
+                }
+            }
         }
     }
 }

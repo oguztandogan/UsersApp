@@ -18,11 +18,8 @@ class UsersListCoordinator: Coordinator {
     }
 
     func start() {
-        let usersService = UsersService()
         let userListVC = UsersListViewController()
-        userListVC.viewModel = UsersListViewModel(
-            nav: self,
-            service: usersService)
+        userListVC.viewModel = DependencyContainer.shared.makeUsersListViewModel(navigation: self)
         customizeNavigationBar()
         navigationController.pushViewController(userListVC, animated: true)
     }
@@ -33,7 +30,7 @@ class UsersListCoordinator: Coordinator {
 }
 
 extension UsersListCoordinator: UserListNavigation {
-    func navigateToUserDetails(selectedUserData: User) {
+    func navigateToUserDetails(selectedUserData: UserEntity) {
         let userDetailsCoordinator = UserDetailsCoordinator(
             navigationController: navigationController,
             userData: selectedUserData

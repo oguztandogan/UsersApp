@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import Swinject
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        // Configure Swinject Dependencies
+        DependencyContainer.shared.configureDependencies()
+
         window = UIWindow(frame: UIScreen.main.bounds)
         let navigationCon = UINavigationController.init()
         appCoordinator = AppCoordinator(navigationController: navigationCon, window: window!)
