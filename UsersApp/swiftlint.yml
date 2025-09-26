@@ -1,51 +1,206 @@
-only_rules:
-  - colon
-  - fatal_error_message
-  - implicitly_unwrapped_optional
-  - legacy_cggeometry_functions
-  - legacy_constant
-  - legacy_constructor
-  - legacy_nsgeometry_functions
-  - operator_usage_whitespace
-  - return_arrow_whitespace
-  - trailing_newline
-  - unused_optional_binding
-  - vertical_whitespace
-  - void_return
-  - custom_rules
+# SwiftLint Configuration for Clean Architecture Project
+# Must-have rules for production iOS apps
 
+# Exclude these paths from linting
 excluded:
   - Carthage
   - Pods
   - .build
+  - Derived Data
+  - UsersApp.xcodeproj
 
+# Use only specific rules instead of default set
+only_rules:
+  # MARK: - Critical Rules (Must Fix)
+  - unused_import
+  - unused_declaration
+  - unused_closure_parameter
+  - force_cast
+  - force_try
+  - force_unwrapping
+  - implicitly_unwrapped_optional
+  - fatal_error_message
+  
+  # MARK: - Clean Code Rules
+  - redundant_discardable_let
+  - redundant_optional_initialization
+  - redundant_type_annotation
+  - redundant_void_return
+  - void_return
+  - empty_string
+  - empty_count
+  - empty_collection_literal
+  
+  # MARK: - Naming Conventions
+  - type_name
+  - identifier_name
+  - generic_type_name
+  - function_parameter_count
+  
+  # MARK: - Code Organization
+  - trailing_newline
+  - trailing_whitespace
+  - vertical_whitespace
+  - vertical_parameter_alignment
+  - opening_brace
+  - closing_brace
+  - operator_usage_whitespace
+  - return_arrow_whitespace
+  - colon
+  - comma
+  
+  # MARK: - Swift Best Practices
+  - legacy_cggeometry_functions
+  - legacy_constant
+  - legacy_constructor
+  - legacy_nsgeometry_functions
+  - shorthand_operator
+  - syntactic_sugar
+  - unneeded_break_in_switch
+  - unused_optional_binding
+  
+  # MARK: - Architecture Rules
+  - weak_delegate
+  - protocol_property_accessors_order
+  - class_delegate_protocol
+  
+  # MARK: - Performance
+  - for_where
+  - contains_over_filter_count
+  - contains_over_filter_is_empty
+  - contains_over_first_not_nil
+  - empty_count
+  - first_where
+  - last_where
+  
+  # MARK: - Concurrency Rules (Swift 6)
+  - actor_member_isolation
+  - non_sendable_property_in_sendable_type
+  
+  # MARK: - Custom Rules
+  - custom_rules
+
+# Rule Configurations
+type_name:
+  min_length: 3
+  max_length: 40
+  excluded:
+    - ID
+    - URL
+    - DTO
+
+identifier_name:
+  min_length: 2
+  max_length: 40
+  excluded:
+    - id
+    - URL
+    - DTO
+
+function_parameter_count:
+  warning: 6
+  error: 8
+
+line_length:
+  warning: 120
+  error: 150
+  ignores_urls: true
+  ignores_function_declarations: true
+  ignores_comments: true
+
+file_length:
+  warning: 400
+  error: 500
+
+type_body_length:
+  warning: 300
+  error: 400
+
+function_body_length:
+  warning: 40
+  error: 60
+
+cyclomatic_complexity:
+  warning: 10
+  error: 15
+
+nesting:
+  type_level:
+    warning: 2
+    error: 3
+  statement_level:
+    warning: 5
+    error: 10
+
+# Whitespace Rules
+trailing_whitespace:
+  ignores_empty_lines: false
+  ignores_comments: true
+
+vertical_whitespace:
+  max_empty_lines: 1
+
+# Colon Rules
 colon:
-  apply_to_dictionaries: false
+  flexible_right_spacing: false
+  apply_to_dictionaries: true
 
-indentation: 2
-
+# Custom Rules for Clean Architecture
 custom_rules:
-  no_objcMembers:
-    name: "@objcMembers"
-    regex: "@objcMembers"
-    message: "Explicitly use @objc on each member you want to expose to Objective-C"
-    severity: error
+  # No print statements in production
   no_direct_standard_out_logs:
-    name: "Writing log messages directly to standard out is disallowed"
+    name: "No direct standard out logs"
     regex: "(\\bprint|\\bdebugPrint|\\bdump|Swift\\.print|Swift\\.debugPrint|Swift\\.dump)\\s*\\("
     match_kinds:
     - identifier
-    message: "Don't commit `print(…)`, `debugPrint(…)`, or `dump(…)` as they write to standard out in release. Either log to a dedicated logging system or silence this warning in debug-only scenarios explicitly using `// swiftlint:disable:next no_direct_standard_out_logs`"
+    message: "Use proper logging instead of print statements. Use // swiftlint:disable:next no_direct_standard_out_logs to suppress."
     severity: warning
+  
+  # Enforce modern Swift
   no_file_literal:
     name: "#file is disallowed"
     regex: "(\\b#file\\b)"
     match_kinds:
     - identifier
-    message: "Instead of #file, use #fileID"
+    message: "Use #fileID instead of #file"
+    severity: error
+  
   no_filepath_literal:
     name: "#filePath is disallowed"
     regex: "(\\b#filePath\\b)"
     match_kinds:
     - identifier
-    message: "Instead of #filePath, use #fileID."
+    message: "Use #fileID instead of #filePath"
+    severity: error
+  
+  # Architecture Rules
+  no_objcMembers:
+    name: "@objcMembers is disallowed"
+    regex: "@objcMembers"
+    message: "Use explicit @objc on individual members instead"
+    severity: error
+  
+  # Dependency Injection Rules
+  no_direct_singletons:
+    name: "Avoid direct singleton access in ViewModels"
+    regex: "\\b[A-Z][a-zA-Z]*\\.shared\\."
+    included: ".*ViewModel\\.swift$"
+    message: "Use dependency injection instead of direct singleton access"
+    severity: warning
+  
+  # Use Case Rules
+  proper_use_case_naming:
+    name: "Use Cases should end with UseCase"
+    regex: "class\\s+\\w+(?<!UseCase)\\s*:\\s*\\w*UseCaseProtocol"
+    message: "Use Case classes should end with 'UseCase'"
+    severity: warning
+  
+  # Repository Rules
+  proper_repository_naming:
+    name: "Repository implementations should end with Impl or Repository"
+    regex: "class\\s+\\w+(?<!Repository)(?<!Impl)\\s*:\\s*\\w*Repository\\b"
+    message: "Repository implementations should end with 'Repository' or 'Impl'"
+    severity: warning
+
+# Reporter type
+reporter: "xcode"
