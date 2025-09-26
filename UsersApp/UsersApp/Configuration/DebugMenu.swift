@@ -12,7 +12,14 @@ class DebugMenu {
     private init() {}
 
     func presentDebugMenu(from viewController: UIViewController) {
-        guard EnvironmentManager.shared.showDebugMenu else { return }
+        // Check both environment setting AND remote config
+        let environmentAllows = EnvironmentManager.shared.showDebugMenu
+        let remoteConfigAllows = RemoteConfigManager.shared.isDebugMenuEnabled
+        
+        guard environmentAllows && remoteConfigAllows else { 
+            print("🛠️ Debug Menu disabled: env=\(environmentAllows), remote=\(remoteConfigAllows)")
+            return 
+        }
 
         let alertController = UIAlertController(
             title: "🛠️ Debug Menu",

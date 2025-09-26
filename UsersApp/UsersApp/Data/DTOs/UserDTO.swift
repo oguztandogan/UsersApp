@@ -88,12 +88,14 @@ struct DateOfBirthDTO: Codable {
 extension UserDTO {
     func toDomainEntity() -> UserEntity {
         return UserEntity(
+            id: UUID(),
             gender: gender,
             name: name?.toDomainEntity(),
             dateOfBirth: dateOfBirth?.toDomainEntity(),
             phone: phone,
             picture: picture?.toDomainEntity(),
-            nationality: nationality
+            nationality: nationality,
+            isSaved: false
         )
     }
 }

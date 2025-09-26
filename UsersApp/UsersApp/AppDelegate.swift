@@ -8,6 +8,7 @@
 import UIKit
 import CoreData
 import Swinject
+import FirebaseCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,7 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         // Setup Environment
         setupEnvironment()
-        
         // Configure Swinject Dependencies
         DependencyContainer.shared.configureDependencies()
 
@@ -36,6 +36,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setupEnvironment() {
         let environmentManager = EnvironmentManager.shared
         environmentManager.infoLog("🚀 App launching with environment: \(environmentManager.currentEnvironment.rawValue)")
+        
+        // Configure Firebase
+        FirebaseManager.shared.configure()
+
+        // Fetch Remote Config
+        RemoteConfigManager.shared.fetchAndActivate { success in
+            if success {
+                environmentManager.infoLog("🏃‍♂️ Remote Config loaded successfully")
+            } else {
+                environmentManager.warningLog("🏃‍♂️ Remote Config failed to load, using defaults")
+            }
+        }
+        
+        // Track app launch
+        AnalyticsTracker().trackAppLaunched()
         
         // Log environment info in debug mode
         if environmentManager.isDebugMode {

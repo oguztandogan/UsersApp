@@ -14,13 +14,16 @@ protocol UserListNavigation: AnyObject {
 
 class UsersListViewModel: BaseViewModel {
     weak var navigation: UserListNavigation!
-
+    
     // Use Cases
     private let getUsersUseCase: GetUsersUseCaseProtocol
     private let getSavedUsersUseCase: GetSavedUsersUseCaseProtocol
     private let saveUserUseCase: SaveUserUseCaseProtocol
     private let deleteUserUseCase: DeleteUserUseCaseProtocol
-
+    
+    // Analytics
+    private let analyticsTracker: AnalyticsTrackerProtocol
+    
     // State
     var pageNumber: Int = 1
     @Published var users: [UserEntity] = []
@@ -30,16 +33,19 @@ class UsersListViewModel: BaseViewModel {
          getUsersUseCase: GetUsersUseCaseProtocol,
          getSavedUsersUseCase: GetSavedUsersUseCaseProtocol,
          saveUserUseCase: SaveUserUseCaseProtocol,
-         deleteUserUseCase: DeleteUserUseCaseProtocol) {
+         deleteUserUseCase: DeleteUserUseCaseProtocol,
+         analyticsTracker: AnalyticsTrackerProtocol = AnalyticsTracker()) {
         self.navigation = navigation
         self.getUsersUseCase = getUsersUseCase
         self.getSavedUsersUseCase = getSavedUsersUseCase
         self.saveUserUseCase = saveUserUseCase
         self.deleteUserUseCase = deleteUserUseCase
+        self.analyticsTracker = analyticsTracker
         super.init()
     }
 
     func onAppear() {
+        analyticsTracker.trackUsersListViewed(source: "app_launch")
         fetchUsers(isPagination: false, isRefreshing: false)
     }
 
@@ -88,6 +94,12 @@ class UsersListViewModel: BaseViewModel {
     }
 
     func fetchUsers(isPagination: Bool, isRefreshing: Bool) {
+        if isPagination {
+            analyticsTracker.trackUsersListPagination(pageNumber: pageNumber + 1)
+        } else if isRefreshing {
+            analyticsTracker.trackUsersListRefreshed()
+        }
+        
         Task(priority: .background) {
             let result = await getUsersUseCase.execute(pageNumber: pageNumber.description)
 
@@ -102,6 +114,7 @@ class UsersListViewModel: BaseViewModel {
                         users = usersResponse.users
                     }
                 case .failure(let error):
+                    analyticsTracker.trackError(error, context: "fetch_users")
                     print("Error fetching users: \(error)")
                 }
             }
@@ -132,16 +145,35 @@ class UsersListViewModel: BaseViewModel {
     }
 
     func navigateToUserDetails(index: Int) {
-        navigation.navigateToUserDetails(selectedUserData: users[index])
+        let user = users[index]
+        analyticsTracker.trackUserDetailsOpened(userId: user.id.uuidString, source: "list_tap")
+        navigation.navigateToUserDetails(selectedUserData: user)
     }
 
     func favouriteButtonAction(index: Int) {
-        if users[index].isSaved {
+        let user = users[index]
+        let isAdding = !user.isSaved
+        
+        analyticsTracker.trackBookmarkToggled(userId: user.id.uuidString, isAdding: isAdding, source: "user_list")
+        
+        if user.isSaved {
             users[index].isSaved = false
             deleteUser(index: index)
+            
+            // Remove from cloud if sync enabled
+            if RemoteConfigManager.shared.isBookmarkSyncEnabled {
+                // TODO: Cloud sync removal
+                print("🔄 Would remove from cloud: \(user.id)")
+            }
         } else {
             users[index].isSaved = true
             saveUser(index: index)
+            
+            // Add to cloud if sync enabled  
+            if RemoteConfigManager.shared.isBookmarkSyncEnabled {
+                // TODO: Cloud sync addition
+                print("🔄 Would add to cloud: \(user.id)")
+            }
         }
     }
 

@@ -29,7 +29,7 @@ enum Environment: String, CaseIterable {
         case .development:
             return "https://randomuser.me"
         case .qa:
-            return "https://qa-randomuser.me"
+            return "https://randomuser.me"
         case .production:
             return "https://randomuser.me"
         }

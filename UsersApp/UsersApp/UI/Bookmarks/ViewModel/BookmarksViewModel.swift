@@ -16,20 +16,26 @@ class BookmarksViewModel: BaseViewModel {
     // Use Cases
     private let getSavedUsersUseCase: GetSavedUsersUseCaseProtocol
     private let deleteUserUseCase: DeleteUserUseCaseProtocol
+    
+    // Analytics
+    private let analyticsTracker: AnalyticsTrackerProtocol
 
     // State
     @Published var savedUsers: [UserEntity] = []
 
     init(navigation: BookmarksNavigation,
          getSavedUsersUseCase: GetSavedUsersUseCaseProtocol,
-         deleteUserUseCase: DeleteUserUseCaseProtocol) {
+         deleteUserUseCase: DeleteUserUseCaseProtocol,
+         analyticsTracker: AnalyticsTrackerProtocol = AnalyticsTracker()) {
         self.navigation = navigation
         self.getSavedUsersUseCase = getSavedUsersUseCase
         self.deleteUserUseCase = deleteUserUseCase
+        self.analyticsTracker = analyticsTracker
         super.init()
     }
 
     func onAppear() {
+        analyticsTracker.trackScreenView("Bookmarks", screenClass: "BookmarksViewModel")
         fetchSavedUsers()
     }
 
