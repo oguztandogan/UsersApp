@@ -2,7 +2,7 @@
 //  CoreDataService.swift
 //  UsersApp
 //
-//  Created by Oguz Tandogan on 4.09.2023.
+//  Created by Oguz Tandogan on 26.09.2025.
 //
 
 import Foundation
@@ -19,12 +19,17 @@ class CoreDataService: CoreDataServiceable, @unchecked Sendable {
         }
     }
 
-    func fetchSavedItems() throws -> [SavedUser] {
-        var fetchResults: [SavedUser] = []
+    func fetch<T: NSManagedObject>(
+        predicate: NSPredicate? = nil,
+        sortDescriptors: [NSSortDescriptor]? = nil
+    ) throws -> [T] {
+        var fetchResults: [T] = []
+        let request = NSFetchRequest<T>(entityName: String(describing: T.self))
+        request.predicate = predicate
+        request.sortDescriptors = sortDescriptors
         try viewContext.performAndWait {
-            let fetchRequest = NSFetchRequest<SavedUser>(entityName: String(describing: SavedUser.self))
             do {
-                fetchResults = try self.viewContext.fetch(fetchRequest)
+                fetchResults = try self.viewContext.fetch(request)
             } catch {
                 throw error
             }
@@ -32,9 +37,14 @@ class CoreDataService: CoreDataServiceable, @unchecked Sendable {
         return fetchResults
     }
 
-    func deleteItem(deletedTask: NSManagedObject) throws {
+    func create<T: NSManagedObject>() -> T {
+        let object = T(context: viewContext)
+        return object
+    }
+
+    func delete(object: NSManagedObject) throws {
         try viewContext.performAndWait {
-            self.viewContext.delete(deletedTask)
+            self.viewContext.delete(object)
             do {
                 try self.viewContext.save()
             } catch {

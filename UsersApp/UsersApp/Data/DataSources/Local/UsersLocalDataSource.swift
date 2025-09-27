@@ -33,9 +33,8 @@ class UsersLocalDataSource: UsersLocalDataSourceProtocol, @unchecked Sendable {
 
     func getSavedUsers() async -> Result<[SavedUser], CoreDataError> {
         return await withCheckedContinuation { continuation in
-            let coreDataService = self.coreDataService
             do {
-                let savedUsers = try coreDataService.fetchSavedItems()
+                let savedUsers: [SavedUser] = try coreDataService.fetch()
                 continuation.resume(returning: .success(savedUsers))
             } catch {
                 continuation.resume(returning: .failure(.fetchError(error.localizedDescription)))
@@ -45,23 +44,17 @@ class UsersLocalDataSource: UsersLocalDataSourceProtocol, @unchecked Sendable {
 
     func saveUser(_ user: UserEntity) async -> Result<Void, CoreDataError> {
         return await withCheckedContinuation { continuation in
-            let coreDataService = self.coreDataService
             let managedContext = coreDataService.viewContext
             managedContext.perform {
                 do {
-                    // Check if user already exists
-                    let fetchRequest = NSFetchRequest<SavedUser>(entityName: "SavedUser")
-                    fetchRequest.predicate = NSPredicate(format: "id == %@", user.id as CVarArg)
-                    
-                    let existingUsers = try managedContext.fetch(fetchRequest)
+                    let predicate = NSPredicate(format: "id == %@", user.id as CVarArg)
+                    let existingUsers: [SavedUser] = try self.coreDataService.fetch(predicate: predicate)
                     
                     if existingUsers.isEmpty {
-                        // Create new SavedUser entity
                         _ = self.mapper.mapToCoreData(user, context: managedContext)
-                        try coreDataService.saveContext()
+                        try self.coreDataService.saveContext()
                         continuation.resume(returning: .success(()))
                     } else {
-                        // User already exists, no need to save again
                         continuation.resume(returning: .success(()))
                     }
                 } catch {
@@ -73,15 +66,15 @@ class UsersLocalDataSource: UsersLocalDataSourceProtocol, @unchecked Sendable {
 
     func deleteUser(withId id: UUID) async -> Result<Void, CoreDataError> {
         return await withCheckedContinuation { continuation in
-            let coreDataService = self.coreDataService
             do {
-                let savedUsers = try coreDataService.fetchSavedItems()
-                guard let userToDelete = savedUsers.first(where: { $0.id == id }) else {
+                let predicate = NSPredicate(format: "id == %@", id as CVarArg)
+                let savedUsers: [SavedUser] = try coreDataService.fetch(predicate: predicate)
+                guard let userToDelete = savedUsers.first else {
                     continuation.resume(returning: .failure(.notFound))
                     return
                 }
 
-                try coreDataService.deleteItem(deletedTask: userToDelete)
+                try coreDataService.delete(object: userToDelete)
                 continuation.resume(returning: .success(()))
             } catch {
                 continuation.resume(returning: .failure(.deleteError(error.localizedDescription)))
@@ -91,11 +84,10 @@ class UsersLocalDataSource: UsersLocalDataSourceProtocol, @unchecked Sendable {
 
     func isUserSaved(withId id: UUID) async -> Result<Bool, CoreDataError> {
         return await withCheckedContinuation { continuation in
-            let coreDataService = self.coreDataService
             do {
-                let savedUsers = try coreDataService.fetchSavedItems()
-                let isSaved = savedUsers.contains { $0.id == id }
-                continuation.resume(returning: .success(isSaved))
+                let predicate = NSPredicate(format: "id == %@", id as CVarArg)
+                let savedUsers: [SavedUser] = try coreDataService.fetch(predicate: predicate)
+                continuation.resume(returning: .success(!savedUsers.isEmpty))
             } catch {
                 continuation.resume(returning: .failure(.fetchError(error.localizedDescription)))
             }
