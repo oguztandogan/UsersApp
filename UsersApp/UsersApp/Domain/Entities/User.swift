@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Domain Entities
-struct UserEntity {
+struct UserEntity: Hashable {
     let id: UUID
     let gender: String?
     let name: UserName?
@@ -56,18 +56,18 @@ struct UserEntity {
     }
 }
 
-struct UserName {
+struct UserName: Hashable {
     let title: String?
     let first: String?
     let last: String?
 }
 
-struct UserDateOfBirth {
+struct UserDateOfBirth: Hashable {
     let date: String?
     let age: Int?
 }
 
-struct UserPicture {
+struct UserPicture: Hashable {
     let large: String?
     let medium: String?
     let thumbnail: String?

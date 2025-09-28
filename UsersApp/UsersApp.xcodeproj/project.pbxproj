@@ -119,6 +119,8 @@
 		459B02A12E875E030039952E /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B029F2E875E030039952E /* CoreDataService.swift */; };
 		459B02A42E875EB70039952E /* UsersApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 459B02A22E875EB70039952E /* UsersApp.xcdatamodeld */; };
 		459B02A52E875EB70039952E /* UsersApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 459B02A22E875EB70039952E /* UsersApp.xcdatamodeld */; };
+		459B02A82E897D260039952E /* UsersTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B02A72E897D260039952E /* UsersTableView.swift */; };
+		459B02A92E897D260039952E /* UsersTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B02A72E897D260039952E /* UsersTableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -211,6 +213,7 @@
 		459B029B2E875D8F0039952E /* CoreDataServiceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataServiceable.swift; sourceTree = "<group>"; };
 		459B029F2E875E030039952E /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		459B02A32E875EB70039952E /* SavedUsers.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SavedUsers.xcdatamodel; sourceTree = "<group>"; };
+		459B02A72E897D260039952E /* UsersTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -357,6 +360,7 @@
 			isa = PBXGroup;
 			children = (
 				4518F5F52AA4AB6100332DB6 /* UsersListViewController.swift */,
+				459B02AA2E8980840039952E /* Subviews */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -465,7 +469,6 @@
 		4518F67B2AA6A7A700332DB6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				4518F67F2AA6A7FF00332DB6 /* UserTableViewCell */,
 				4518F67C2AA6A7B600332DB6 /* InformationLabelComponent */,
 			);
 			path = Components;
@@ -794,6 +797,23 @@
 			path = Generic;
 			sourceTree = "<group>";
 		};
+		459B02A62E897D040039952E /* UsersTableView */ = {
+			isa = PBXGroup;
+			children = (
+				459B02A72E897D260039952E /* UsersTableView.swift */,
+				4518F67F2AA6A7FF00332DB6 /* UserTableViewCell */,
+			);
+			path = UsersTableView;
+			sourceTree = "<group>";
+		};
+		459B02AA2E8980840039952E /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				459B02A62E897D040039952E /* UsersTableView */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -942,6 +962,7 @@
 				459B01E02E86C4B90039952E /* EnvironmentManager.swift in Sources */,
 				459B01E12E86C4B90039952E /* DebugMenu.swift in Sources */,
 				4518F66C2AA5D90700332DB6 /* SavedUser+CoreDataClass.swift in Sources */,
+				459B02A92E897D260039952E /* UsersTableView.swift in Sources */,
 				4518F5FC2AA4AB7B00332DB6 /* BookmarksViewModel.swift in Sources */,
 				4518F66F2AA6563F00332DB6 /* PersistenceStore.swift in Sources */,
 				4518F5F42AA4A4F200332DB6 /* BookmarksCoordinator.swift in Sources */,
@@ -1010,6 +1031,7 @@
 			files = (
 				4518F6B32AA71DB200332DB6 /* BookmarksViewController.swift in Sources */,
 				4518F69C2AA7189200332DB6 /* UsersListTests.swift in Sources */,
+				459B02A82E897D260039952E /* UsersTableView.swift in Sources */,
 				4518F6B92AA71DC000332DB6 /* AppDelegate.swift in Sources */,
 				4518F6AD2AA71D9D00332DB6 /* TabBarController.swift in Sources */,
 				4518F6B82AA71DBE00332DB6 /* UserDetailsContentViewData.swift in Sources */,
@@ -1200,7 +1222,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1232,7 +1254,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1368,7 +1390,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1483,7 +1505,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1592,7 +1614,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1701,7 +1723,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

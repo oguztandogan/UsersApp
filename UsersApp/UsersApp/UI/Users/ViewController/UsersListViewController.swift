@@ -8,29 +8,24 @@
 import Foundation
 import UIKit
 import Combine
-import Kingfisher
 
 class UsersListViewController: UIViewController {
     var viewModel: UsersListViewModel!
-    var refreshControl = UIRefreshControl()
-    var cancellables: Set<AnyCancellable> = []
+    private var cancellables: Set<AnyCancellable> = []
 
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: self.view.frame, style: .insetGrouped)
-        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-        tableView.refreshControl = refreshControl
+    private lazy var usersTableView: UsersTableView = {
+        let tableView = UsersTableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(UserTableViewCell.self, forCellReuseIdentifier: "UserTableViewCell")
+        tableView.delegate = self
         return tableView
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setupTableView()
+        setupUI()
+        bindViewModel()
         viewModel.onAppear()
-        bindTableView()
-        self.navigationItem.title = "Users"
+        navigationItem.title = "Users"
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -38,63 +33,47 @@ class UsersListViewController: UIViewController {
         viewModel.viewWillAppear()
     }
 
+    private func setupUI() {
+        view.addSubview(usersTableView)
+        setupConstraints()
+    }
+
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            usersTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            usersTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            usersTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            usersTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 
-    private func setupTableView() {
-        view.addSubview(tableView)
-        tableView.backgroundColor = .systemMint
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
-
-    private func bindTableView() {
+    private func bindViewModel() {
         viewModel.$users
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.tableView.reloadData()
+            .sink { [weak self] users in
+                guard let self = self else { return }
+                let cellDataArray = self.viewModel.createCellDataArray()
+                self.usersTableView.updateUsers(with: users, cellDataArray: cellDataArray)
             }
             .store(in: &cancellables)
     }
-
-    @objc func refreshData() {
-        viewModel.fetchUsers(isPagination: false, isRefreshing: false)
-        refreshControl.endRefreshing()
-    }
 }
 
-extension UsersListViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.users.count
+// MARK: - UsersTableViewDelegate
+extension UsersListViewController: UsersTableViewDelegate {
+    func didSelectUser(_ user: UserEntity) {
+        viewModel.navigateToUserDetails(for: user)
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = self.tableView.dequeueReusableCell(
-            withIdentifier: "UserTableViewCell") as? UserTableViewCell
-        else { return UITableViewCell() }
-        cell.setData(cellData: viewModel.setCellData(index: indexPath.row))
-        cell.buttonTapCallback = {
-            self.viewModel.favouriteButtonAction(index: indexPath.row)
-            cell.setFavouriteButtonsImage(isSaved: self.viewModel.users[indexPath.row].isSaved)
-        }
-        let lastIndex = self.viewModel.users.count - 3
-        if indexPath.row == lastIndex {
-            viewModel.fetchUsers(isPagination: true, isRefreshing: false)
-        }
-        return cell
+    func didTapFavoriteButton(for user: UserEntity) {
+        viewModel.favouriteButtonAction(for: user)
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+    func shouldLoadMoreData(currentCount: Int) {
+        viewModel.fetchUsers(isPagination: true, isRefreshing: false)
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.navigateToUserDetails(index: indexPath.row)
+    func didPullToRefresh() {
+        viewModel.fetchUsers(isPagination: false, isRefreshing: true)
     }
 }

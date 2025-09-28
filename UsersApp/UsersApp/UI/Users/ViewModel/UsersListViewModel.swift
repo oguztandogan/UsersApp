@@ -53,9 +53,11 @@ class UsersListViewModel: BaseViewModel {
         fetchSavedUsers()
     }
 
-    func setCellData(index: Int) -> UserTableViewCellData {
-        let user = users[index]
+    func createCellDataArray() -> [UserTableViewCellData] {
+        return users.map { createCellData(for: $0) }
+    }
 
+    private func createCellData(for user: UserEntity) -> UserTableViewCellData {
         let usernameData = InformationItemLabelData(
             title: user.fullName,
             text: "",
@@ -64,6 +66,7 @@ class UsersListViewModel: BaseViewModel {
             titleFontSize: 13,
             textFontSize: 12
         )
+
         let nationalityData = InformationItemLabelData(
             title: "Nationality:",
             text: user.nationality ?? "Not specified",
@@ -72,6 +75,7 @@ class UsersListViewModel: BaseViewModel {
             titleFontSize: 13,
             textFontSize: 12
         )
+
         let ageData = InformationItemLabelData(
             title: "Age:",
             text: user.dateOfBirth?.age?.description ?? "Not specified",
@@ -80,18 +84,16 @@ class UsersListViewModel: BaseViewModel {
             titleFontSize: 13,
             textFontSize: 12
         )
-        let imageUrl = user.picture?.medium ?? "Not specified"
-        let isSaved = user.isSaved
 
-        let cellData = UserTableViewCellData(
-            imageUrl: imageUrl,
+        return UserTableViewCellData(
+            imageUrl: user.picture?.medium ?? "",
             userNameData: usernameData,
             ageData: ageData,
             nationalityData: nationalityData,
-            isSaved: isSaved
+            isSaved: user.isSaved
         )
-        return cellData
     }
+
 
     func fetchUsers(isPagination: Bool, isRefreshing: Bool) {
         if isPagination {
@@ -152,6 +154,11 @@ class UsersListViewModel: BaseViewModel {
         analyticsTracker.trackUserDetailsOpened(userId: user.id.uuidString, source: "list_tap")
         navigation.navigateToUserDetails(selectedUserData: user)
     }
+    
+    func navigateToUserDetails(for user: UserEntity) {
+        analyticsTracker.trackUserDetailsOpened(userId: user.id.uuidString, source: "list_tap")
+        navigation.navigateToUserDetails(selectedUserData: user)
+    }
 
     func favouriteButtonAction(index: Int) {
         let user = users[index]
@@ -178,6 +185,15 @@ class UsersListViewModel: BaseViewModel {
                 print("🔄 Would add to cloud: \(user.id)")
             }
         }
+    }
+    
+    func favouriteButtonAction(for user: UserEntity) {
+        guard let index = users.firstIndex(where: { $0.id == user.id }) else {
+            print("⚠️ User not found in current users array")
+            return
+        }
+        
+        favouriteButtonAction(index: index)
     }
 
     private func deleteUser(index: Int) {
