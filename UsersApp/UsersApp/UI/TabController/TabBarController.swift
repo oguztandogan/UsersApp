@@ -28,14 +28,61 @@ class TabBarController: UITabBarController {
 
     private func customizeTabBar() {
         let tabBarAppearance = UITabBarAppearance()
-        tabBarAppearance.backgroundColor = .purple.withAlphaComponent(0.5)
-        tabBarAppearance.backgroundEffect = UIBlurEffect(style: .light)
-        tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.black]
-        tabBarAppearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.white]
-        tabBarAppearance.stackedLayoutAppearance.normal.iconColor = UIColor.white
-        tabBarAppearance.stackedLayoutAppearance.selected.iconColor = UIColor.black
+        tabBarAppearance.configureWithOpaqueBackground()
+        tabBarAppearance.backgroundColor = .appBackground // Liste background ile aynı
+        
+        // Normal state (unselected)
+        tabBarAppearance.stackedLayoutAppearance.normal.titleTextAttributes = [
+            .foregroundColor: UIColor.appOnSurfaceVariant
+        ]
+        tabBarAppearance.stackedLayoutAppearance.normal.iconColor = .appOnSurfaceVariant
+        
+        // Selected state
+        tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = [
+            .foregroundColor: UIColor.appPrimary
+        ]
+        tabBarAppearance.stackedLayoutAppearance.selected.iconColor = .appPrimary
+        
         tabBar.standardAppearance = tabBarAppearance
         tabBar.scrollEdgeAppearance = tabBarAppearance
+        
+        // Add shadow to TabBar
+        addTabBarShadow()
+    }
+    
+    private func addTabBarShadow() {
+        tabBar.layer.shadowColor = UIColor.black.cgColor
+        tabBar.layer.shadowOpacity = 0.3
+        tabBar.layer.shadowOffset = CGSize(width: 0, height: -2)
+        tabBar.layer.shadowRadius = 8
+        tabBar.layer.masksToBounds = false
+        
+        // Create shadow path for better performance
+        tabBar.layer.shadowPath = UIBezierPath(
+            rect: CGRect(
+                x: 0,
+                y: -8,
+                width: tabBar.bounds.width,
+                height: tabBar.bounds.height + 8
+            )
+        ).cgPath
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // Update shadow path when layout changes
+        updateTabBarShadowPath()
+    }
+    
+    private func updateTabBarShadowPath() {
+        tabBar.layer.shadowPath = UIBezierPath(
+            rect: CGRect(
+                x: 0,
+                y: -8,
+                width: tabBar.bounds.width,
+                height: tabBar.bounds.height + 8
+            )
+        ).cgPath
     }
 }
 

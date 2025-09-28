@@ -55,12 +55,13 @@ class UsersListViewModel: BaseViewModel {
 
     private func createCellData(for user: UserEntity) -> UserTableViewCellData {
         let usernameData = LabelViewData.primary(text: user.fullName)
-        let nationalityData = LabelViewData.secondary(text: user.job?.title ?? "Job Title")
+        let nationalityData = LabelViewData.secondary(text: "Nationality: \(user.nationality ?? "Not specified")")
+        let ageData = LabelViewData.secondary(text: "Age: \(user.dateOfBirth?.age?.description ?? "Not specified")")
 
         return UserTableViewCellData(
             imageUrl: user.picture?.medium ?? "",
             userNameData: usernameData,
-            ageData: nationalityData, // Job title as secondary info
+            ageData: ageData,
             nationalityData: nationalityData,
             isSaved: user.isSaved
         )

@@ -27,12 +27,18 @@ extension Coordinator {
     func customizeNavigationBar() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        appearance.backgroundColor = .purple.withAlphaComponent(0.7)
-        appearance.backgroundEffect = UIBlurEffect(style: .regular)
+        appearance.backgroundColor = .appBackground // Liste background ile aynı
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.appOnSurface]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.appOnSurface]
+        
+        // Remove default shadow/border
+        appearance.shadowColor = .clear
+        appearance.shadowImage = UIImage()
+        
         let proxy = UINavigationBar.appearance()
-        proxy.tintColor = .white
+        proxy.tintColor = .appOnSurface
         proxy.standardAppearance = appearance
         proxy.scrollEdgeAppearance = appearance
+        proxy.compactAppearance = appearance
     }
 }
