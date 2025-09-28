@@ -14,7 +14,7 @@ class SaveUserUseCase: SaveUserUseCaseProtocol {
         self.repository = repository
     }
 
-    func execute(_ user: UserEntity) async -> Result<Void, DomainError> {
-        return await repository.saveUser(user)
+    func execute(_ user: UserEntity) async throws {
+        try await repository.saveUser(user)
     }
 }

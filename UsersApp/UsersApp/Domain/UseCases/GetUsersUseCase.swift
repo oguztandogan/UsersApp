@@ -14,7 +14,7 @@ class GetUsersUseCase: GetUsersUseCaseProtocol {
         self.repository = repository
     }
 
-    func execute(pageNumber: String) async -> Result<UsersResponse, DomainError> {
-        return await repository.getUsers(pageNumber: pageNumber)
+    func execute(pageNumber: String) async throws -> UsersResponse {
+        return try await repository.getUsers(pageNumber: pageNumber)
     }
 }

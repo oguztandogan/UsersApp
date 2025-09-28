@@ -90,7 +90,6 @@
 		459B01FE2E86CE3B0039952E /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 459B01FD2E86CE3B0039952E /* FirebaseCrashlytics */; };
 		459B02002E86CE3B0039952E /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 459B01FF2E86CE3B0039952E /* FirebaseFirestore */; };
 		459B02022E86CE3B0039952E /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 459B02012E86CE3B0039952E /* FirebaseRemoteConfig */; };
-		459B020C2E86D0630039952E /* FirestoreBookmarkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B02062E86D0630039952E /* FirestoreBookmarkManager.swift */; };
 		459B020D2E86D0630039952E /* AnalyticsTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B02032E86D0630039952E /* AnalyticsTracker.swift */; };
 		459B020E2E86D0630039952E /* RemoteConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B02082E86D0630039952E /* RemoteConfigManager.swift */; };
 		459B020F2E86D0630039952E /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B020A2E86D0630039952E /* FirebaseManager.swift */; };
@@ -187,7 +186,6 @@
 		459B01E62E86C6930039952E /* Info-QA.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-QA.plist"; sourceTree = "<group>"; };
 		459B01F62E86C7730039952E /* Info-Prod.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Prod.plist"; sourceTree = "<group>"; };
 		459B02032E86D0630039952E /* AnalyticsTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsTracker.swift; sourceTree = "<group>"; };
-		459B02062E86D0630039952E /* FirestoreBookmarkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreBookmarkManager.swift; sourceTree = "<group>"; };
 		459B02082E86D0630039952E /* RemoteConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigManager.swift; sourceTree = "<group>"; };
 		459B020A2E86D0630039952E /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		459B02102E86D6870039952E /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -623,14 +621,6 @@
 			path = Analytics;
 			sourceTree = "<group>";
 		};
-		459B02072E86D0630039952E /* Firestore */ = {
-			isa = PBXGroup;
-			children = (
-				459B02062E86D0630039952E /* FirestoreBookmarkManager.swift */,
-			);
-			path = Firestore;
-			sourceTree = "<group>";
-		};
 		459B02092E86D0630039952E /* RemoteConfig */ = {
 			isa = PBXGroup;
 			children = (
@@ -643,7 +633,6 @@
 			isa = PBXGroup;
 			children = (
 				459B02042E86D0630039952E /* Analytics */,
-				459B02072E86D0630039952E /* Firestore */,
 				459B02092E86D0630039952E /* RemoteConfig */,
 				459B020A2E86D0630039952E /* FirebaseManager.swift */,
 			);
@@ -996,7 +985,6 @@
 				459B01B42E869D3F0039952E /* SaveUserUseCase.swift in Sources */,
 				4518F67A2AA6A61400332DB6 /* BaseViewModel.swift in Sources */,
 				4518F6212AA5366200332DB6 /* UserDetailsViewController.swift in Sources */,
-				459B020C2E86D0630039952E /* FirestoreBookmarkManager.swift in Sources */,
 				459B020D2E86D0630039952E /* AnalyticsTracker.swift in Sources */,
 				459B020E2E86D0630039952E /* RemoteConfigManager.swift in Sources */,
 				459B020F2E86D0630039952E /* FirebaseManager.swift in Sources */,

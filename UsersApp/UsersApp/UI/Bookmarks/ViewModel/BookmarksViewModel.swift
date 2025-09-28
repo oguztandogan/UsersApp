@@ -41,13 +41,14 @@ class BookmarksViewModel: BaseViewModel {
 
     private func fetchSavedUsers() {
         Task {
-            let result = await getSavedUsersUseCase.execute()
-
-            await MainActor.run {
-                switch result {
-                case .success(let users):
+            do {
+                let users = try await getSavedUsersUseCase.execute()
+                
+                await MainActor.run {
                     savedUsers = users
-                case .failure(let error):
+                }
+            } catch {
+                await MainActor.run {
                     print("Error fetching saved users: \(error)")
                 }
             }
@@ -63,13 +64,14 @@ class BookmarksViewModel: BaseViewModel {
     func deleteUser(index: Int) async {
         let userId = savedUsers[index].id
 
-        let result = await deleteUserUseCase.execute(userId: userId)
-
-        await MainActor.run {
-            switch result {
-            case .success:
+        do {
+            try await deleteUserUseCase.execute(userId: userId)
+            
+            await MainActor.run {
                 savedUsers.remove(at: index)
-            case .failure(let error):
+            }
+        } catch {
+            await MainActor.run {
                 print("Error deleting user: \(error)")
             }
         }

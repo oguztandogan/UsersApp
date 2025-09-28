@@ -93,14 +93,15 @@ class UserDetailsViewModel: BaseViewModel {
 
     private func deleteUser() {
         Task {
-            let result = await deleteUserUseCase.execute(userId: user.id)
-
-            await MainActor.run {
-                switch result {
-                case .success:
+            do {
+                try await deleteUserUseCase.execute(userId: user.id)
+                
+                await MainActor.run {
                     // Remove from saved users array
                     savedUsers.removeAll { $0.id == user.id }
-                case .failure(let error):
+                }
+            } catch {
+                await MainActor.run {
                     print("Error deleting user: \(error)")
                     // Revert the UI state
                     user.isSaved = true
@@ -111,14 +112,15 @@ class UserDetailsViewModel: BaseViewModel {
 
     private func saveUser() {
         Task {
-            let result = await saveUserUseCase.execute(user)
-
-            await MainActor.run {
-                switch result {
-                case .success:
+            do {
+                try await saveUserUseCase.execute(user)
+                
+                await MainActor.run {
                     // Add to saved users array
                     savedUsers.append(user)
-                case .failure(let error):
+                }
+            } catch {
+                await MainActor.run {
                     print("Error saving user: \(error)")
                     // Revert the UI state
                     user.isSaved = false

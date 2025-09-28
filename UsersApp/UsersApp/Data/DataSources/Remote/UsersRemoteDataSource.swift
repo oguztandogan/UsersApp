@@ -8,7 +8,7 @@
 import Foundation
 
 protocol UsersRemoteDataSourceProtocol: Sendable {
-    func getUsers(pageNumber: String) async -> Result<UsersResponse, NetworkError>
+    func getUsers(pageNumber: String) async throws -> UsersResponse
 }
 
 /// Updated remote data source using the new networking layer
@@ -21,15 +21,8 @@ class UsersRemoteDataSource: UsersRemoteDataSourceProtocol, @unchecked Sendable 
         self.networkService = networkService
     }
     
-    func getUsers(pageNumber: String) async -> Result<UsersResponse, NetworkError> {
-        do {
-            let response = try await networkService.getUsers(page: pageNumber, results: 25)
-            return .success(response)
-        } catch let networkError as NetworkError {
-            return .failure(networkError)
-        } catch {
-            return .failure(.unknown(error))
-        }
+    func getUsers(pageNumber: String) async throws -> UsersResponse {
+        return try await networkService.getUsers(page: pageNumber, results: 25)
     }
 }
 
@@ -37,12 +30,12 @@ class UsersRemoteDataSource: UsersRemoteDataSourceProtocol, @unchecked Sendable 
 extension UsersRemoteDataSource {
     
     /// Convenience method to get users with integer page number
-    func getUsers(page: Int) async -> Result<UsersResponse, NetworkError> {
-        return await getUsers(pageNumber: String(page))
+    func getUsers(page: Int) async throws -> UsersResponse {
+        return try await getUsers(pageNumber: String(page))
     }
     
     /// Convenience method to get first page
-    func getFirstPage() async -> Result<UsersResponse, NetworkError> {
-        return await getUsers(pageNumber: "1")
+    func getFirstPage() async throws -> UsersResponse {
+        return try await getUsers(pageNumber: "1")
     }
 }

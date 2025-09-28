@@ -11,28 +11,27 @@ import Foundation
 protocol UseCase {
     associatedtype Request
     associatedtype Response
-    associatedtype Error: Swift.Error
 
-    func execute(_ request: Request) async -> Result<Response, Error>
+    func execute(_ request: Request) async throws -> Response
 }
 
 // MARK: - Specific Use Case Protocols
 protocol GetUsersUseCaseProtocol {
-    func execute(pageNumber: String) async -> Result<UsersResponse, DomainError>
+    func execute(pageNumber: String) async throws -> UsersResponse
 }
 
 protocol GetSavedUsersUseCaseProtocol {
-    func execute() async -> Result<[UserEntity], DomainError>
+    func execute() async throws -> [UserEntity]
 }
 
 protocol SaveUserUseCaseProtocol {
-    func execute(_ user: UserEntity) async -> Result<Void, DomainError>
+    func execute(_ user: UserEntity) async throws
 }
 
 protocol DeleteUserUseCaseProtocol {
-    func execute(userId: UUID) async -> Result<Void, DomainError>
+    func execute(userId: UUID) async throws
 }
 
 protocol CheckUserSavedStatusUseCaseProtocol {
-    func execute(userId: UUID) async -> Result<Bool, DomainError>
+    func execute(userId: UUID) async throws -> Bool
 }

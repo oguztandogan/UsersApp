@@ -101,11 +101,10 @@ class UsersListViewModel: BaseViewModel {
         }
         
         Task(priority: .background) {
-            let result = await getUsersUseCase.execute(pageNumber: pageNumber.description)
-
-            await MainActor.run {
-                switch result {
-                case .success(let usersResponse):
+            do {
+                let usersResponse = try await getUsersUseCase.execute(pageNumber: pageNumber.description)
+                
+                await MainActor.run {
                     if isPagination {
                         pageNumber += 1
                         users += usersResponse.users
@@ -113,7 +112,9 @@ class UsersListViewModel: BaseViewModel {
                         pageNumber = 1
                         users = usersResponse.users
                     }
-                case .failure(let error):
+                }
+            } catch {
+                await MainActor.run {
                     analyticsTracker.trackError(error, context: "fetch_users")
                     print("Error fetching users: \(error)")
                 }
@@ -123,16 +124,18 @@ class UsersListViewModel: BaseViewModel {
 
     func fetchSavedUsers() {
         Task {
-            let result = await getSavedUsersUseCase.execute()
-
-            await MainActor.run {
-                switch result {
-                case .success(let savedUsersResult):
+            do {
+                let savedUsersResult = try await getSavedUsersUseCase.execute()
+                
+                await MainActor.run {
                     savedUsers = savedUsersResult
-                case .failure(let error):
-                    print("Error fetching saved users: \(error)")
+                    compareSavedUsersAndFetchedUsers()
                 }
-                compareSavedUsersAndFetchedUsers()
+            } catch {
+                await MainActor.run {
+                    print("Error fetching saved users: \(error)")
+                    compareSavedUsersAndFetchedUsers()
+                }
             }
         }
     }
@@ -181,14 +184,15 @@ class UsersListViewModel: BaseViewModel {
         let userId = users[index].id
 
         Task {
-            let result = await deleteUserUseCase.execute(userId: userId)
-
-            await MainActor.run {
-                switch result {
-                case .success:
+            do {
+                try await deleteUserUseCase.execute(userId: userId)
+                
+                await MainActor.run {
                     // Remove from saved users array
                     savedUsers.removeAll { $0.id == userId }
-                case .failure(let error):
+                }
+            } catch {
+                await MainActor.run {
                     print("Error deleting user: \(error)")
                     // Revert the UI state
                     users[index].isSaved = true
@@ -201,14 +205,15 @@ class UsersListViewModel: BaseViewModel {
         let user = users[index]
 
         Task {
-            let result = await saveUserUseCase.execute(user)
-
-            await MainActor.run {
-                switch result {
-                case .success:
+            do {
+                try await saveUserUseCase.execute(user)
+                
+                await MainActor.run {
                     // Add to saved users array
                     savedUsers.append(user)
-                case .failure(let error):
+                }
+            } catch {
+                await MainActor.run {
                     print("Error saving user: \(error)")
                     // Revert the UI state
                     users[index].isSaved = false

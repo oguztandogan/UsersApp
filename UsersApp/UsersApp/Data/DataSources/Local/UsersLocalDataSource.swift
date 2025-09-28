@@ -9,10 +9,10 @@ import Foundation
 import CoreData
 
 protocol UsersLocalDataSourceProtocol {
-    func getSavedUsers() async -> Result<[SavedUser], CoreDataError>
-    func saveUser(_ user: UserEntity) async -> Result<Void, CoreDataError>
-    func deleteUser(withId id: UUID) async -> Result<Void, CoreDataError>
-    func isUserSaved(withId id: UUID) async -> Result<Bool, CoreDataError>
+    func getSavedUsers() async throws -> [SavedUser]
+    func saveUser(_ user: UserEntity) async throws
+    func deleteUser(withId id: UUID) async throws
+    func isUserSaved(withId id: UUID) async throws -> Bool
 }
 
 enum CoreDataError: Error {
@@ -31,19 +31,19 @@ class UsersLocalDataSource: UsersLocalDataSourceProtocol, @unchecked Sendable {
         self.mapper = mapper
     }
 
-    func getSavedUsers() async -> Result<[SavedUser], CoreDataError> {
-        return await withCheckedContinuation { continuation in
+    func getSavedUsers() async throws -> [SavedUser] {
+        return try await withCheckedThrowingContinuation { continuation in
             do {
                 let savedUsers: [SavedUser] = try coreDataService.fetch()
-                continuation.resume(returning: .success(savedUsers))
+                continuation.resume(returning: savedUsers)
             } catch {
-                continuation.resume(returning: .failure(.fetchError(error.localizedDescription)))
+                continuation.resume(throwing: CoreDataError.fetchError(error.localizedDescription))
             }
         }
     }
 
-    func saveUser(_ user: UserEntity) async -> Result<Void, CoreDataError> {
-        return await withCheckedContinuation { continuation in
+    func saveUser(_ user: UserEntity) async throws {
+        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
             let managedContext = coreDataService.viewContext
             managedContext.perform {
                 do {
@@ -53,43 +53,43 @@ class UsersLocalDataSource: UsersLocalDataSourceProtocol, @unchecked Sendable {
                     if existingUsers.isEmpty {
                         _ = self.mapper.mapToCoreData(user, context: managedContext)
                         try self.coreDataService.saveContext()
-                        continuation.resume(returning: .success(()))
+                        continuation.resume(returning: ())
                     } else {
-                        continuation.resume(returning: .success(()))
+                        continuation.resume(returning: ())
                     }
                 } catch {
-                    continuation.resume(returning: .failure(.saveError(error.localizedDescription)))
+                    continuation.resume(throwing: CoreDataError.saveError(error.localizedDescription))
                 }
             }
         }
     }
 
-    func deleteUser(withId id: UUID) async -> Result<Void, CoreDataError> {
-        return await withCheckedContinuation { continuation in
+    func deleteUser(withId id: UUID) async throws {
+        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
             do {
                 let predicate = NSPredicate(format: "id == %@", id as CVarArg)
                 let savedUsers: [SavedUser] = try coreDataService.fetch(predicate: predicate)
                 guard let userToDelete = savedUsers.first else {
-                    continuation.resume(returning: .failure(.notFound))
+                    continuation.resume(throwing: CoreDataError.notFound)
                     return
                 }
 
                 try coreDataService.delete(object: userToDelete)
-                continuation.resume(returning: .success(()))
+                continuation.resume(returning: ())
             } catch {
-                continuation.resume(returning: .failure(.deleteError(error.localizedDescription)))
+                continuation.resume(throwing: CoreDataError.deleteError(error.localizedDescription))
             }
         }
     }
 
-    func isUserSaved(withId id: UUID) async -> Result<Bool, CoreDataError> {
-        return await withCheckedContinuation { continuation in
+    func isUserSaved(withId id: UUID) async throws -> Bool {
+        return try await withCheckedThrowingContinuation { continuation in
             do {
                 let predicate = NSPredicate(format: "id == %@", id as CVarArg)
                 let savedUsers: [SavedUser] = try coreDataService.fetch(predicate: predicate)
-                continuation.resume(returning: .success(!savedUsers.isEmpty))
+                continuation.resume(returning: !savedUsers.isEmpty)
             } catch {
-                continuation.resume(returning: .failure(.fetchError(error.localizedDescription)))
+                continuation.resume(throwing: CoreDataError.fetchError(error.localizedDescription))
             }
         }
     }

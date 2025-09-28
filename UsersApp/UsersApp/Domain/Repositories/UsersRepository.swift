@@ -8,11 +8,11 @@
 import Foundation
 
 protocol UsersRepository {
-    func getUsers(pageNumber: String) async -> Result<UsersResponse, DomainError>
-    func getSavedUsers() async -> Result<[UserEntity], DomainError>
-    func saveUser(_ user: UserEntity) async -> Result<Void, DomainError>
-    func deleteUser(withId id: UUID) async -> Result<Void, DomainError>
-    func isUserSaved(withId id: UUID) async -> Result<Bool, DomainError>
+    func getUsers(pageNumber: String) async throws -> UsersResponse
+    func getSavedUsers() async throws -> [UserEntity]
+    func saveUser(_ user: UserEntity) async throws
+    func deleteUser(withId id: UUID) async throws
+    func isUserSaved(withId id: UUID) async throws -> Bool
 }
 
 enum DomainError: Error {

@@ -14,7 +14,7 @@ class GetSavedUsersUseCase: GetSavedUsersUseCaseProtocol {
         self.repository = repository
     }
 
-    func execute() async -> Result<[UserEntity], DomainError> {
-        return await repository.getSavedUsers()
+    func execute() async throws -> [UserEntity] {
+        return try await repository.getSavedUsers()
     }
 }

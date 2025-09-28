@@ -14,7 +14,7 @@ class DeleteUserUseCase: DeleteUserUseCaseProtocol {
         self.repository = repository
     }
 
-    func execute(userId: UUID) async -> Result<Void, DomainError> {
-        return await repository.deleteUser(withId: userId)
+    func execute(userId: UUID) async throws {
+        try await repository.deleteUser(withId: userId)
     }
 }
