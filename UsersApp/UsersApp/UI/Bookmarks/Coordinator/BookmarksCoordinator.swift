@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class BookmarksCoordinator: Coordinator, NavigationCoordinator {
+class BookmarksCoordinator: NavigationCoordinator {
     typealias Destination = BookmarksDestination
     typealias NavigationData = UserNavigationData
     var parentCoordinator: Coordinator?

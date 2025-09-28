@@ -123,6 +123,8 @@
 		459B02A92E897D260039952E /* UsersTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B02A72E897D260039952E /* UsersTableView.swift */; };
 		459B02AD2E89876D0039952E /* NavigationProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B02AC2E89876D0039952E /* NavigationProtocols.swift */; };
 		459B02AE2E89876D0039952E /* NavigationProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B02AC2E89876D0039952E /* NavigationProtocols.swift */; };
+		459B02B02E898C2C0039952E /* TabConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B02AF2E898C2C0039952E /* TabConfiguration.swift */; };
+		459B02B12E898C2C0039952E /* TabConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B02AF2E898C2C0039952E /* TabConfiguration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -217,6 +219,7 @@
 		459B02A32E875EB70039952E /* SavedUsers.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SavedUsers.xcdatamodel; sourceTree = "<group>"; };
 		459B02A72E897D260039952E /* UsersTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTableView.swift; sourceTree = "<group>"; };
 		459B02AC2E89876D0039952E /* NavigationProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationProtocols.swift; sourceTree = "<group>"; };
+		459B02AF2E898C2C0039952E /* TabConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabConfiguration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -326,6 +329,7 @@
 		450438A12AA296A900E44E89 /* TabController */ = {
 			isa = PBXGroup;
 			children = (
+				459B02AF2E898C2C0039952E /* TabConfiguration.swift */,
 				4518F5ED2AA4958D00332DB6 /* TabBarCoordinator.swift */,
 				4518F5EB2AA48E8D00332DB6 /* TabBarController.swift */,
 			);
@@ -963,6 +967,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				459B02B02E898C2C0039952E /* TabConfiguration.swift in Sources */,
 				459B01DF2E86C4B90039952E /* Environment.swift in Sources */,
 				459B01E02E86C4B90039952E /* EnvironmentManager.swift in Sources */,
 				459B01E12E86C4B90039952E /* DebugMenu.swift in Sources */,
@@ -1055,6 +1060,7 @@
 				4518F6BC2AA7202C00332DB6 /* users_response.json in Sources */,
 				4518F6AA2AA71D8F00332DB6 /* PersistenceStore.swift in Sources */,
 				4518F69D2AA71D7600332DB6 /* UsersListTableViewCell.swift in Sources */,
+				459B02B12E898C2C0039952E /* TabConfiguration.swift in Sources */,
 				459B02A52E875EB70039952E /* UsersApp.xcdatamodeld in Sources */,
 				4518F6AE2AA71DA000332DB6 /* UsersListCoordinator.swift in Sources */,
 				4518F6A82AA71D8F00332DB6 /* SavedUser+CoreDataProperties.swift in Sources */,

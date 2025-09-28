@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class UsersListCoordinator: Coordinator, NavigationCoordinator {
+class UsersListCoordinator: NavigationCoordinator {
     typealias Destination = UsersDestination
     typealias NavigationData = UserNavigationData
     var parentCoordinator: Coordinator?
