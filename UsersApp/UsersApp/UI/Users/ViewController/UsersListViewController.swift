@@ -14,7 +14,7 @@ class UsersListViewController: UIViewController {
     private var cancellables: Set<AnyCancellable> = []
 
     private lazy var usersTableView: UsersTableView = {
-        let tableView = UsersTableView()
+        let tableView = UsersTableView(configuration: .default)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
         return tableView

@@ -17,8 +17,18 @@ protocol UsersTableViewDelegate: AnyObject {
 
 class UsersTableView: UIView {
     
+    // MARK: - Configuration
+    struct Configuration {
+        let showPullToRefresh: Bool
+        let showPagination: Bool
+        
+        static let `default` = Configuration(showPullToRefresh: true, showPagination: true)
+        static let bookmarks = Configuration(showPullToRefresh: false, showPagination: false)
+    }
+    
     // MARK: - Properties
     weak var delegate: UsersTableViewDelegate?
+    private let configuration: Configuration
     
     // MARK: - Diffable Data Source
     private typealias DataSource = UITableViewDiffableDataSource<Section, CellDataWrapper>
@@ -46,8 +56,10 @@ class UsersTableView: UIView {
                 self.delegate?.didTapFavoriteButton(for: cellDataWrapper.user)
             }
             
-            // Check if need to load more data
-            self.checkForPagination(at: indexPath)
+            // Check if need to load more data (only if pagination enabled)
+            if self.configuration.showPagination {
+                self.checkForPagination(at: indexPath)
+            }
             
             return cell
         }
@@ -75,12 +87,14 @@ class UsersTableView: UIView {
         tableView.backgroundColor = .systemMint
         tableView.delegate = self
         tableView.register(UserTableViewCell.self, forCellReuseIdentifier: UserTableViewCell.reuseID)
-        
-        // Setup refresh control
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
-        tableView.refreshControl = refreshControl
-        
+
+        // Setup refresh control only if enabled
+        if configuration.showPullToRefresh {
+            let refreshControl = UIRefreshControl()
+            refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+            tableView.refreshControl = refreshControl
+        }
+
         return tableView
     }()
     
@@ -88,12 +102,20 @@ class UsersTableView: UIView {
     private var cellDataWrappers: [CellDataWrapper] = []
     
     // MARK: - Initialization
+    init(configuration: Configuration = .default) {
+        self.configuration = configuration
+        super.init(frame: .zero)
+        setupUI()
+    }
+    
     override init(frame: CGRect) {
+        self.configuration = .default
         super.init(frame: frame)
         setupUI()
     }
     
     required init?(coder: NSCoder) {
+        self.configuration = .default
         super.init(coder: coder)
         setupUI()
     }
