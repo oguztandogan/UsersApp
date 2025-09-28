@@ -84,9 +84,22 @@ class UsersTableView: UIView {
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = nil
+        tableView.backgroundColor = .appBackground
         tableView.delegate = self
         tableView.register(UserTableViewCell.self, forCellReuseIdentifier: UserTableViewCell.reuseID)
+        
+        // Configure separators
+        tableView.separatorStyle = .singleLine
+        tableView.separatorColor = .appOutline
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 76, bottom: 0, right: 16) // Align with text content
+        
+        // Modern iOS styling
+        if #available(iOS 15.0, *) {
+            tableView.sectionHeaderTopPadding = 0
+        }
+        
+        // Remove extra separators at bottom
+        tableView.tableFooterView = UIView()
 
         // Setup refresh control only if enabled
         if configuration.showPullToRefresh {

@@ -61,7 +61,12 @@ class UserTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
         setupConstraints()
-        selectionStyle = .none
+        
+        // Configure selection style
+        selectionStyle = .default
+        let selectedBackgroundView = UIView()
+        selectedBackgroundView.backgroundColor = .appOnSurfaceVariant.withAlphaComponent(0.1)
+        self.selectedBackgroundView = selectedBackgroundView
     }
     
     private func setupUI() {
@@ -72,6 +77,10 @@ class UserTableViewCell: UITableViewCell {
         // Set cell background color
         backgroundColor = .appSurface
         contentView.backgroundColor = .appSurface
+        
+        // Configure separator appearance
+        preservesSuperviewLayoutMargins = false
+        separatorInset = UIEdgeInsets(top: 0, left: 76, bottom: 0, right: 16) // Align with text content
     }
 
     private func setupConstraints() {
