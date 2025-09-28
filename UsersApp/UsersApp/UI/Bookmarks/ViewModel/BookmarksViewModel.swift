@@ -8,8 +8,6 @@
 import Foundation
 import CoreData
 
-protocol BookmarksNavigation: AnyObject {}
-
 class BookmarksViewModel: BaseViewModel {
     weak var navigation: BookmarksNavigation!
 

@@ -121,6 +121,8 @@
 		459B02A52E875EB70039952E /* UsersApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 459B02A22E875EB70039952E /* UsersApp.xcdatamodeld */; };
 		459B02A82E897D260039952E /* UsersTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B02A72E897D260039952E /* UsersTableView.swift */; };
 		459B02A92E897D260039952E /* UsersTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B02A72E897D260039952E /* UsersTableView.swift */; };
+		459B02AD2E89876D0039952E /* NavigationProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B02AC2E89876D0039952E /* NavigationProtocols.swift */; };
+		459B02AE2E89876D0039952E /* NavigationProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B02AC2E89876D0039952E /* NavigationProtocols.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -214,6 +216,7 @@
 		459B029F2E875E030039952E /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		459B02A32E875EB70039952E /* SavedUsers.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SavedUsers.xcdatamodel; sourceTree = "<group>"; };
 		459B02A72E897D260039952E /* UsersTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTableView.swift; sourceTree = "<group>"; };
+		459B02AC2E89876D0039952E /* NavigationProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationProtocols.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -342,6 +345,7 @@
 		4518F5E62AA4868E00332DB6 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
+				459B02AC2E89876D0039952E /* NavigationProtocols.swift */,
 				4518F5E72AA4869A00332DB6 /* BaseCoordinator.swift */,
 				4518F5E92AA486B100332DB6 /* AppCoordinator.swift */,
 			);
@@ -894,6 +898,7 @@
 				459B01C42E86A16B0039952E /* XCRemoteSwiftPackageReference "Swinject" */,
 				459B01D62E86A50E0039952E /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
 				459B01FA2E86CE3B0039952E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				459B02AB2E8987380039952E /* XCRemoteSwiftPackageReference "Pulse" */,
 			);
 			productRefGroup = 450438692AA295A100E44E89 /* Products */;
 			projectDirPath = "";
@@ -989,6 +994,7 @@
 				459B029A2E875A440039952E /* NetworkConfiguration.swift in Sources */,
 				459B02872E874EC40039952E /* UsersRemoteDataSource.swift in Sources */,
 				459B02882E874EC40039952E /* LoggingInterceptor.swift in Sources */,
+				459B02AE2E89876D0039952E /* NavigationProtocols.swift in Sources */,
 				459B02892E874EC40039952E /* NetworkClientProtocol.swift in Sources */,
 				459B028A2E874EC40039952E /* URLRequest+Extensions.swift in Sources */,
 				459B028B2E874EC40039952E /* HTTPMethod.swift in Sources */,
@@ -1058,6 +1064,7 @@
 				4518F69F2AA71D7B00332DB6 /* InformationItemLabel.swift in Sources */,
 				4518F6A72AA71D8F00332DB6 /* SavedUser+CoreDataClass.swift in Sources */,
 				4518F6B42AA71DB500332DB6 /* UserDetailsCoordinator.swift in Sources */,
+				459B02AD2E89876D0039952E /* NavigationProtocols.swift in Sources */,
 				4518F68A2AA716B400332DB6 /* BaseCoordinator.swift in Sources */,
 				4518F6922AA717B400332DB6 /* UsersServiceMock.swift in Sources */,
 				4518F6AF2AA71DA200332DB6 /* UsersListViewModel.swift in Sources */,
@@ -1834,6 +1841,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 12.3.0;
+			};
+		};
+		459B02AB2E8987380039952E /* XCRemoteSwiftPackageReference "Pulse" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Pulse";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.4;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

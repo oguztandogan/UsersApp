@@ -8,7 +8,9 @@
 import Foundation
 import UIKit
 
-class BookmarksCoordinator: Coordinator {
+class BookmarksCoordinator: Coordinator, NavigationCoordinator {
+    typealias Destination = BookmarksDestination
+    typealias NavigationData = UserNavigationData
     var parentCoordinator: Coordinator?
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
@@ -30,4 +32,36 @@ class BookmarksCoordinator: Coordinator {
     }
 }
 
-extension BookmarksCoordinator: BookmarksNavigation {}
+// MARK: - NavigationCoordinator Implementation
+extension BookmarksCoordinator {
+    func navigate(to destination: BookmarksDestination, with data: UserNavigationData?) {
+        switch destination {
+        case .bookmarksList:
+            // Already at bookmarks list
+            break
+        case .bookmarkDetails(let user):
+            navigateToBookmarkDetails(with: user, data: data)
+        }
+    }
+    
+    private func navigateToBookmarkDetails(with user: UserEntity, data: UserNavigationData?) {
+        let userDetailsCoordinator = UserDetailsCoordinator(
+            navigationController: navigationController,
+            userData: user
+        )
+        userDetailsCoordinator.parentCoordinator = self
+        childCoordinators.append(userDetailsCoordinator)
+        userDetailsCoordinator.start()
+    }
+}
+
+// MARK: - BookmarksNavigation Implementation
+extension BookmarksCoordinator: BookmarksNavigation {
+    func navigateToBookmarks() {
+        // Already at bookmarks
+    }
+    
+    func navigateToBookmarkDetails(with bookmark: UserEntity) {
+        navigate(to: .bookmarkDetails(bookmark))
+    }
+}

@@ -27,7 +27,7 @@ class DependencyContainer {
     }
 
     // MARK: - ViewModel Factory Methods
-    func makeUsersListViewModel(navigation: UserListNavigation) -> UsersListViewModel {
+    func makeUsersListViewModel(navigation: UsersNavigation) -> UsersListViewModel {
         return assembler.resolver.resolve(UsersListViewModel.self, argument: navigation)!
     }
 

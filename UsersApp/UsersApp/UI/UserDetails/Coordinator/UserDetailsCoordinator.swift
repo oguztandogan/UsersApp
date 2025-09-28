@@ -8,7 +8,9 @@
 import Foundation
 import UIKit
 
-class UserDetailsCoordinator: Coordinator {
+class UserDetailsCoordinator: Coordinator, NavigationCoordinator {
+    typealias Destination = UserDetailsDestination
+    typealias NavigationData = UserNavigationData
     var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
@@ -28,6 +30,26 @@ class UserDetailsCoordinator: Coordinator {
     }
 }
 
+// MARK: - NavigationCoordinator Implementation
+extension UserDetailsCoordinator {
+    func navigate(to destination: UserDetailsDestination, with data: UserNavigationData?) {
+        switch destination {
+        case .userDetails:
+            goToUserDetails()
+        case .editUser:
+            navigateToEditUser(data: data)
+        case .backToHome:
+            goBackToHome()
+        }
+    }
+    
+    private func navigateToEditUser(data: UserNavigationData?) {
+        // TODO: Implement edit user functionality
+        print("Navigate to edit user: \(userData.name)")
+    }
+}
+
+// MARK: - UserDetailsNavigation Implementation
 extension UserDetailsCoordinator: UserDetailsNavigation {
     func goToUserDetails() {
         let userDetailsVC = UserDetailsViewController()
@@ -40,5 +62,9 @@ extension UserDetailsCoordinator: UserDetailsNavigation {
     func goBackToHome() {
         navigationController.popToRootViewController(animated: true)
         parentCoordinator?.childDidFinish(self)
+    }
+    
+    func navigateToEditUser(with user: UserEntity) {
+        navigate(to: .editUser, with: UserNavigationData(user: user))
     }
 }

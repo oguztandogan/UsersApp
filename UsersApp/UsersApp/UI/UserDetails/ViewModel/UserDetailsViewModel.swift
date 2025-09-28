@@ -9,10 +9,6 @@ import Foundation
 import UIKit
 import Combine
 
-protocol UserDetailsNavigation: AnyObject {
-    func goBackToHome()
-}
-
 class UserDetailsViewModel: BaseViewModel {
     weak var navigation: UserDetailsNavigation!
 

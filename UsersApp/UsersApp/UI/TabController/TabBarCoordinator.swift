@@ -28,7 +28,7 @@ class TabBarCoordinator: Coordinator {
 
         let userListNavigationController = UINavigationController()
         let userListCoordinator = UsersListCoordinator.init(navigationController: userListNavigationController)
-        userListCoordinator.parentCoordinator = parentCoordinator
+        userListCoordinator.parentCoordinator = self
 
         let userListItem = UITabBarItem()
         userListItem.title = "Users"
@@ -37,14 +37,14 @@ class TabBarCoordinator: Coordinator {
 
         let bookmarksNavigationController = UINavigationController()
         let bookmarksCoordinator = BookmarksCoordinator.init(navigationController: bookmarksNavigationController)
-        bookmarksCoordinator.parentCoordinator = parentCoordinator
+        bookmarksCoordinator.parentCoordinator = self
 
         let bookmarksItem = UITabBarItem()
         bookmarksItem.title = "Bookmarks"
         bookmarksItem.image = UIImage.init(systemName: "heart.circle.fill")
         bookmarksNavigationController.tabBarItem = bookmarksItem
-        parentCoordinator?.childCoordinators.append(userListCoordinator)
-        parentCoordinator?.childCoordinators.append(bookmarksCoordinator)
+        childCoordinators.append(userListCoordinator)
+        childCoordinators.append(bookmarksCoordinator)
         userListCoordinator.start()
         bookmarksCoordinator.start()
         tabbarController.viewControllers = [

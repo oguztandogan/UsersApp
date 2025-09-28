@@ -11,7 +11,7 @@ import Swinject
 class PresentationAssembly: Assembly {
     func assemble(container: Container) {
         // MARK: - ViewModels with Navigation
-        container.register(UsersListViewModel.self) { (resolver, navigation: UserListNavigation) in
+        container.register(UsersListViewModel.self) { (resolver, navigation: UsersNavigation) in
             UsersListViewModel(
                 navigation: navigation,
                 getUsersUseCase: resolver.resolve(GetUsersUseCaseProtocol.self)!,

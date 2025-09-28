@@ -8,12 +8,8 @@
 import Foundation
 import Combine
 
-protocol UserListNavigation: AnyObject {
-    func navigateToUserDetails(selectedUserData: UserEntity)
-}
-
 class UsersListViewModel: BaseViewModel {
-    weak var navigation: UserListNavigation!
+    weak var navigation: UsersNavigation!
     
     // Use Cases
     private let getUsersUseCase: GetUsersUseCaseProtocol
@@ -29,7 +25,7 @@ class UsersListViewModel: BaseViewModel {
     @Published var users: [UserEntity] = []
     @Published var savedUsers: [UserEntity] = []
 
-    init(navigation: UserListNavigation,
+    init(navigation: UsersNavigation,
          getUsersUseCase: GetUsersUseCaseProtocol,
          getSavedUsersUseCase: GetSavedUsersUseCaseProtocol,
          saveUserUseCase: SaveUserUseCaseProtocol,
@@ -152,12 +148,12 @@ class UsersListViewModel: BaseViewModel {
     func navigateToUserDetails(index: Int) {
         let user = users[index]
         analyticsTracker.trackUserDetailsOpened(userId: user.id.uuidString, source: "list_tap")
-        navigation.navigateToUserDetails(selectedUserData: user)
+        navigation.navigateToUserDetails(with: user)
     }
     
     func navigateToUserDetails(for user: UserEntity) {
         analyticsTracker.trackUserDetailsOpened(userId: user.id.uuidString, source: "list_tap")
-        navigation.navigateToUserDetails(selectedUserData: user)
+        navigation.navigateToUserDetails(with: user)
     }
 
     func favouriteButtonAction(index: Int) {
