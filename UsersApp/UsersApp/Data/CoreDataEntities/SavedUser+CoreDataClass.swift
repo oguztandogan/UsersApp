@@ -6,10 +6,8 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 @objc(SavedUser)
-public class SavedUser: NSManagedObject {
-
-}
+public class SavedUser: NSManagedObject {}

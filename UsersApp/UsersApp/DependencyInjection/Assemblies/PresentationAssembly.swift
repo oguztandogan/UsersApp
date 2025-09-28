@@ -10,7 +10,6 @@ import Swinject
 
 class PresentationAssembly: Assembly {
     func assemble(container: Container) {
-        // MARK: - ViewModels with Navigation
         container.register(UsersListViewModel.self) { (resolver, navigation: UsersNavigation) in
             UsersListViewModel(
                 navigation: navigation,
@@ -20,7 +19,6 @@ class PresentationAssembly: Assembly {
                 deleteUserUseCase: resolver.resolve(DeleteUserUseCaseProtocol.self)!
             )
         }
-
         container.register(BookmarksViewModel.self) { (resolver, navigation: BookmarksNavigation) in
             BookmarksViewModel(
                 navigation: navigation,
@@ -29,7 +27,6 @@ class PresentationAssembly: Assembly {
             )
         }
 
-        // swiftlint:disable:next line_length
         container.register(UserDetailsViewModel.self) { (resolver, navigation: UserDetailsNavigation, user: UserEntity) in
             UserDetailsViewModel(
                 navigation: navigation,

@@ -12,7 +12,6 @@ protocol UsersRepository {
     func getSavedUsers() async throws -> [UserEntity]
     func saveUser(_ user: UserEntity) async throws
     func deleteUser(withId id: UUID) async throws
-    func isUserSaved(withId id: UUID) async throws -> Bool
 }
 
 enum DomainError: Error {

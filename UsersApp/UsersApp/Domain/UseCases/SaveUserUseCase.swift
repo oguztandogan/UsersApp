@@ -7,9 +7,12 @@
 
 import Foundation
 
+protocol SaveUserUseCaseProtocol {
+    func execute(_ user: UserEntity) async throws
+}
+
 class SaveUserUseCase: SaveUserUseCaseProtocol {
     private let repository: UsersRepository
-
     init(repository: UsersRepository) {
         self.repository = repository
     }

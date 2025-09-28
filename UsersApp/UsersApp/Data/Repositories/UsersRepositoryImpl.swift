@@ -10,7 +10,6 @@ import Foundation
 class UsersRepositoryImpl: UsersRepository {
     private let remoteDataSource: UsersRemoteDataSourceProtocol
     private let localDataSource: UsersLocalDataSourceProtocol
-
     init(remoteDataSource: UsersRemoteDataSourceProtocol, localDataSource: UsersLocalDataSourceProtocol) {
         self.remoteDataSource = remoteDataSource
         self.localDataSource = localDataSource
@@ -19,8 +18,7 @@ class UsersRepositoryImpl: UsersRepository {
     func getUsers(pageNumber: String) async throws -> UsersResponse {
         do {
             let usersResponse = try await remoteDataSource.getUsers(pageNumber: pageNumber)
-            
-            // Check which users are saved locally and update the isSaved flag
+
             var updatedUsers: [UserEntity] = []
             for user in usersResponse.users {
                 do {
@@ -29,13 +27,11 @@ class UsersRepositoryImpl: UsersRepository {
                     updatedUser.isSaved = isSaved
                     updatedUsers.append(updatedUser)
                 } catch {
-                    // If checking saved status fails, default to false
                     var updatedUser = user
                     updatedUser.isSaved = false
                     updatedUsers.append(updatedUser)
                 }
             }
-
             return UsersResponse(users: updatedUsers, info: usersResponse.info)
         } catch let networkError as NetworkError {
             throw DomainError.networkError(networkError.localizedDescription)
@@ -68,16 +64,6 @@ class UsersRepositoryImpl: UsersRepository {
     func deleteUser(withId id: UUID) async throws {
         do {
             try await localDataSource.deleteUser(withId: id)
-        } catch let coreDataError as CoreDataError {
-            throw DomainError.persistenceError(coreDataError.localizedDescription)
-        } catch {
-            throw DomainError.persistenceError(error.localizedDescription)
-        }
-    }
-
-    func isUserSaved(withId id: UUID) async throws -> Bool {
-        do {
-            return try await localDataSource.isUserSaved(withId: id)
         } catch let coreDataError as CoreDataError {
             throw DomainError.persistenceError(coreDataError.localizedDescription)
         } catch {

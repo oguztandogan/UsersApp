@@ -7,9 +7,12 @@
 
 import Foundation
 
+protocol DeleteUserUseCaseProtocol {
+    func execute(userId: UUID) async throws
+}
+
 class DeleteUserUseCase: DeleteUserUseCaseProtocol {
     private let repository: UsersRepository
-
     init(repository: UsersRepository) {
         self.repository = repository
     }

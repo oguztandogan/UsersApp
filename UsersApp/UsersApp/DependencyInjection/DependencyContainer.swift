@@ -10,9 +10,7 @@ import Swinject
 
 class DependencyContainer {
     static let shared = DependencyContainer()
-
     let assembler: Assembler
-
     private init() {
         assembler = Assembler([
             DataAssembly(),
@@ -21,12 +19,10 @@ class DependencyContainer {
         ])
     }
 
-    // MARK: - Resolver Methods
     func resolve<T>(_ serviceType: T.Type) -> T? {
         return assembler.resolver.resolve(serviceType)
     }
 
-    // MARK: - ViewModel Factory Methods
     func makeUsersListViewModel(navigation: UsersNavigation) -> UsersListViewModel {
         return assembler.resolver.resolve(UsersListViewModel.self, argument: navigation)!
     }
@@ -40,13 +36,9 @@ class DependencyContainer {
     }
 }
 
-// MARK: - Container Configuration Extension
 extension DependencyContainer {
     func configureDependencies() {
-        // Bu method AppDelegate'de çağrılacak
-        // Assembler zaten lazy olarak initialize ediliyor
         _ = assembler
         print("Swinject dependencies configured successfully")
     }
-
 }

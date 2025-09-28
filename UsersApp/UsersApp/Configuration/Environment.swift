@@ -9,21 +9,21 @@ import Foundation
 
 enum Environment: String, CaseIterable {
     case development = "Development"
-    case qa = "QA" // swiftlint:disable:this identifier_name
+    case qa = "QA"
     case production = "Production"
 
-    // MARK: - Current Environment
     static var current: Environment {
         #if DEV
-        return .development
+            return .development
         #elseif QA
-        return .qa
+            return .qa
         #else
-        return .production
+            return .production
         #endif
     }
 
     // MARK: - Environment Configuration
+
     var baseURL: String {
         switch self {
         case .development:
@@ -102,17 +102,15 @@ enum Environment: String, CaseIterable {
            let timeout = TimeInterval(timeoutString) {
             return timeout
         }
-        return 30.0 // Default fallback
+        return 30.0
     }
 }
 
-// MARK: - Log Level
 enum LogLevel: Int, CaseIterable {
     case debug = 0
     case info = 1
     case warning = 2
     case error = 3
-
     var description: String {
         switch self {
         case .debug: return "DEBUG"

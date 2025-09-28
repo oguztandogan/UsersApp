@@ -1,10 +1,8 @@
-
-import Foundation
 import CoreData
+import Foundation
 
 protocol CoreDataServiceable: Sendable {
     var viewContext: NSManagedObjectContext { get }
-
     func saveContext() throws
     func fetch<T: NSManagedObject>(
         predicate: NSPredicate?,

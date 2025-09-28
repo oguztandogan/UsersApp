@@ -7,9 +7,12 @@
 
 import Foundation
 
+protocol GetUsersUseCaseProtocol {
+    func execute(pageNumber: String) async throws -> UsersResponse
+}
+
 class GetUsersUseCase: GetUsersUseCaseProtocol {
     private let repository: UsersRepository
-
     init(repository: UsersRepository) {
         self.repository = repository
     }

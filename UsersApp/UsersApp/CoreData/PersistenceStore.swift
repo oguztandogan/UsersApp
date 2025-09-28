@@ -5,13 +5,11 @@
 //  Created by Oguz Tandogan on 4.09.2023.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 class PersistenceStore {
-
     static let shared = PersistenceStore()
-
     var managedObjectContext: NSManagedObjectContext? {
         return persistentContainer.viewContext
     }

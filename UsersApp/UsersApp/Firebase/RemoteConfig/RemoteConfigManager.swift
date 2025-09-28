@@ -5,8 +5,8 @@
 //  Created by Oguz Tandogan on 3.09.2023.
 //
 
-import Foundation
 import FirebaseRemoteConfig
+import Foundation
 
 protocol RemoteConfigManagerProtocol {
     func fetchAndActivate(completion: @escaping (Bool) -> Void)
@@ -16,7 +16,6 @@ protocol RemoteConfigManagerProtocol {
     func getIntValue(for key: RemoteConfigKey) -> Int
     func getDoubleValue(for key: RemoteConfigKey) -> Double
 
-    // Feature Flags
     var isDarkModeEnabled: Bool { get }
     var isDebugMenuEnabled: Bool { get }
     var showWelcomeMessage: Bool { get }
@@ -31,10 +30,8 @@ protocol RemoteConfigManagerProtocol {
 
 class RemoteConfigManager: RemoteConfigManagerProtocol {
     static let shared = RemoteConfigManager()
-
     private let firebaseManager: FirebaseManagerProtocol
     private let environmentManager: EnvironmentManagerProtocol
-
     init(firebaseManager: FirebaseManagerProtocol = FirebaseManager.shared,
          environmentManager: EnvironmentManagerProtocol = EnvironmentManager.shared) {
         self.firebaseManager = firebaseManager
@@ -56,7 +53,6 @@ class RemoteConfigManager: RemoteConfigManagerProtocol {
         guard let configValue = firebaseManager.getRemoteConfigValue(forKey: key.rawValue) else {
             return defaultValue
         }
-
         switch defaultValue {
         case is Bool:
             return configValue.boolValue as? T ?? defaultValue
@@ -88,7 +84,6 @@ class RemoteConfigManager: RemoteConfigManagerProtocol {
     }
 }
 
-// MARK: - Remote Config Keys
 enum RemoteConfigKey: String, CaseIterable {
     case darkModeEnabled = "dark_mode_enabled"
     case bookmarkSyncEnabled = "bookmark_sync_enabled"
@@ -100,7 +95,6 @@ enum RemoteConfigKey: String, CaseIterable {
     case enablePushNotifications = "enable_push_notifications"
     case maintenanceMode = "maintenance_mode"
     case forceUpdateRequired = "force_update_required"
-
     var defaultBoolValue: Bool {
         switch self {
         case .darkModeEnabled:
@@ -175,10 +169,7 @@ enum RemoteConfigKey: String, CaseIterable {
     }
 }
 
-// MARK: - Feature Flags
 extension RemoteConfigManager {
-
-    // MARK: - UI Features
     var isDarkModeEnabled: Bool {
         getBoolValue(for: .darkModeEnabled)
     }
@@ -191,7 +182,6 @@ extension RemoteConfigManager {
         getBoolValue(for: .showWelcomeMessage)
     }
 
-    // MARK: - App Features
     var isBookmarkSyncEnabled: Bool {
         getBoolValue(for: .bookmarkSyncEnabled)
     }
@@ -204,7 +194,6 @@ extension RemoteConfigManager {
         getBoolValue(for: .enablePushNotifications)
     }
 
-    // MARK: - App Control
     var isMaintenanceModeEnabled: Bool {
         getBoolValue(for: .maintenanceMode)
     }
@@ -213,7 +202,6 @@ extension RemoteConfigManager {
         getBoolValue(for: .forceUpdateRequired)
     }
 
-    // MARK: - Configuration Values
     var apiTimeoutSeconds: Double {
         getDoubleValue(for: .apiTimeoutSeconds)
     }
@@ -223,17 +211,14 @@ extension RemoteConfigManager {
     }
 }
 
-// MARK: - Debug Extension
 extension RemoteConfigManager {
     func getAllRemoteConfigValues() -> [String: Any] {
         var values: [String: Any] = [:]
-
         for key in RemoteConfigKey.allCases {
             if let configValue = firebaseManager.getRemoteConfigValue(forKey: key.rawValue) {
                 values[key.rawValue] = configValue.stringValue
             }
         }
-
         return values
     }
 

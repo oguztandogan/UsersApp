@@ -8,37 +8,34 @@
 import UIKit
 
 class LabelView: UIView {
-    
-    // MARK: - Properties
     var text: String? {
         didSet {
             label.text = text
         }
     }
-    
+
     var textColor: UIColor? {
         didSet {
             label.textColor = textColor
         }
     }
-    
+
     var font: UIFont? {
         didSet {
             label.font = font
         }
     }
-    
+
     var textAlignment: NSTextAlignment {
         get { label.textAlignment }
         set { label.textAlignment = newValue }
     }
-    
+
     var numberOfLines: Int {
         get { label.numberOfLines }
         set { label.numberOfLines = newValue }
     }
-    
-    // MARK: - UI Components
+
     private lazy var label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -48,37 +45,34 @@ class LabelView: UIView {
         label.lineBreakMode = .byTruncatingTail
         return label
     }()
-    
-    // MARK: - Initialization
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupUI()
     }
-    
-    convenience init(text: String? = nil, 
-                    textColor: UIColor? = nil, 
-                    font: UIFont? = nil) {
+
+    convenience init(text: String? = nil,
+                     textColor: UIColor? = nil,
+                     font: UIFont? = nil) {
         self.init(frame: .zero)
         self.text = text
         self.textColor = textColor ?? .appOnSurface
         self.font = font ?? UIFont.systemFont(ofSize: 16)
     }
-    
-    // MARK: - Setup
+
     private func setupUI() {
         addSubview(label)
         setupConstraints()
-        
-        // Default styling
+
         label.textColor = .appOnSurface
         label.font = UIFont.systemFont(ofSize: 16)
     }
-    
+
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             label.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -87,21 +81,17 @@ class LabelView: UIView {
             label.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
-    
-    // MARK: - Public Methods
-    func configure(text: String?, 
-                  textColor: UIColor = .appOnSurface, 
-                  font: UIFont = UIFont.systemFont(ofSize: 16)) {
+
+    func configure(text: String?,
+                   textColor: UIColor = .appOnSurface,
+                   font: UIFont = UIFont.systemFont(ofSize: 16)) {
         self.text = text
         self.textColor = textColor
         self.font = font
     }
 }
 
-// MARK: - Convenience Extensions
 extension LabelView {
-    
-    /// Creates a primary text label (for user names, titles)
     static func primaryLabel(text: String? = nil) -> LabelView {
         return LabelView(
             text: text,
@@ -109,8 +99,7 @@ extension LabelView {
             font: UIFont.systemFont(ofSize: 16, weight: .medium)
         )
     }
-    
-    /// Creates a secondary text label (for job titles, subtitles)
+
     static func secondaryLabel(text: String? = nil) -> LabelView {
         return LabelView(
             text: text,
@@ -118,8 +107,7 @@ extension LabelView {
             font: UIFont.systemFont(ofSize: 14, weight: .regular)
         )
     }
-    
-    /// Creates a caption label (for small text)
+
     static func captionLabel(text: String? = nil) -> LabelView {
         return LabelView(
             text: text,

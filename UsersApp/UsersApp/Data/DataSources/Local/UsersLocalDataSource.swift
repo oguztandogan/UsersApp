@@ -5,8 +5,8 @@
 //  Created by Oguz Tandogan on 3.09.2023.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 protocol UsersLocalDataSourceProtocol {
     func getSavedUsers() async throws -> [SavedUser]
@@ -25,7 +25,6 @@ enum CoreDataError: Error {
 class UsersLocalDataSource: UsersLocalDataSourceProtocol, @unchecked Sendable {
     private let coreDataService: CoreDataServiceable
     private let mapper: UserMapperProtocol
-
     init(coreDataService: CoreDataServiceable, mapper: UserMapperProtocol) {
         self.coreDataService = coreDataService
         self.mapper = mapper
@@ -49,7 +48,6 @@ class UsersLocalDataSource: UsersLocalDataSourceProtocol, @unchecked Sendable {
                 do {
                     let predicate = NSPredicate(format: "id == %@", user.id as CVarArg)
                     let existingUsers: [SavedUser] = try self.coreDataService.fetch(predicate: predicate)
-                    
                     if existingUsers.isEmpty {
                         _ = self.mapper.mapToCoreData(user, context: managedContext)
                         try self.coreDataService.saveContext()
@@ -73,7 +71,6 @@ class UsersLocalDataSource: UsersLocalDataSourceProtocol, @unchecked Sendable {
                     continuation.resume(throwing: CoreDataError.notFound)
                     return
                 }
-
                 try coreDataService.delete(object: userToDelete)
                 continuation.resume(returning: ())
             } catch {
@@ -95,7 +92,6 @@ class UsersLocalDataSource: UsersLocalDataSourceProtocol, @unchecked Sendable {
     }
 }
 
-// MARK: - Core Data Entity to Domain Entity Mapper
 extension SavedUser {
     func toDomainEntity() -> UserEntity {
         return UserMapper.mapFromCoreData(self)

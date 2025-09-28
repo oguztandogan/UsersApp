@@ -5,8 +5,8 @@
 //  Created by Oguz Tandogan on 26.09.2025.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 class CoreDataService: CoreDataServiceable, @unchecked Sendable {
     func saveContext() throws {

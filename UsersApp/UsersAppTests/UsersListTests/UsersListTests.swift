@@ -6,13 +6,11 @@
 //
 
 import Foundation
-import XCTest
 @testable import UsersApp
+import XCTest
 
 class UsersListViewModelTests: XCTestCase {
-
     var viewModel: UsersListViewModel!
-
     override func setUp() {
         super.setUp()
         let usersServiceMock = UsersServiceMock()
@@ -23,6 +21,7 @@ class UsersListViewModelTests: XCTestCase {
         viewModel = nil
         super.tearDown()
     }
+
     func testOnAppear() {
         viewModel.onAppear()
         XCTAssertEqual(viewModel.pageNumber, 1)
@@ -32,7 +31,6 @@ class UsersListViewModelTests: XCTestCase {
         let expectation = XCTestExpectation(description: "Fetch Users")
         viewModel.pageNumber = 1
         viewModel.fetchUsers(isPagination: true, isRefreshing: false)
-
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
             expectation.fulfill()
         }
@@ -43,7 +41,5 @@ class UsersListViewModelTests: XCTestCase {
 }
 
 class MockUserListNavigation: UserListNavigation {
-    func navigateToUserDetails(selectedUserData: User) {
-        //
-    }
+    func navigateToUserDetails(selectedUserData _: User) {}
 }

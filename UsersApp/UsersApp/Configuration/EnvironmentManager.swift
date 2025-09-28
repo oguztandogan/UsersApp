@@ -17,7 +17,6 @@ protocol EnvironmentManagerProtocol {
     var enableAnalytics: Bool { get }
     var apiTimeout: TimeInterval { get }
     var logLevel: LogLevel { get }
-
     func log(_ message: String, level: LogLevel)
     func debugLog(_ message: String)
     func infoLog(_ message: String)
@@ -27,14 +26,11 @@ protocol EnvironmentManagerProtocol {
 
 class EnvironmentManager: EnvironmentManagerProtocol {
     static let shared = EnvironmentManager()
-
     private init() {
         setupEnvironment()
     }
 
-    // MARK: - Environment Properties
     let currentEnvironment = Environment.current
-
     var baseURL: String {
         return currentEnvironment.baseURL
     }
@@ -67,7 +63,6 @@ class EnvironmentManager: EnvironmentManagerProtocol {
         return currentEnvironment.logLevel
     }
 
-    // MARK: - Setup
     private func setupEnvironment() {
         print("🏗️ Environment Setup:")
         print("   Environment: \(currentEnvironment.rawValue)")
@@ -77,19 +72,13 @@ class EnvironmentManager: EnvironmentManagerProtocol {
         print("   Log Level: \(logLevel.description)")
     }
 
-    // MARK: - Logging
     func log(_ message: String, level: LogLevel) {
         guard level.rawValue >= logLevel.rawValue else { return }
-
         let timestamp = DateFormatter.logFormatter.string(from: Date())
         let logMessage = "[\(timestamp)] [\(level.description)] \(message)"
-
         print(logMessage)
 
-        // In production, you might want to send logs to crash reporting service
-        if currentEnvironment == .production && level == .error {
-            // Send to crash reporting service (Crashlytics, Sentry, etc.)
-        }
+        if currentEnvironment == .production, level == .error {}
     }
 
     func debugLog(_ message: String) {
@@ -109,16 +98,6 @@ class EnvironmentManager: EnvironmentManagerProtocol {
     }
 }
 
-// MARK: - DateFormatter Extension
-private extension DateFormatter {
-    static let logFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm:ss.SSS"
-        return formatter
-    }()
-}
-
-// MARK: - Environment Info
 extension EnvironmentManager {
     func getEnvironmentInfo() -> [String: Any] {
         return [
@@ -137,9 +116,9 @@ extension EnvironmentManager {
 
     private func getBuildConfiguration() -> String {
         #if DEBUG
-        return "Debug"
+            return "Debug"
         #else
-        return "Release"
+            return "Release"
         #endif
     }
 }

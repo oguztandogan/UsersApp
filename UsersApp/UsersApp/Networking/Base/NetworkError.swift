@@ -7,8 +7,6 @@
 
 import Foundation
 
-/// Comprehensive error type for networking operations
-/// Conforms to Sendable for Swift 6 thread safety
 enum NetworkError: Error, Sendable, LocalizedError, CustomStringConvertible {
     case invalidURL(String)
     case noData
@@ -24,7 +22,6 @@ enum NetworkError: Error, Sendable, LocalizedError, CustomStringConvertible {
     case serverError(Int, String?)
     case unknown(Error)
 
-    // MARK: - HTTPStatusCode
     enum HTTPStatusCode: Int, Sendable {
         case success = 200
         case created = 201
@@ -41,32 +38,30 @@ enum NetworkError: Error, Sendable, LocalizedError, CustomStringConvertible {
         case badGateway = 502
         case serviceUnavailable = 503
         case gatewayTimeout = 504
-
         var isSuccess: Bool {
-            return 200...299 ~= rawValue
+            return 200 ... 299 ~= rawValue
         }
 
         var isClientError: Bool {
-            return 400...499 ~= rawValue
+            return 400 ... 499 ~= rawValue
         }
 
         var isServerError: Bool {
-            return 500...599 ~= rawValue
+            return 500 ... 599 ~= rawValue
         }
     }
 
-    // MARK: - LocalizedError
     var errorDescription: String? {
         switch self {
-        case .invalidURL(let url):
+        case let .invalidURL(url):
             return "Invalid URL: \(url)"
         case .noData:
             return "No data received from server"
-        case .decodingError(let error):
+        case let .decodingError(error):
             return "Failed to decode response: \(error.localizedDescription)"
-        case .encodingError(let error):
+        case let .encodingError(error):
             return "Failed to encode request: \(error.localizedDescription)"
-        case .httpError(let statusCode, _):
+        case let .httpError(statusCode, _):
             return "HTTP error with status code: \(statusCode.rawValue)"
         case .networkUnavailable:
             return "Network is unavailable"
@@ -80,24 +75,21 @@ enum NetworkError: Error, Sendable, LocalizedError, CustomStringConvertible {
             return "Access forbidden"
         case .notFound:
             return "Resource not found"
-        case .serverError(let code, let message):
+        case let .serverError(code, message):
             return "Server error (\(code)): \(message ?? "Unknown error")"
-        case .unknown(let error):
+        case let .unknown(error):
             return "Unknown error: \(error.localizedDescription)"
         }
     }
 
-    // MARK: - CustomStringConvertible
     var description: String {
         return errorDescription ?? "Unknown network error"
     }
 
-    // MARK: - Convenience Initializers
     static func from(httpStatusCode: Int, data: Data? = nil) -> NetworkError {
         guard let statusCode = HTTPStatusCode(rawValue: httpStatusCode) else {
             return .serverError(httpStatusCode, "Unknown status code")
         }
-
         switch statusCode {
         case .unauthorized:
             return .unauthorized
@@ -126,35 +118,6 @@ enum NetworkError: Error, Sendable, LocalizedError, CustomStringConvertible {
             return .invalidURL(urlError.localizedDescription)
         default:
             return .unknown(urlError)
-        }
-    }
-
-    // MARK: - Helper Properties
-    var isRetryable: Bool {
-        switch self {
-        case .networkUnavailable, .timeout, .serverError:
-            return true
-        case .httpError(let statusCode, _):
-            return statusCode.rawValue >= 500
-        default:
-            return false
-        }
-    }
-
-    var statusCode: Int? {
-        switch self {
-        case .httpError(let statusCode, _):
-            return statusCode.rawValue
-        case .unauthorized:
-            return 401
-        case .forbidden:
-            return 403
-        case .notFound:
-            return 404
-        case .serverError(let code, _):
-            return code
-        default:
-            return nil
         }
     }
 }

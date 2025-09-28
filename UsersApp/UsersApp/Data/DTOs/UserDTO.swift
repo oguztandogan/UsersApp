@@ -7,11 +7,9 @@
 
 import Foundation
 
-// MARK: - Data Transfer Objects (DTOs) for API
 struct UsersDTO: Codable {
     let results: [UserDTO]
     let info: InfoDTO
-
     enum CodingKeys: String, CodingKey {
         case results
         case info
@@ -25,7 +23,6 @@ struct UserDTO: Codable {
     let phone: String?
     let picture: PictureDTO?
     let nationality: String?
-
     enum CodingKeys: String, CodingKey {
         case gender
         case name
@@ -41,7 +38,6 @@ struct InfoDTO: Codable {
     let results: Int?
     let page: Int?
     let version: String?
-
     enum CodingKeys: String, CodingKey {
         case seed
         case results
@@ -54,7 +50,6 @@ struct PictureDTO: Codable {
     let large: String?
     let medium: String?
     let thumbnail: String?
-
     enum CodingKeys: String, CodingKey {
         case large
         case medium
@@ -66,7 +61,6 @@ struct NameDTO: Codable {
     let title: String?
     let first: String?
     let last: String?
-
     enum CodingKeys: String, CodingKey {
         case title
         case first
@@ -77,14 +71,12 @@ struct NameDTO: Codable {
 struct DateOfBirthDTO: Codable {
     let date: String?
     let age: Int?
-
     enum CodingKeys: String, CodingKey {
         case date
         case age
     }
 }
 
-// MARK: - DTO to Domain Entity Mappers
 extension UserDTO {
     func toDomainEntity() -> UserEntity {
         return UserEntity(

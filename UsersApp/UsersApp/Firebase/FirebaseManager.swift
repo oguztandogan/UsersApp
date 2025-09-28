@@ -5,11 +5,11 @@
 //  Created by Oguz Tandogan on 3.09.2023.
 //
 
-import Foundation
-import FirebaseCore
 import FirebaseAnalytics
+import FirebaseCore
 import FirebaseCrashlytics
 import FirebaseRemoteConfig
+import Foundation
 
 protocol FirebaseManagerProtocol {
     func configure()
@@ -23,37 +23,29 @@ protocol FirebaseManagerProtocol {
 
 class FirebaseManager: FirebaseManagerProtocol {
     static let shared = FirebaseManager()
-
     private let environmentManager = EnvironmentManager.shared
     private var remoteConfig: RemoteConfig?
-
     private init() {}
-
     func configure() {
-        // Firebase configuration based on environment
         guard let configFileName = getConfigFileName() else {
             environmentManager.errorLog("Firebase config file not found for environment")
             return
         }
-
         guard let filePath = Bundle.main.path(forResource: configFileName, ofType: "plist"),
-              let options = FirebaseOptions(contentsOfFile: filePath) else {
+              let options = FirebaseOptions(contentsOfFile: filePath)
+        else {
             environmentManager.errorLog("Failed to load Firebase config from \(configFileName).plist")
             return
         }
-
         FirebaseApp.configure(options: options)
 
-        // Configure services based on environment
         configureAnalytics()
         configureCrashlytics()
         configureRemoteConfig()
-
         environmentManager.infoLog("🔥 Firebase configured for \(environmentManager.currentEnvironment.rawValue)")
     }
 
     private func getConfigFileName() -> String? {
-        // For now, use single Firebase config for all environments
         return "GoogleService-Info"
     }
 
@@ -63,17 +55,14 @@ class FirebaseManager: FirebaseManagerProtocol {
             environmentManager.debugLog("📊 Analytics disabled for \(environmentManager.currentEnvironment.rawValue)")
             return
         }
-
         Analytics.setAnalyticsCollectionEnabled(true)
         Analytics.setUserProperty(environmentManager.currentEnvironment.rawValue, forName: "environment")
         environmentManager.infoLog("📊 Analytics enabled")
     }
 
     private func configureCrashlytics() {
-        // Enable Crashlytics only in QA and Production
         let shouldEnable = environmentManager.currentEnvironment != .development
         Crashlytics.crashlytics().setCrashlyticsCollectionEnabled(shouldEnable)
-
         if shouldEnable {
             Crashlytics.crashlytics().setUserID("user_\(environmentManager.currentEnvironment.rawValue)")
             Crashlytics.crashlytics().setCustomValue(
@@ -90,21 +79,17 @@ class FirebaseManager: FirebaseManagerProtocol {
         remoteConfig = RemoteConfig.remoteConfig()
         let settings = RemoteConfigSettings()
 
-        // Different fetch intervals for different environments
         switch environmentManager.currentEnvironment {
         case .development:
-            settings.minimumFetchInterval = 0 // Immediate for testing
+            settings.minimumFetchInterval = 0
         case .qa:
-            settings.minimumFetchInterval = 300 // 5 minutes
+            settings.minimumFetchInterval = 300
         case .production:
-            settings.minimumFetchInterval = 3600 // 1 hour
+            settings.minimumFetchInterval = 3600
         }
-
         remoteConfig?.configSettings = settings
 
-        // Set default values
         setRemoteConfigDefaults()
-
         environmentManager.infoLog("🏃‍♂️ Remote Config configured")
     }
 
@@ -117,21 +102,16 @@ class FirebaseManager: FirebaseManagerProtocol {
             "feature_user_profiles": false as NSObject,
             "max_bookmarks_count": 100 as NSObject
         ]
-
         remoteConfig?.setDefaults(defaults)
     }
 }
 
-// MARK: - Analytics
 extension FirebaseManager {
     func logEvent(_ event: AnalyticsEvent, parameters: [String: Any]? = nil) {
         guard environmentManager.enableAnalytics else { return }
-
         var params = parameters ?? [:]
         params["environment"] = environmentManager.currentEnvironment.rawValue
-
         Analytics.logEvent(event.rawValue, parameters: params)
-
         if environmentManager.isDebugMode {
             environmentManager.debugLog("📊 Analytics Event: \(event.rawValue) with params: \(params)")
         }
@@ -139,32 +119,27 @@ extension FirebaseManager {
 
     func setUserProperty(_ value: String?, forName name: String) {
         guard environmentManager.enableAnalytics else { return }
-
         Analytics.setUserProperty(value, forName: name)
         environmentManager.debugLog("👤 User Property Set: \(name) = \(value ?? "nil")")
     }
 }
 
-// MARK: - Crashlytics
 extension FirebaseManager {
     func recordError(_ error: Error, userInfo: [String: Any]? = nil) {
         var combinedUserInfo = userInfo ?? [:]
         combinedUserInfo["environment"] = environmentManager.currentEnvironment.rawValue
-
         Crashlytics.crashlytics().record(error: error, userInfo: combinedUserInfo)
         environmentManager.errorLog("💥 Error recorded: \(error.localizedDescription)")
     }
 
     func logMessage(_ message: String) {
         Crashlytics.crashlytics().log(message)
-
         if environmentManager.isDebugMode {
             environmentManager.debugLog("📝 Crashlytics Log: \(message)")
         }
     }
 }
 
-// MARK: - Remote Config
 extension FirebaseManager {
     func fetchRemoteConfig(completion: @escaping (Bool) -> Void) {
         remoteConfig?.fetch { [weak self] _, error in
@@ -173,7 +148,6 @@ extension FirebaseManager {
                 completion(false)
                 return
             }
-
             self?.remoteConfig?.activate { _, _ in
                 self?.environmentManager.infoLog("🏃‍♂️ Remote Config activated")
                 completion(true)
@@ -186,7 +160,6 @@ extension FirebaseManager {
     }
 }
 
-// MARK: - Analytics Events
 enum AnalyticsEvent: String, CaseIterable {
     case appLaunched = "app_launched"
     case listViewed = "list_viewed"
@@ -199,7 +172,6 @@ enum AnalyticsEvent: String, CaseIterable {
     case errorOccurred = "error_occurred"
     case debugMenuOpened = "debug_menu_opened"
     case environmentSwitched = "environment_switched"
-
     var description: String {
         switch self {
         case .appLaunched: return "App launched"

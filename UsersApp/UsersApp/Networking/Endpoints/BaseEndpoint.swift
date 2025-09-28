@@ -7,7 +7,6 @@
 
 import Foundation
 
-/// Base endpoint structure for common API configurations
 struct BaseEndpoint: EndpointProtocol, Sendable {
     let baseURL: String
     let path: String
@@ -16,7 +15,6 @@ struct BaseEndpoint: EndpointProtocol, Sendable {
     let queryParameters: [String: String]
     let body: Data?
     let timeoutInterval: TimeInterval
-
     init(
         baseURL: String,
         path: String,
@@ -36,9 +34,7 @@ struct BaseEndpoint: EndpointProtocol, Sendable {
     }
 }
 
-// MARK: - BaseEndpoint Factory Methods
 extension BaseEndpoint {
-    /// Creates a GET endpoint
     static func get(
         baseURL: String,
         path: String,
@@ -56,7 +52,6 @@ extension BaseEndpoint {
         )
     }
 
-    /// Creates a POST endpoint with data body
     static func post(
         baseURL: String,
         path: String,
@@ -74,7 +69,6 @@ extension BaseEndpoint {
         )
     }
 
-    /// Creates a POST endpoint with encodable body
     static func post<T: Encodable>(
         baseURL: String,
         path: String,
@@ -94,7 +88,6 @@ extension BaseEndpoint {
         )
     }
 
-    /// Creates a PUT endpoint with data body
     static func put(
         baseURL: String,
         path: String,
@@ -112,7 +105,6 @@ extension BaseEndpoint {
         )
     }
 
-    /// Creates a PUT endpoint with encodable body
     static func put<T: Encodable>(
         baseURL: String,
         path: String,
@@ -132,7 +124,6 @@ extension BaseEndpoint {
         )
     }
 
-    /// Creates a DELETE endpoint
     static func delete(
         baseURL: String,
         path: String,
@@ -148,7 +139,6 @@ extension BaseEndpoint {
         )
     }
 
-    /// Creates a PATCH endpoint with data body
     static func patch(
         baseURL: String,
         path: String,
@@ -166,7 +156,6 @@ extension BaseEndpoint {
         )
     }
 
-    /// Creates a PATCH endpoint with encodable body
     static func patch<T: Encodable>(
         baseURL: String,
         path: String,
@@ -187,9 +176,7 @@ extension BaseEndpoint {
     }
 }
 
-// MARK: - Environment-based Endpoints
 extension BaseEndpoint {
-    /// Creates an endpoint with environment-specific base URL
     static func withEnvironment(
         environment: APIEnvironment,
         path: String,
@@ -212,39 +199,20 @@ extension BaseEndpoint {
 }
 
 // MARK: - API Environment
+
 enum APIEnvironment: String, Sendable, CaseIterable {
     case development = "dev"
-    case staging = "staging"
+    case staging
     case production = "prod"
 
     var baseURL: String {
         switch self {
         case .development:
-            return "https://dev-api.randomuser.me"
+            return "https://randomuser.me"
         case .staging:
-            return "https://staging-api.randomuser.me"
+            return "https://randomuser.me"
         case .production:
             return "https://randomuser.me"
-        }
-    }
-
-    var timeout: TimeInterval {
-        switch self {
-        case .development:
-            return 60.0 // Longer timeout for development
-        case .staging:
-            return 45.0
-        case .production:
-            return 30.0
-        }
-    }
-
-    var allowsInsecureHTTP: Bool {
-        switch self {
-        case .development:
-            return true
-        case .staging, .production:
-            return false
         }
     }
 }

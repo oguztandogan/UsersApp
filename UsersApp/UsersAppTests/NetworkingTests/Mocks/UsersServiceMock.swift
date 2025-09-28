@@ -8,7 +8,7 @@
 import Foundation
 
 final class UsersServiceMock: Mockable, UsersServiceable {
-    func getUsers(pageNumber: String) async -> Result<Users, RequestError> {
+    func getUsers(pageNumber _: String) async -> Result<Users, RequestError> {
         return .success(loadJSON(filename: "users_response", type: Users.self))
     }
 }

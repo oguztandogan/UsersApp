@@ -14,25 +14,20 @@ protocol AnalyticsTrackerProtocol {
     func trackError(_ error: Error, context: String?)
     func setUserProperty(_ value: String?, forName name: String)
 
-    // Users List Analytics
     func trackUsersListViewed(source: String)
     func trackUsersListRefreshed()
     func trackUsersListPagination(pageNumber: Int)
 
-    // User Details Analytics
     func trackUserDetailsOpened(userId: String, source: String)
 
-    // Bookmark Analytics
     func trackBookmarkToggled(userId: String, isAdding: Bool, source: String)
 
-    // App Lifecycle Analytics
     func trackAppLaunched()
 }
 
 class AnalyticsTracker: AnalyticsTrackerProtocol {
     private let firebaseManager: FirebaseManagerProtocol
     private let environmentManager: EnvironmentManagerProtocol
-
     init(firebaseManager: FirebaseManagerProtocol = FirebaseManager.shared,
          environmentManager: EnvironmentManagerProtocol = EnvironmentManager.shared) {
         self.firebaseManager = firebaseManager
@@ -43,7 +38,6 @@ class AnalyticsTracker: AnalyticsTrackerProtocol {
         var enrichedParams = parameters ?? [:]
         enrichedParams["timestamp"] = Date().timeIntervalSince1970
         enrichedParams["app_version"] = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-
         firebaseManager.logEvent(event, parameters: enrichedParams)
         environmentManager.debugLog("📊 Tracked: \(event.description)")
     }
@@ -53,7 +47,6 @@ class AnalyticsTracker: AnalyticsTrackerProtocol {
             "screen_name": screenName,
             "screen_class": screenClass ?? screenName
         ]
-
         trackEvent(.listViewed, parameters: parameters)
     }
 
@@ -62,7 +55,6 @@ class AnalyticsTracker: AnalyticsTrackerProtocol {
             "action": action.rawValue,
             "context": context ?? "unknown"
         ]
-
         trackEvent(action.analyticsEvent, parameters: parameters)
     }
 
@@ -73,7 +65,6 @@ class AnalyticsTracker: AnalyticsTrackerProtocol {
             "error_code": (error as NSError).code,
             "context": context ?? "unknown"
         ]
-
         trackEvent(.errorOccurred, parameters: parameters)
         firebaseManager.recordError(error, userInfo: parameters)
     }
@@ -83,7 +74,6 @@ class AnalyticsTracker: AnalyticsTrackerProtocol {
     }
 }
 
-// MARK: - User Actions
 enum UserAction: String, CaseIterable {
     case userDetailsTapped = "user_details_tapped"
     case bookmarkTapped = "bookmark_tapped"
@@ -91,7 +81,6 @@ enum UserAction: String, CaseIterable {
     case paginationTriggered = "pagination_triggered"
     case debugMenuOpened = "debug_menu_opened"
     case environmentChanged = "environment_changed"
-
     var analyticsEvent: AnalyticsEvent {
         switch self {
         case .userDetailsTapped:
@@ -110,10 +99,7 @@ enum UserAction: String, CaseIterable {
     }
 }
 
-// MARK: - Analytics Extension for ViewModels
 extension AnalyticsTracker {
-
-    // MARK: - Users List Analytics
     func trackUsersListViewed(source: String) {
         trackEvent(.listViewed, parameters: ["source": source])
     }
@@ -126,7 +112,6 @@ extension AnalyticsTracker {
         trackUserAction(.paginationTriggered, context: "page_\(pageNumber)")
     }
 
-    // MARK: - User Details Analytics
     func trackUserDetailsOpened(userId: String, source: String) {
         let parameters: [String: Any] = [
             "user_id": userId,
@@ -135,7 +120,6 @@ extension AnalyticsTracker {
         trackEvent(.userDetailsOpened, parameters: parameters)
     }
 
-    // MARK: - Bookmark Analytics
     func trackBookmarkToggled(userId: String, isAdding: Bool, source: String) {
         let event: AnalyticsEvent = isAdding ? .bookmarkAdded : .bookmarkRemoved
         let parameters: [String: Any] = [
@@ -146,7 +130,6 @@ extension AnalyticsTracker {
         trackEvent(event, parameters: parameters)
     }
 
-    // MARK: - App Lifecycle Analytics
     func trackAppLaunched() {
         let parameters: [String: Any] = [
             "environment": environmentManager.currentEnvironment.rawValue,

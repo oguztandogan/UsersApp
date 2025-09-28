@@ -6,21 +6,19 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
 
-extension SavedUser {
-
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<SavedUser> {
+public extension SavedUser {
+    @nonobjc class func fetchRequest() -> NSFetchRequest<SavedUser> {
         return NSFetchRequest<SavedUser>(entityName: "SavedUser")
     }
 
-    @NSManaged public var userName: String?
-    @NSManaged public var userAge: String?
-    @NSManaged public var userPictureUrl: String?
-    @NSManaged public var userNationality: String?
-    @NSManaged public var id: UUID?
-
+    @NSManaged var userName: String?
+    @NSManaged var userAge: String?
+    @NSManaged var userPictureUrl: String?
+    @NSManaged var userNationality: String?
+    @NSManaged var id: UUID?
 }
 
 extension SavedUser: Identifiable {}

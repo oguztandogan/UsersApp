@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - Domain Entities
 struct UserEntity: Hashable {
     let id: UUID
     let gender: String?
@@ -17,12 +16,10 @@ struct UserEntity: Hashable {
     let picture: UserPicture?
     let nationality: String?
     var isSaved: Bool
-
     var fullName: String {
-        guard let name = self.name else {
+        guard let name = name else {
             return ""
         }
-
         var fullName = ""
         if let title = name.title {
             fullName += title + " "
@@ -33,7 +30,6 @@ struct UserEntity: Hashable {
         if let last = name.last {
             fullName += last
         }
-
         return fullName.trimmingCharacters(in: .whitespaces)
     }
 
