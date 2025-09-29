@@ -197,6 +197,3 @@ extension BaseEndpoint {
         )
     }
 }
-
-// MARK: - API Environment
-

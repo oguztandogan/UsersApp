@@ -17,7 +17,6 @@ class TabBarController: UITabBarController {
     weak var customDelegate: TabBarControllerDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBar.accessibilityIdentifier = "MainTabBar"
         setupDelegates()
         customizeTabBar()
     }

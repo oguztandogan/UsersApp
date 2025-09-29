@@ -10,11 +10,11 @@ import Cuckoo
 @testable import UsersApp
 
 final class APIClientTests: XCTestCase {
-    
+
     var mockTransport: MockNetworkTransportProtocol!
     var mockInterceptors: [MockInterceptorProtocol]!
     var apiClient: APIClient!
-    
+
     override func setUpWithError() throws {
         mockTransport = MockNetworkTransportProtocol()
         mockInterceptors = [MockInterceptorProtocol()]
@@ -23,28 +23,28 @@ final class APIClientTests: XCTestCase {
             interceptors: mockInterceptors
         )
     }
-    
+
     override func tearDownWithError() throws {
         mockTransport = nil
         mockInterceptors = nil
         apiClient = nil
     }
-    
+
     // MARK: - Initialization Tests
-    
+
     func testInitializationWithDefaultParameters() {
         // Given & When
         let client = APIClient(transport: mockTransport)
-        
+
         // Then
         XCTAssertNotNil(client)
     }
-    
+
     func testInitializationWithCustomParameters() {
         // Given
         let customDecoder = JSONDecoder()
         let customEncoder = JSONEncoder()
-        
+
         // When
         let client = APIClient(
             transport: mockTransport,
@@ -52,92 +52,92 @@ final class APIClientTests: XCTestCase {
             jsonDecoder: customDecoder,
             jsonEncoder: customEncoder
         )
-        
+
         // Then
         XCTAssertNotNil(client)
     }
-    
+
     // MARK: - Request Building Tests
-    
+
     func testBuildURLRequestWithValidEndpoint() throws {
         // Given
         let endpoint = UserEndpoint.userList(page: "1", results: 25)
         let expectedData = createMockUsersDTOData()
         let mockResponse = createMockHTTPResponse(statusCode: 200)
-        
+
         stub(mockTransport) { mock in
             when(mock.performRequest(any())).thenReturn((expectedData, mockResponse))
         }
-        
+
         stub(mockInterceptors[0]) { mock in
             when(mock.intercept(request: any())).thenReturn(any())
             when(mock.intercept(data: any(), response: any(), for: any())).thenReturn(expectedData)
         }
-        
+
         // When
         let _: UsersDTO = try await apiClient.request(
             endpoint: endpoint,
             responseType: UsersDTO.self
         )
-        
+
         // Then
         verify(mockTransport).performRequest(any())
     }
-    
+
     func testBuildURLRequestWithQueryParameters() async throws {
         // Given
         let endpoint = UserEndpoint.userList(page: "2", results: 50)
         let expectedData = createMockUsersDTOData()
         let mockResponse = createMockHTTPResponse(statusCode: 200)
-        
+
         stub(mockTransport) { mock in
             when(mock.performRequest(any())).thenReturn((expectedData, mockResponse))
         }
-        
+
         stub(mockInterceptors[0]) { mock in
             when(mock.intercept(request: any())).thenReturn(any())
             when(mock.intercept(data: any(), response: any(), for: any())).thenReturn(expectedData)
         }
-        
+
         // When
         let _: UsersDTO = try await apiClient.request(
             endpoint: endpoint,
             responseType: UsersDTO.self
         )
-        
+
         // Then
         verify(mockTransport).performRequest(any())
     }
-    
+
     // MARK: - Interceptor Tests
-    
+
     func testRequestInterceptorsCalled() async throws {
         // Given
         let endpoint = UserEndpoint.userList(page: "1", results: 25)
         let expectedData = createMockUsersDTOData()
         let mockResponse = createMockHTTPResponse(statusCode: 200)
         let mockRequest = createMockURLRequest()
-        
+
         stub(mockTransport) { mock in
             when(mock.performRequest(any())).thenReturn((expectedData, mockResponse))
         }
-        
+
         stub(mockInterceptors[0]) { mock in
             when(mock.intercept(request: any())).thenReturn(mockRequest)
             when(mock.intercept(data: any(), response: any(), for: any())).thenReturn(expectedData)
         }
-        
+
         // When
         let _: UsersDTO = try await apiClient.request(
             endpoint: endpoint,
             responseType: UsersDTO.self
         )
-        
+
         // Then
         verify(mockInterceptors[0]).intercept(request: any())
         verify(mockInterceptors[0]).intercept(data: any(), response: any(), for: any())
     }
-    
+
     func testMultipleInterceptorsCalled() async throws {
         // Given
         let secondInterceptor = MockInterceptorProtocol()
@@ -146,160 +146,160 @@ final class APIClientTests: XCTestCase {
             transport: mockTransport,
             interceptors: interceptors
         )
-        
+
         let endpoint = UserEndpoint.userList(page: "1", results: 25)
         let expectedData = createMockUsersDTOData()
         let mockResponse = createMockHTTPResponse(statusCode: 200)
         let mockRequest = createMockURLRequest()
-        
+
         stub(mockTransport) { mock in
             when(mock.performRequest(any())).thenReturn((expectedData, mockResponse))
         }
-        
+
         stub(mockInterceptors[0]) { mock in
             when(mock.intercept(request: any())).thenReturn(mockRequest)
             when(mock.intercept(data: any(), response: any(), for: any())).thenReturn(expectedData)
         }
-        
+
         stub(secondInterceptor) { mock in
             when(mock.intercept(request: any())).thenReturn(mockRequest)
             when(mock.intercept(data: any(), response: any(), for: any())).thenReturn(expectedData)
         }
-        
+
         // When
         let _: UsersDTO = try await apiClient.request(
             endpoint: endpoint,
             responseType: UsersDTO.self
         )
-        
+
         // Then
         verify(mockInterceptors[0]).intercept(request: any())
         verify(mockInterceptors[0]).intercept(data: any(), response: any(), for: any())
         verify(secondInterceptor).intercept(request: any())
         verify(secondInterceptor).intercept(data: any(), response: any(), for: any())
     }
-    
+
     // MARK: - Response Validation Tests
-    
+
     func testValidateResponseSuccess() async throws {
         // Given
         let endpoint = UserEndpoint.userList(page: "1", results: 25)
         let expectedData = createMockUsersDTOData()
         let mockResponse = createMockHTTPResponse(statusCode: 200)
-        
+
         stub(mockTransport) { mock in
             when(mock.performRequest(any())).thenReturn((expectedData, mockResponse))
         }
-        
+
         stub(mockInterceptors[0]) { mock in
             when(mock.intercept(request: any())).thenReturn(any())
             when(mock.intercept(data: any(), response: any(), for: any())).thenReturn(expectedData)
         }
-        
+
         // When
         let result: UsersDTO = try await apiClient.request(
             endpoint: endpoint,
             responseType: UsersDTO.self
         )
-        
+
         // Then
         XCTAssertEqual(result.results.count, 2)
     }
-    
+
     func testValidateResponseWithDifferentStatusCodes() async throws {
         let statusCodes = [201, 204, 299]
-        
+
         for statusCode in statusCodes {
             // Given
             let endpoint = UserEndpoint.userList(page: "1", results: 25)
             let expectedData = createMockUsersDTOData()
             let mockResponse = createMockHTTPResponse(statusCode: statusCode)
-            
+
             stub(mockTransport) { mock in
                 when(mock.performRequest(any())).thenReturn((expectedData, mockResponse))
             }
-            
+
             stub(mockInterceptors[0]) { mock in
                 when(mock.intercept(request: any())).thenReturn(any())
                 when(mock.intercept(data: any(), response: any(), for: any())).thenReturn(expectedData)
             }
-            
+
             // When
             let result: UsersDTO = try await apiClient.request(
                 endpoint: endpoint,
                 responseType: UsersDTO.self
             )
-            
+
             // Then
             XCTAssertEqual(result.results.count, 2)
         }
     }
-    
+
     // MARK: - JSON Decoding Tests
-    
+
     func testJSONDecodingWithSnakeCase() async throws {
         // Given
         let endpoint = UserEndpoint.userList(page: "1", results: 25)
         let snakeCaseData = createSnakeCaseJSONData()
         let mockResponse = createMockHTTPResponse(statusCode: 200)
-        
+
         stub(mockTransport) { mock in
             when(mock.performRequest(any())).thenReturn((snakeCaseData, mockResponse))
         }
-        
+
         stub(mockInterceptors[0]) { mock in
             when(mock.intercept(request: any())).thenReturn(any())
             when(mock.intercept(data: any(), response: any(), for: any())).thenReturn(snakeCaseData)
         }
-        
+
         // When
         let result: UsersDTO = try await apiClient.request(
             endpoint: endpoint,
             responseType: UsersDTO.self
         )
-        
+
         // Then
         XCTAssertEqual(result.results.count, 1)
         XCTAssertEqual(result.results[0].gender, "male")
     }
-    
+
     func testJSONDecodingWithISO8601Date() async throws {
         // Given
         let endpoint = UserEndpoint.userList(page: "1", results: 25)
         let iso8601Data = createISO8601DateJSONData()
         let mockResponse = createMockHTTPResponse(statusCode: 200)
-        
+
         stub(mockTransport) { mock in
             when(mock.performRequest(any())).thenReturn((iso8601Data, mockResponse))
         }
-        
+
         stub(mockInterceptors[0]) { mock in
             when(mock.intercept(request: any())).thenReturn(any())
             when(mock.intercept(data: any(), response: any(), for: any())).thenReturn(iso8601Data)
         }
-        
+
         // When
         let result: UsersDTO = try await apiClient.request(
             endpoint: endpoint,
             responseType: UsersDTO.self
         )
-        
+
         // Then
         XCTAssertEqual(result.results.count, 1)
         XCTAssertEqual(result.results[0].gender, "male")
     }
-    
+
     // MARK: - Error Handling Tests
-    
+
     func testTransportError() async throws {
         // Given
         let endpoint = UserEndpoint.userList(page: "1", results: 25)
         let transportError = URLError(.notConnectedToInternet)
-        
+
         stub(mockTransport) { mock in
             when(mock.performRequest(any())).thenThrow(transportError)
         }
-        
+
         // When & Then
         do {
             let _: UsersDTO = try await apiClient.request(
@@ -311,16 +311,16 @@ final class APIClientTests: XCTestCase {
             // Expected error
         }
     }
-    
+
     func testInterceptorError() async throws {
         // Given
         let endpoint = UserEndpoint.userList(page: "1", results: 25)
         let interceptorError = NetworkError.unauthorized
-        
+
         stub(mockInterceptors[0]) { mock in
             when(mock.intercept(request: any())).thenThrow(interceptorError)
         }
-        
+
         // When & Then
         do {
             let _: UsersDTO = try await apiClient.request(
@@ -332,9 +332,9 @@ final class APIClientTests: XCTestCase {
             // Expected error
         }
     }
-    
+
     // MARK: - Helper Methods
-    
+
     private func createMockUsersDTOData() -> Data {
         let usersDTO = UsersDTO(
             results: [
@@ -365,7 +365,7 @@ final class APIClientTests: XCTestCase {
             return Data()
         }
     }
-    
+
     private func createSnakeCaseJSONData() -> Data {
         let jsonString = """
         {
@@ -400,7 +400,7 @@ final class APIClientTests: XCTestCase {
         """
         return jsonString.data(using: .utf8)!
     }
-    
+
     private func createISO8601DateJSONData() -> Data {
         let jsonString = """
         {
@@ -435,7 +435,7 @@ final class APIClientTests: XCTestCase {
         """
         return jsonString.data(using: .utf8)!
     }
-    
+
     private func createMockHTTPResponse(statusCode: Int) -> HTTPURLResponse {
         return HTTPURLResponse(
             url: URL(string: "https://test.com")!,
@@ -444,7 +444,7 @@ final class APIClientTests: XCTestCase {
             headerFields: nil
         )!
     }
-    
+
     private func createMockURLRequest() -> URLRequest {
         return URLRequest(url: URL(string: "https://test.com")!)
     }

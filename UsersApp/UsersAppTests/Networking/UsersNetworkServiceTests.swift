@@ -36,7 +36,7 @@ final class UsersNetworkServiceTests: XCTestCase {
             info: InfoDTO(seed: "seed", results: 0, page: 1, version: "1")
         )
         let expected = fakeDTO.toDomainEntity()
-        
+
         stub(mockApiClient) { stub in
             when(stub.request(endpoint: any(), responseType: any()))
                 .thenReturn(fakeDTO)
@@ -54,7 +54,7 @@ final class UsersNetworkServiceTests: XCTestCase {
         verify(mockApiClient).request(endpoint: any(), responseType: any(UsersDTO.Type.self))
         verify(mockMapper).mapToDomain(any(UsersDTO.self))
     }
-    
+
     func test_getUser_success() async throws {
         // Arrange
         let fakeDTO = UserDTO(
@@ -84,7 +84,7 @@ final class UsersNetworkServiceTests: XCTestCase {
         verify(mockApiClient).request(endpoint: any(), responseType: any(UserDTO.Type.self))
         verify(mockMapper).mapToDomain(any(UserDTO.self))
     }
-    
+
     func test_getUsers_failure_whenApiThrows() async throws {
         // Arrange
         stub(mockApiClient) { stub in
@@ -123,6 +123,4 @@ final class UsersNetworkServiceTests: XCTestCase {
         verify(mockApiClient).request(endpoint: any(), responseType: any(UsersDTO.Type.self))
         verify(mockMapper).mapToDomain(any(UsersDTO.self))
     }
-
-
 }

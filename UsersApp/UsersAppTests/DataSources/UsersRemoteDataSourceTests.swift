@@ -5,7 +5,6 @@
 //  Created by Oguz Tandogan on 29.09.2025.
 //
 
-
 import XCTest
 import Cuckoo
 @testable import UsersApp

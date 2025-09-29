@@ -82,7 +82,7 @@ class FirebaseManager: FirebaseManagerProtocol {
         switch environmentManager.currentEnvironment {
         case .development:
             settings.minimumFetchInterval = 0
-        case .qa:
+        case .staging:
             settings.minimumFetchInterval = 300
         case .production:
             settings.minimumFetchInterval = 3600

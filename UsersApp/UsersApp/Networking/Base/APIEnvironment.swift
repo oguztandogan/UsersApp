@@ -5,7 +5,6 @@
 //  Created by Oguz Tandogan on 29.09.2025.
 //
 
-
 enum APIEnvironment: String, Sendable, CaseIterable {
     case development = "dev"
     case staging

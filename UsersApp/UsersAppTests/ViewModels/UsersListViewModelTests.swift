@@ -5,7 +5,6 @@
 //  Created by Oguz Tandogan on 29.09.2025.
 //
 
-
 import XCTest
 import Cuckoo
 @testable import UsersApp
@@ -96,13 +95,29 @@ final class UsersListViewModelTests: XCTestCase {
         XCTAssertEqual(sut.pageNumber, 2)
     }
 
-
     func test_fetchSavedUsers_setsSavedUsersAndUpdatesFlags() async throws {
         let id = UUID()
-        let user = UserEntity(id: id, gender: nil, name: nil, dateOfBirth: nil, phone: nil, picture: nil, nationality: nil)
+        let user = UserEntity(
+            id: id,
+            gender: nil,
+            name: nil,
+            dateOfBirth: nil,
+            phone: nil,
+            picture: nil,
+            nationality: nil
+        )
         sut.users = [user]
 
-        let savedUser = UserEntity(id: id, gender: nil, name: nil, dateOfBirth: nil, phone: nil, picture: nil, nationality: nil, isSaved: true)
+        let savedUser = UserEntity(
+            id: id,
+            gender: nil,
+            name: nil,
+            dateOfBirth: nil,
+            phone: nil,
+            picture: nil,
+            nationality: nil,
+            isSaved: true
+        )
 
         stub(mockGetSavedUsers) { stub in
             when(stub.execute()).thenReturn([savedUser])

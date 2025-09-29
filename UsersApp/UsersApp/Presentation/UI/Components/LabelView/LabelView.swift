@@ -19,7 +19,6 @@ class LabelView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.adjustsFontSizeToFitWidth = false
         label.lineBreakMode = .byTruncatingTail
-        label.accessibilityIdentifier = "LabelView"
         return label
     }()
 

@@ -5,7 +5,6 @@
 //  Created by Oguz Tandogan on 29.09.2025.
 //
 
-
 import XCTest
 import Cuckoo
 @testable import UsersApp
@@ -24,7 +23,15 @@ final class UsersRepositoryTests: XCTestCase {
 
     func test_getUsers_setsIsSavedFromLocal() async throws {
         // Arrange
-        let user = UserEntity(id: UUID(), gender: "male", name: nil, dateOfBirth: nil, phone: nil, picture: nil, nationality: nil)
+        let user = UserEntity(
+            id: UUID(),
+            gender: "male",
+            name: nil,
+            dateOfBirth: nil,
+            phone: nil,
+            picture: nil,
+            nationality: nil
+        )
         let response = UsersResponse(users: [user], info: ResponseInfo(seed: "s", results: 1, page: 1, version: "1"))
 
         stub(mockRemote) { stub in
@@ -58,7 +65,15 @@ final class UsersRepositoryTests: XCTestCase {
     }
 
     func test_saveUser_failure_convertsToDomainError() async {
-        let entity = UserEntity(id: UUID(), gender: nil, name: nil, dateOfBirth: nil, phone: nil, picture: nil, nationality: nil)
+        let entity = UserEntity(
+            id: UUID(),
+            gender: nil,
+            name: nil,
+            dateOfBirth: nil,
+            phone: nil,
+            picture: nil,
+            nationality: nil
+        )
         stub(mockLocal) { stub in
             when(stub.saveUser(any())).thenThrow(CoreDataError.saveError("fail"))
         }

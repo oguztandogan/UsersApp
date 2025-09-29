@@ -68,6 +68,10 @@ class UsersListViewModel: BaseViewModel {
         } else if isRefreshing {
             analyticsTracker.trackUsersListRefreshed()
         }
+
+        setLoading(true)
+        clearError()
+
         Task(priority: .background) {
             do {
                 let usersResponse = try await getUsersUseCase.execute(pageNumber: pageNumber.description)
@@ -79,10 +83,13 @@ class UsersListViewModel: BaseViewModel {
                         pageNumber = 1
                         users = usersResponse.users
                     }
+                    setLoading(false)
                 }
             } catch {
                 await MainActor.run {
                     analyticsTracker.trackError(error, context: "fetch_users")
+                    setError("Failed to load users. Please try again.")
+                    setLoading(false)
                     print("Error fetching users: \(error)")
                 }
             }

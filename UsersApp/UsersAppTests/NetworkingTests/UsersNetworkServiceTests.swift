@@ -10,11 +10,11 @@ import Cuckoo
 @testable import UsersApp
 
 final class UsersNetworkServiceTests: XCTestCase {
-    
+
     var mockAPIClient: MockNetworkClientProtocol!
     var mockMapper: MockUserMapperProtocol!
     var usersNetworkService: UsersNetworkService!
-    
+
     override func setUpWithError() throws {
         mockAPIClient = MockNetworkClientProtocol()
         mockMapper = MockUserMapperProtocol()
@@ -23,71 +23,71 @@ final class UsersNetworkServiceTests: XCTestCase {
             mapper: mockMapper
         )
     }
-    
+
     override func tearDownWithError() throws {
         mockAPIClient = nil
         mockMapper = nil
         usersNetworkService = nil
     }
-    
+
     // MARK: - getUsers Tests
-    
+
     func testGetUsersSuccess() async throws {
         // Given
         let page = "1"
         let results = 25
         let mockUsersDTO = createMockUsersDTO()
         let expectedUsersResponse = createMockUsersResponse()
-        
+
         stub(mockAPIClient) { mock in
             when(mock.request(
                 endpoint: any(),
                 responseType: UsersDTO.self
             )).thenReturn(mockUsersDTO)
         }
-        
+
         stub(mockMapper) { mock in
             when(mock.mapToDomain(mockUsersDTO)).thenReturn(expectedUsersResponse)
         }
-        
+
         // When
         let result = try await usersNetworkService.getUsers(page: page, results: results)
-        
+
         // Then
         XCTAssertEqual(result.users.count, 2)
         XCTAssertEqual(result.users[0].name?.first, "John")
         XCTAssertEqual(result.users[0].name?.last, "Doe")
         XCTAssertEqual(result.users[1].name?.first, "Jane")
         XCTAssertEqual(result.users[1].name?.last, "Smith")
-        
+
         verify(mockAPIClient).request(
             endpoint: any(),
             responseType: UsersDTO.self
         )
         verify(mockMapper).mapToDomain(mockUsersDTO)
     }
-    
+
     func testGetUsersWithNilPage() async throws {
         // Given
         let page: String? = nil
         let results = 25
         let mockUsersDTO = createMockUsersDTO()
         let expectedUsersResponse = createMockUsersResponse()
-        
+
         stub(mockAPIClient) { mock in
             when(mock.request(
                 endpoint: any(),
                 responseType: UsersDTO.self
             )).thenReturn(mockUsersDTO)
         }
-        
+
         stub(mockMapper) { mock in
             when(mock.mapToDomain(mockUsersDTO)).thenReturn(expectedUsersResponse)
         }
-        
+
         // When
         let result = try await usersNetworkService.getUsers(page: page, results: results)
-        
+
         // Then
         XCTAssertEqual(result.users.count, 2)
         verify(mockAPIClient).request(
@@ -95,27 +95,27 @@ final class UsersNetworkServiceTests: XCTestCase {
             responseType: UsersDTO.self
         )
     }
-    
+
     func testGetUsersWithDefaultResults() async throws {
         // Given
         let page = "2"
         let mockUsersDTO = createMockUsersDTO()
         let expectedUsersResponse = createMockUsersResponse()
-        
+
         stub(mockAPIClient) { mock in
             when(mock.request(
                 endpoint: any(),
                 responseType: UsersDTO.self
             )).thenReturn(mockUsersDTO)
         }
-        
+
         stub(mockMapper) { mock in
             when(mock.mapToDomain(mockUsersDTO)).thenReturn(expectedUsersResponse)
         }
-        
+
         // When
         let result = try await usersNetworkService.getUsers(page: page)
-        
+
         // Then
         XCTAssertEqual(result.users.count, 2)
         verify(mockAPIClient).request(
@@ -123,23 +123,23 @@ final class UsersNetworkServiceTests: XCTestCase {
             responseType: UsersDTO.self
         )
     }
-    
+
     func testGetUsersNetworkError() async throws {
         // Given
         let page = "1"
         let results = 25
         let networkError = NetworkError.unauthorized
-        
+
         stub(mockAPIClient) { mock in
             when(mock.request(
                 endpoint: any(),
                 responseType: UsersDTO.self
             )).thenThrow(networkError)
         }
-        
+
         // When & Then
         do {
-            let _ = try await usersNetworkService.getUsers(page: page, results: results)
+            _ = try await usersNetworkService.getUsers(page: page, results: results)
             XCTFail("Expected network error")
         } catch let error as NetworkError {
             if case .unauthorized = error {
@@ -149,57 +149,57 @@ final class UsersNetworkServiceTests: XCTestCase {
             }
         }
     }
-    
+
     // MARK: - getUser Tests
-    
+
     func testGetUserSuccess() async throws {
         // Given
         let userId = "123"
         let mockUserDTO = createMockUserDTO()
         let expectedUserEntity = createMockUserEntity()
-        
+
         stub(mockAPIClient) { mock in
             when(mock.request(
                 endpoint: any(),
                 responseType: UserDTO.self
             )).thenReturn(mockUserDTO)
         }
-        
+
         stub(mockMapper) { mock in
             when(mock.mapToDomain(mockUserDTO)).thenReturn(expectedUserEntity)
         }
-        
+
         // When
         let result = try await usersNetworkService.getUser(id: userId)
-        
+
         // Then
         XCTAssertEqual(result.name?.first, "John")
         XCTAssertEqual(result.name?.last, "Doe")
         XCTAssertEqual(result.gender, "male")
         XCTAssertEqual(result.phone, "+1234567890")
-        
+
         verify(mockAPIClient).request(
             endpoint: any(),
             responseType: UserDTO.self
         )
         verify(mockMapper).mapToDomain(mockUserDTO)
     }
-    
+
     func testGetUserNetworkError() async throws {
         // Given
         let userId = "123"
         let networkError = NetworkError.notFound
-        
+
         stub(mockAPIClient) { mock in
             when(mock.request(
                 endpoint: any(),
                 responseType: UserDTO.self
             )).thenThrow(networkError)
         }
-        
+
         // When & Then
         do {
-            let _ = try await usersNetworkService.getUser(id: userId)
+            _ = try await usersNetworkService.getUser(id: userId)
             XCTFail("Expected network error")
         } catch let error as NetworkError {
             if case .notFound = error {
@@ -209,30 +209,30 @@ final class UsersNetworkServiceTests: XCTestCase {
             }
         }
     }
-    
+
     // MARK: - Extension Methods Tests
-    
+
     func testGetUsersWithIntPage() async throws {
         // Given
         let page = 2
         let results = 50
         let mockUsersDTO = createMockUsersDTO()
         let expectedUsersResponse = createMockUsersResponse()
-        
+
         stub(mockAPIClient) { mock in
             when(mock.request(
                 endpoint: any(),
                 responseType: UsersDTO.self
             )).thenReturn(mockUsersDTO)
         }
-        
+
         stub(mockMapper) { mock in
             when(mock.mapToDomain(mockUsersDTO)).thenReturn(expectedUsersResponse)
         }
-        
+
         // When
         let result = try await usersNetworkService.getUsers(page: page, results: results)
-        
+
         // Then
         XCTAssertEqual(result.users.count, 2)
         verify(mockAPIClient).request(
@@ -240,27 +240,27 @@ final class UsersNetworkServiceTests: XCTestCase {
             responseType: UsersDTO.self
         )
     }
-    
+
     func testGetFirstPageUsers() async throws {
         // Given
         let results = 10
         let mockUsersDTO = createMockUsersDTO()
         let expectedUsersResponse = createMockUsersResponse()
-        
+
         stub(mockAPIClient) { mock in
             when(mock.request(
                 endpoint: any(),
                 responseType: UsersDTO.self
             )).thenReturn(mockUsersDTO)
         }
-        
+
         stub(mockMapper) { mock in
             when(mock.mapToDomain(mockUsersDTO)).thenReturn(expectedUsersResponse)
         }
-        
+
         // When
         let result = try await usersNetworkService.getFirstPageUsers(results: results)
-        
+
         // Then
         XCTAssertEqual(result.users.count, 2)
         verify(mockAPIClient).request(
@@ -268,26 +268,26 @@ final class UsersNetworkServiceTests: XCTestCase {
             responseType: UsersDTO.self
         )
     }
-    
+
     func testGetDefaultUsers() async throws {
         // Given
         let mockUsersDTO = createMockUsersDTO()
         let expectedUsersResponse = createMockUsersResponse()
-        
+
         stub(mockAPIClient) { mock in
             when(mock.request(
                 endpoint: any(),
                 responseType: UsersDTO.self
             )).thenReturn(mockUsersDTO)
         }
-        
+
         stub(mockMapper) { mock in
             when(mock.mapToDomain(mockUsersDTO)).thenReturn(expectedUsersResponse)
         }
-        
+
         // When
         let result = try await usersNetworkService.getDefaultUsers()
-        
+
         // Then
         XCTAssertEqual(result.users.count, 2)
         verify(mockAPIClient).request(
@@ -295,9 +295,9 @@ final class UsersNetworkServiceTests: XCTestCase {
             responseType: UsersDTO.self
         )
     }
-    
+
     // MARK: - Helper Methods
-    
+
     private func createMockUsersDTO() -> UsersDTO {
         return UsersDTO(
             results: [
@@ -314,7 +314,7 @@ final class UsersNetworkServiceTests: XCTestCase {
             info: InfoDTO(seed: "test", results: 2, page: 1, version: "1.0")
         )
     }
-    
+
     private func createMockUserDTO() -> UserDTO {
         return UserDTO(
             gender: "male",
@@ -325,7 +325,7 @@ final class UsersNetworkServiceTests: XCTestCase {
             nationality: "US"
         )
     }
-    
+
     private func createMockUsersResponse() -> UsersResponse {
         return UsersResponse(
             users: [
@@ -344,7 +344,7 @@ final class UsersNetworkServiceTests: XCTestCase {
             info: ResponseInfo(seed: "test", results: 2, page: 1, version: "1.0")
         )
     }
-    
+
     private func createMockUserEntity() -> UserEntity {
         return UserEntity(
             id: UUID(),

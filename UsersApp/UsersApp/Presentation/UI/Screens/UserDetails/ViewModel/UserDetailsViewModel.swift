@@ -57,34 +57,44 @@ class UserDetailsViewModel: BaseViewModel {
     }
 
     private func deleteUser() {
+        setLoading(true)
+        clearError()
+
         Task {
             do {
                 try await deleteUserUseCase.execute(userId: user.id)
                 await MainActor.run {
                     savedUsers.removeAll { $0.id == user.id }
+                    setLoading(false)
                 }
             } catch {
                 await MainActor.run {
                     print("Error deleting user: \(error)")
-
+                    setError("Failed to remove user from favorites. Please try again.")
                     user.isSaved = true
+                    setLoading(false)
                 }
             }
         }
     }
 
     private func saveUser() {
+        setLoading(true)
+        clearError()
+
         Task {
             do {
                 try await saveUserUseCase.execute(user)
                 await MainActor.run {
                     savedUsers.append(user)
+                    setLoading(false)
                 }
             } catch {
                 await MainActor.run {
                     print("Error saving user: \(error)")
-
+                    setError("Failed to save user to favorites. Please try again.")
                     user.isSaved = false
+                    setLoading(false)
                 }
             }
         }

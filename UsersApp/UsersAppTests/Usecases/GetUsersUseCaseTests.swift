@@ -9,7 +9,6 @@ import XCTest
 import Cuckoo
 @testable import UsersApp
 
-
 final class GetUsersUseCaseTests: XCTestCase {
     var mockRepository: MockUsersRepository!
     var sut: GetUsersUseCase!

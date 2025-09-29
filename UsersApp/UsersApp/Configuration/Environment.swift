@@ -9,14 +9,14 @@ import Foundation
 
 enum Environment: String, CaseIterable {
     case development = "Development"
-    case qa = "QA"
+    case staging = "QA"
     case production = "Production"
 
     static var current: Environment {
         #if DEV
             return .development
         #elseif QA
-            return .qa
+            return .staging
         #else
             return .production
         #endif
@@ -28,7 +28,7 @@ enum Environment: String, CaseIterable {
         switch self {
         case .development:
             return "https://randomuser.me"
-        case .qa:
+        case .staging:
             return "https://randomuser.me"
         case .production:
             return "https://randomuser.me"
@@ -39,7 +39,7 @@ enum Environment: String, CaseIterable {
         switch self {
         case .development:
             return "UsersApp Dev"
-        case .qa:
+        case .staging:
             return "UsersApp QA"
         case .production:
             return "UsersApp"
@@ -50,7 +50,7 @@ enum Environment: String, CaseIterable {
         switch self {
         case .development:
             return "com.oguztandogan.usersapp.dev"
-        case .qa:
+        case .staging:
             return "com.oguztandogan.usersapp.qa"
         case .production:
             return "com.oguztandogan.usersapp"
@@ -61,7 +61,7 @@ enum Environment: String, CaseIterable {
         switch self {
         case .development:
             return .debug
-        case .qa:
+        case .staging:
             return .info
         case .production:
             return .error
@@ -70,7 +70,7 @@ enum Environment: String, CaseIterable {
 
     var isDebugMode: Bool {
         switch self {
-        case .development, .qa:
+        case .development, .staging:
             return true
         case .production:
             return false
@@ -81,7 +81,7 @@ enum Environment: String, CaseIterable {
         switch self {
         case .development:
             return true
-        case .qa, .production:
+        case .staging, .production:
             return false
         }
     }
@@ -90,7 +90,7 @@ enum Environment: String, CaseIterable {
         switch self {
         case .development:
             return false
-        case .qa:
+        case .staging:
             return true
         case .production:
             return true

@@ -27,35 +27,30 @@ class UserTableViewCell: UITableViewCell {
         imageView.layer.cornerRadius = 30
         imageView.clipsToBounds = true
         imageView.backgroundColor = .systemGray6
-        imageView.accessibilityIdentifier = "UserImageView"
         return imageView
     }()
 
     private lazy var username: LabelView = {
         let username = LabelView(data: .primary())
         username.translatesAutoresizingMaskIntoConstraints = false
-        username.accessibilityIdentifier = "UsernameLabel"
         return username
     }()
 
     private lazy var nationality: LabelView = {
         let nationality = LabelView(data: .secondary())
         nationality.translatesAutoresizingMaskIntoConstraints = false
-        nationality.accessibilityIdentifier = "NationalityLabel"
         return nationality
     }()
 
     private lazy var age: LabelView = {
         let age = LabelView(data: .secondary())
         age.translatesAutoresizingMaskIntoConstraints = false
-        age.accessibilityIdentifier = "AgeLabel"
         return age
     }()
 
     private lazy var favouriteButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.accessibilityIdentifier = "FavoriteButton"
         button.addTarget(self, action: #selector(favouriteButtonTap), for: .touchUpInside)
         return button
     }()
@@ -78,7 +73,6 @@ class UserTableViewCell: UITableViewCell {
 
         backgroundColor = .appSurface
         contentView.backgroundColor = .appSurface
-        accessibilityIdentifier = "UserTableViewCell"
 
         preservesSuperviewLayoutMargins = false
         separatorInset = UIEdgeInsets(top: 0, left: 76, bottom: 0, right: 16)
@@ -113,7 +107,25 @@ class UserTableViewCell: UITableViewCell {
     }
 
     @objc func favouriteButtonTap() {
+        animateButtonTap()
         buttonTapCallback()
+    }
+
+    private func animateButtonTap() {
+        UIView.animate(
+            withDuration: 0.1,
+            animations: {
+                self.favouriteButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            },
+            completion: { _ in
+                UIView.animate(
+                    withDuration: 0.1,
+                    animations: {
+                        self.favouriteButton.transform = .identity
+                    }
+                )
+            }
+        )
     }
 
     func setFavouriteButtonsImage(isSaved: Bool) {

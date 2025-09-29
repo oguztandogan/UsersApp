@@ -5,7 +5,6 @@
 //  Created by Oguz Tandogan on 29.09.2025.
 //
 
-
 import XCTest
 import Cuckoo
 @testable import UsersApp
@@ -29,7 +28,7 @@ final class APIClientTests: XCTestCase {
         sut = nil
         super.tearDown()
     }
-    
+
     func test_request_success_decodesResponse() async throws {
         // Arrange
         let endpoint = UserEndpoint.userList(page: "1", results: 1)
@@ -70,7 +69,7 @@ final class APIClientTests: XCTestCase {
         verify(mockInterceptor).intercept(request: any())
         verify(mockInterceptor).intercept(data: any(), response: any(), for: any())
     }
-    
+
     func test_request_throwsDecodingError() async {
         // Arrange
         let endpoint = UserEndpoint.userList(page: "1")
@@ -99,7 +98,7 @@ final class APIClientTests: XCTestCase {
             }
         }
     }
-    
+
     func test_request_throwsUnauthorized() async {
         // Arrange
         let endpoint = UserEndpoint.userList(page: "1")

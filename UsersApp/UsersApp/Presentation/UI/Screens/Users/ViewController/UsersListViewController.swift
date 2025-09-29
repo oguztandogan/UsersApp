@@ -15,9 +15,15 @@ class UsersListViewController: UIViewController {
     private lazy var usersTableView: UsersTableView = {
         let tableView = UsersTableView(configuration: .default)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.accessibilityIdentifier = "UsersTableView"
         tableView.delegate = self
         return tableView
+    }()
+
+    private lazy var loadingView: LottieLoadingView = {
+        let loadingView = LottieLoadingView(animationName: "loading")
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        loadingView.isHidden = true
+        return loadingView
     }()
 
     override func viewDidLoad() {
@@ -35,8 +41,8 @@ class UsersListViewController: UIViewController {
 
     private func setupUI() {
         view.backgroundColor = .appBackground
-        view.accessibilityIdentifier = "UsersListViewController"
         view.addSubview(usersTableView)
+        view.addSubview(loadingView)
         setupConstraints()
     }
 
@@ -45,7 +51,10 @@ class UsersListViewController: UIViewController {
             usersTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             usersTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             usersTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            usersTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            usersTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+
+            loadingView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadingView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 
@@ -58,6 +67,34 @@ class UsersListViewController: UIViewController {
                 self.usersTableView.updateUsers(with: users, cellDataArray: cellDataArray)
             }
             .store(in: &cancellables)
+
+        viewModel.$isLoading
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isLoading in
+                guard let self = self else { return }
+                if isLoading {
+                    self.loadingView.start()
+                } else {
+                    self.loadingView.stop()
+                }
+            }
+            .store(in: &cancellables)
+
+        viewModel.$errorMessage
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] errorMessage in
+                guard let self = self, let errorMessage = errorMessage else { return }
+                self.showErrorAlert(message: errorMessage)
+            }
+            .store(in: &cancellables)
+    }
+
+    private func showErrorAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+            self?.viewModel.clearError()
+        })
+        present(alert, animated: true)
     }
 }
 

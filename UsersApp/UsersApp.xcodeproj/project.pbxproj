@@ -152,9 +152,6 @@
 		459B01E22E86C4B90039952E /* Development.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 459B01D72E86C4B90039952E /* Development.xcconfig */; };
 		459B01E32E86C4B90039952E /* Production.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 459B01D82E86C4B90039952E /* Production.xcconfig */; };
 		459B01E42E86C4B90039952E /* QA.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 459B01D92E86C4B90039952E /* QA.xcconfig */; };
-		459B01E72E86C6930039952E /* Info-QA.plist in Resources */ = {isa = PBXBuildFile; fileRef = 459B01E62E86C6930039952E /* Info-QA.plist */; };
-		459B01E82E86C6930039952E /* Info-Dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 459B01E52E86C6930039952E /* Info-Dev.plist */; };
-		459B01F72E86C7730039952E /* Info-Prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 459B01F62E86C7730039952E /* Info-Prod.plist */; };
 		459B01FC2E86CE3B0039952E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 459B01FB2E86CE3B0039952E /* FirebaseAnalytics */; };
 		459B01FE2E86CE3B0039952E /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 459B01FD2E86CE3B0039952E /* FirebaseCrashlytics */; };
 		459B02002E86CE3B0039952E /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 459B01FF2E86CE3B0039952E /* FirebaseFirestore */; };
@@ -198,6 +195,11 @@
 		45FE7A442E8A6905003552C4 /* GetUsersUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE7A432E8A6905003552C4 /* GetUsersUseCaseTests.swift */; };
 		45FE7A472E8A690F003552C4 /* SaveUserUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE7A462E8A690F003552C4 /* SaveUserUseCaseTests.swift */; };
 		45FE7A4C2E8A6985003552C4 /* UsersListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE7A4B2E8A6985003552C4 /* UsersListViewModelTests.swift */; };
+		45FE7A6F2E8A7A8C003552C4 /* LottieLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE7A6E2E8A7A8C003552C4 /* LottieLoadingView.swift */; };
+		45FE7A702E8A7A8C003552C4 /* LottieLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE7A6E2E8A7A8C003552C4 /* LottieLoadingView.swift */; };
+		45FE7A762E8A7B46003552C4 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 45FE7A752E8A7B46003552C4 /* Lottie */; };
+		45FE7A7F2E8A7C37003552C4 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 45FE7A7E2E8A7C37003552C4 /* loading.json */; };
+		45FE7A802E8A7C37003552C4 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 45FE7A7E2E8A7C37003552C4 /* loading.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -314,6 +316,8 @@
 		45FE7A432E8A6905003552C4 /* GetUsersUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUsersUseCaseTests.swift; sourceTree = "<group>"; };
 		45FE7A462E8A690F003552C4 /* SaveUserUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveUserUseCaseTests.swift; sourceTree = "<group>"; };
 		45FE7A4B2E8A6985003552C4 /* UsersListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListViewModelTests.swift; sourceTree = "<group>"; };
+		45FE7A6E2E8A7A8C003552C4 /* LottieLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieLoadingView.swift; sourceTree = "<group>"; };
+		45FE7A7E2E8A7C37003552C4 /* loading.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -322,6 +326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4518F61B2AA5248C00332DB6 /* Kingfisher in Frameworks */,
+				45FE7A762E8A7B46003552C4 /* Lottie in Frameworks */,
 				459B01FE2E86CE3B0039952E /* FirebaseCrashlytics in Frameworks */,
 				459B01C62E86A16B0039952E /* Swinject in Frameworks */,
 				459B02022E86CE3B0039952E /* FirebaseRemoteConfig in Frameworks */,
@@ -461,6 +466,7 @@
 		4518F6162AA505A100332DB6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				45FE7A792E8A7B75003552C4 /* Lottie */,
 				4518F6172AA505B000332DB6 /* ColorAssets.swift */,
 			);
 			path = Resources;
@@ -919,6 +925,7 @@
 		459B02C92E89965E0039952E /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				45FE7A6C2E8A7A89003552C4 /* LottieView */,
 				45866CF62E89A8BB00AC44AA /* LabelView */,
 				459B02A62E897D040039952E /* UsersTableView */,
 				450438A12AA296A900E44E89 /* TabController */,
@@ -970,6 +977,22 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		45FE7A6C2E8A7A89003552C4 /* LottieView */ = {
+			isa = PBXGroup;
+			children = (
+				45FE7A6E2E8A7A8C003552C4 /* LottieLoadingView.swift */,
+			);
+			path = LottieView;
+			sourceTree = "<group>";
+		};
+		45FE7A792E8A7B75003552C4 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				45FE7A7E2E8A7C37003552C4 /* loading.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -994,6 +1017,7 @@
 				459B01FD2E86CE3B0039952E /* FirebaseCrashlytics */,
 				459B01FF2E86CE3B0039952E /* FirebaseFirestore */,
 				459B02012E86CE3B0039952E /* FirebaseRemoteConfig */,
+				45FE7A752E8A7B46003552C4 /* Lottie */,
 			);
 			productName = UsersApp;
 			productReference = 450438682AA295A100E44E89 /* UsersApp.app */;
@@ -1053,6 +1077,7 @@
 				459B01FA2E86CE3B0039952E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				459B02AB2E8987380039952E /* XCRemoteSwiftPackageReference "Pulse" */,
 				4544136C2E89F90E004B33BB /* XCRemoteSwiftPackageReference "Cuckoo" */,
+				45FE7A742E8A7B46003552C4 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			productRefGroup = 450438692AA295A100E44E89 /* Products */;
 			projectDirPath = "";
@@ -1073,10 +1098,8 @@
 				450438782AA295A200E44E89 /* Assets.xcassets in Resources */,
 				459B02112E86D6870039952E /* GoogleService-Info.plist in Resources */,
 				459B01E22E86C4B90039952E /* Development.xcconfig in Resources */,
+				45FE7A802E8A7C37003552C4 /* loading.json in Resources */,
 				459B01E32E86C4B90039952E /* Production.xcconfig in Resources */,
-				459B01F72E86C7730039952E /* Info-Prod.plist in Resources */,
-				459B01E72E86C6930039952E /* Info-QA.plist in Resources */,
-				459B01E82E86C6930039952E /* Info-Dev.plist in Resources */,
 				459B01E42E86C4B90039952E /* QA.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1085,6 +1108,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45FE7A7F2E8A7C37003552C4 /* loading.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1155,6 +1179,7 @@
 				454412DC2E89E3AC004B33BB /* DateFormatter+Extensions.swift in Sources */,
 				454412C52E89D8C0004B33BB /* AppDelegate.swift in Sources */,
 				454412DF2E89E4B4004B33BB /* UseCase.swift in Sources */,
+				45FE7A702E8A7A8C003552C4 /* LottieLoadingView.swift in Sources */,
 				459B02882E874EC40039952E /* LoggingInterceptor.swift in Sources */,
 				459B02892E874EC40039952E /* NetworkClientProtocol.swift in Sources */,
 				4544130D2E89E726004B33BB /* TabDestination.swift in Sources */,
@@ -1221,6 +1246,7 @@
 				454413BC2E8A06E1004B33BB /* NetworkError.swift in Sources */,
 				454413BD2E8A06E1004B33BB /* LoggingInterceptor.swift in Sources */,
 				454413BE2E8A06E1004B33BB /* APIClient.swift in Sources */,
+				45FE7A6F2E8A7A8C003552C4 /* LottieLoadingView.swift in Sources */,
 				454413BF2E8A06E1004B33BB /* InterceptorProtocol.swift in Sources */,
 				454413C02E8A06E1004B33BB /* HTTPMethod.swift in Sources */,
 				454413C12E8A06E1004B33BB /* UserEndpoint.swift in Sources */,
@@ -1455,11 +1481,12 @@
 				DEVELOPMENT_TEAM = RNN4Y9Z58L;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "${inherited}";
-				INFOPLIST_KEY_CFBundleDisplayName = "${inherited}";
+				INFOPLIST_KEY_CFBundleDisplayName = "UsersApp Dev";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1469,10 +1496,14 @@
 				MARKETING_VERSION = "${inherited}";
 				PRODUCT_BUNDLE_IDENTIFIER = "${inherited}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "${inherited}";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug_Development;
 		};
@@ -1487,11 +1518,12 @@
 				DEVELOPMENT_TEAM = RNN4Y9Z58L;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "${inherited}";
-				INFOPLIST_KEY_CFBundleDisplayName = "${inherited}";
+				INFOPLIST_KEY_CFBundleDisplayName = "UsersApp Dev";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1501,10 +1533,14 @@
 				MARKETING_VERSION = "${inherited}";
 				PRODUCT_BUNDLE_IDENTIFIER = "${inherited}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "${inherited}";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release_Development;
 		};
@@ -1621,11 +1657,12 @@
 				DEVELOPMENT_TEAM = RNN4Y9Z58L;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "${inherited}";
-				INFOPLIST_KEY_CFBundleDisplayName = "${inherited}";
+				INFOPLIST_KEY_CFBundleDisplayName = "UsersApp Dev";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1635,10 +1672,14 @@
 				MARKETING_VERSION = "${inherited}";
 				PRODUCT_BUNDLE_IDENTIFIER = "${inherited}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "${inherited}";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug_Prod;
 		};
@@ -1735,11 +1776,12 @@
 				DEVELOPMENT_TEAM = RNN4Y9Z58L;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "${inherited}";
-				INFOPLIST_KEY_CFBundleDisplayName = "${inherited}";
+				INFOPLIST_KEY_CFBundleDisplayName = "UsersApp Dev";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1749,10 +1791,14 @@
 				MARKETING_VERSION = "${inherited}";
 				PRODUCT_BUNDLE_IDENTIFIER = "${inherited}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "${inherited}";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug_QA;
 		};
@@ -1843,11 +1889,12 @@
 				DEVELOPMENT_TEAM = RNN4Y9Z58L;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "${inherited}";
-				INFOPLIST_KEY_CFBundleDisplayName = "${inherited}";
+				INFOPLIST_KEY_CFBundleDisplayName = "UsersApp Dev";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1857,10 +1904,14 @@
 				MARKETING_VERSION = "${inherited}";
 				PRODUCT_BUNDLE_IDENTIFIER = "${inherited}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "${inherited}";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release_QA;
 		};
@@ -1951,11 +2002,12 @@
 				DEVELOPMENT_TEAM = RNN4Y9Z58L;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "${inherited}";
-				INFOPLIST_KEY_CFBundleDisplayName = "${inherited}";
+				INFOPLIST_KEY_CFBundleDisplayName = "UsersApp Dev";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1965,10 +2017,14 @@
 				MARKETING_VERSION = "${inherited}";
 				PRODUCT_BUNDLE_IDENTIFIER = "${inherited}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "${inherited}";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release_Prod;
 		};
@@ -2085,6 +2141,14 @@
 				minimumVersion = 5.1.4;
 			};
 		};
+		45FE7A742E8A7B46003552C4 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2127,6 +2191,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 459B01FA2E86CE3B0039952E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
+		};
+		45FE7A752E8A7B46003552C4 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45FE7A742E8A7B46003552C4 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 
