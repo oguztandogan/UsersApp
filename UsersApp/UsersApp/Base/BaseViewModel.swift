@@ -6,7 +6,25 @@
 //
 
 import Foundation
+import Combine
 
-class BaseViewModel {
-    var coreDataService: CoreDataServiceable = CoreDataService()
+class BaseViewModel: ObservableObject {
+    @Published var isLoading: Bool = false
+    @Published var errorMessage: String?
+
+    func setLoading(_ loading: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            self?.isLoading = loading
+        }
+    }
+
+    func setError(_ message: String?) {
+        DispatchQueue.main.async { [weak self] in
+            self?.errorMessage = message
+        }
+    }
+
+    func clearError() {
+        setError(nil)
+    }
 }
