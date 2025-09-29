@@ -30,7 +30,6 @@ final class APIClientTests: XCTestCase {
     }
 
     func test_request_success_decodesResponse() async throws {
-        // Arrange
         let endpoint = UserEndpoint.userList(page: "1", results: 1)
         let userJson = """
         {
@@ -60,10 +59,8 @@ final class APIClientTests: XCTestCase {
             when(stub.performRequest(any())).thenReturn((userJson, response))
         }
 
-        // Act
         let result: UsersDTO = try await sut.request(endpoint: endpoint, responseType: UsersDTO.self)
 
-        // Assert
         XCTAssertEqual(result.results.first?.name?.first, "John")
         verify(mockTransport).performRequest(any())
         verify(mockInterceptor).intercept(request: any())
@@ -71,7 +68,6 @@ final class APIClientTests: XCTestCase {
     }
 
     func test_request_throwsDecodingError() async {
-        // Arrange
         let endpoint = UserEndpoint.userList(page: "1")
         let invalidJson = "{ invalid json }".data(using: .utf8)!
         let response = HTTPURLResponse(url: URL(string: "https://example.com")!,
@@ -87,7 +83,6 @@ final class APIClientTests: XCTestCase {
             when(stub.performRequest(any())).thenReturn((invalidJson, response))
         }
 
-        // Act & Assert
         do {
             _ = try await sut.request(endpoint: endpoint, responseType: UsersDTO.self)
             XCTFail("Expected decoding error")
@@ -100,7 +95,6 @@ final class APIClientTests: XCTestCase {
     }
 
     func test_request_throwsUnauthorized() async {
-        // Arrange
         let endpoint = UserEndpoint.userList(page: "1")
         let dummyData = Data()
         let response = HTTPURLResponse(url: URL(string: "https://example.com")!,
@@ -115,7 +109,6 @@ final class APIClientTests: XCTestCase {
             when(stub.performRequest(any())).thenReturn((dummyData, response))
         }
 
-        // Act & Assert
         do {
             _ = try await sut.request(endpoint: endpoint, responseType: UsersDTO.self)
             XCTFail("Expected unauthorized error")

@@ -9,7 +9,7 @@ import Combine
 import Foundation
 import UIKit
 
-class UsersListViewController: UIViewController {
+class UsersListViewController: BaseViewController {
     var viewModel: UsersListViewModel!
     private var cancellables: Set<AnyCancellable> = []
     private lazy var usersTableView: UsersTableView = {

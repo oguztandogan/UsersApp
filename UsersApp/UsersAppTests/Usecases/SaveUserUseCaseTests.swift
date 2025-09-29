@@ -20,7 +20,7 @@ final class SaveUserUseCaseTests: XCTestCase {
     }
 
     func test_execute_callsRepository() async throws {
-        // Arrange
+
         let user = UserEntity(id: UUID(), gender: nil, name: nil,
                               dateOfBirth: nil, phone: nil,
                               picture: nil, nationality: nil)
@@ -28,10 +28,8 @@ final class SaveUserUseCaseTests: XCTestCase {
             when(stub.saveUser(any())).thenDoNothing()
         }
 
-        // Act
         try await sut.execute(user)
 
-        // Assert
         verify(mockRepository).saveUser(equal(to: user))
     }
 

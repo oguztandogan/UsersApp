@@ -22,8 +22,6 @@ enum Environment: String, CaseIterable {
         #endif
     }
 
-    // MARK: - Environment Configuration
-
     var baseURL: String {
         switch self {
         case .development:
@@ -103,20 +101,5 @@ enum Environment: String, CaseIterable {
             return timeout
         }
         return 30.0
-    }
-}
-
-enum LogLevel: Int, CaseIterable {
-    case debug = 0
-    case info = 1
-    case warning = 2
-    case error = 3
-    var description: String {
-        switch self {
-        case .debug: return "DEBUG"
-        case .info: return "INFO"
-        case .warning: return "WARNING"
-        case .error: return "ERROR"
-        }
     }
 }

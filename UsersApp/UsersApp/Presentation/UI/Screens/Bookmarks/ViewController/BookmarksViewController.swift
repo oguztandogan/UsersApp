@@ -9,7 +9,7 @@ import Combine
 import Foundation
 import UIKit
 
-class BookmarksViewController: UIViewController {
+class BookmarksViewController: BaseViewController {
     var viewModel: BookmarksViewModel!
     private var cancellables: Set<AnyCancellable> = []
     private lazy var usersTableView: UsersTableView = {

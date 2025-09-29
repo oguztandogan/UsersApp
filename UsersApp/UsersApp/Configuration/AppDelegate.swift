@@ -9,6 +9,8 @@ import CoreData
 import FirebaseCore
 import Swinject
 import UIKit
+import Pulse
+import PulseProxy
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,8 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         setupEnvironment()
-
+#if DEV || QA
+        setupNetworkDebugger()
+#endif
         DependencyContainer.shared.configureDependencies()
+
         return true
     }
 
@@ -56,4 +61,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+
+#if DEV || QA
+    private func setupNetworkDebugger() {
+        var configuration = Pulse.NetworkLogger.Configuration()
+        configuration.excludedHosts = [
+            "https://firebaselogging-pa.googleapis.com"
+        ]
+        configuration.excludedURLs = [
+            "https://firebaselogging-pa.googleapis.com/v1/firelog/legacy/batchlog"
+        ]
+        configuration.sensitiveHeaders = [
+            "Authorization",
+            "Access-Token"
+        ]
+        configuration.sensitiveQueryItems = [
+            "password"
+        ]
+        configuration.sensitiveDataFields = [
+            "password"
+        ]
+
+        let logger = Pulse.NetworkLogger(configuration: configuration)
+        Pulse.NetworkLogger.shared = logger
+        Pulse.NetworkLogger.enableProxy()
+    }
+#endif
 }

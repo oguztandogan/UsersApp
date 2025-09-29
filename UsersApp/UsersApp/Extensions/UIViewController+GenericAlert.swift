@@ -42,7 +42,7 @@ extension UIViewController {
         )
         showGenericAlert(data: data)
     }
-    
+
     func showErrorAlert(
         title: String? = nil,
         subtitle: String? = nil,

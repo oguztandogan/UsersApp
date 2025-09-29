@@ -54,6 +54,8 @@
 		4518F6B62AA71DBA00332DB6 /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F6202AA5366200332DB6 /* UserDetailsViewController.swift */; };
 		4518F6B72AA71DBE00332DB6 /* UserDetailsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F6762AA69CFF00332DB6 /* UserDetailsContentView.swift */; };
 		4518F6B82AA71DBE00332DB6 /* UserDetailsContentViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F6802AA6A81A00332DB6 /* UserDetailsContentViewData.swift */; };
+		45310AFD2E8A9880005B2614 /* LogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45310AFC2E8A9880005B2614 /* LogLevel.swift */; };
+		45310AFE2E8A9880005B2614 /* LogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45310AFC2E8A9880005B2614 /* LogLevel.swift */; };
 		454412C32E89D711004B33BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454412C22E89D70D004B33BB /* SceneDelegate.swift */; };
 		454412C52E89D8C0004B33BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454412C42E89D8C0004B33BB /* AppDelegate.swift */; };
 		454412D52E89DEC2004B33BB /* EndpointProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454412D42E89DEC2004B33BB /* EndpointProtocol.swift */; };
@@ -210,6 +212,11 @@
 		45FE7A9C2E8A85AF003552C4 /* AlertViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE7A942E8A85AF003552C4 /* AlertViewData.swift */; };
 		45FE7AA02E8A8728003552C4 /* UIViewController+GenericAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE7A9F2E8A8728003552C4 /* UIViewController+GenericAlert.swift */; };
 		45FE7AA12E8A8728003552C4 /* UIViewController+GenericAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE7A9F2E8A8728003552C4 /* UIViewController+GenericAlert.swift */; };
+		45FE7AA42E8A8C79003552C4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE7AA32E8A8C79003552C4 /* BaseViewController.swift */; };
+		45FE7AA52E8A8C79003552C4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE7AA32E8A8C79003552C4 /* BaseViewController.swift */; };
+		45FE7AAA2E8A8CAC003552C4 /* Pulse in Frameworks */ = {isa = PBXBuildFile; productRef = 45FE7AA92E8A8CAC003552C4 /* Pulse */; };
+		45FE7AAC2E8A8CAC003552C4 /* PulseProxy in Frameworks */ = {isa = PBXBuildFile; productRef = 45FE7AAB2E8A8CAC003552C4 /* PulseProxy */; };
+		45FE7AAE2E8A8CAC003552C4 /* PulseUI in Frameworks */ = {isa = PBXBuildFile; productRef = 45FE7AAD2E8A8CAC003552C4 /* PulseUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -249,6 +256,7 @@
 		4518F6792AA6A61400332DB6 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		4518F6802AA6A81A00332DB6 /* UserDetailsContentViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsContentViewData.swift; sourceTree = "<group>"; };
 		4518F6822AA6AE5700332DB6 /* UserTableViewCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCellData.swift; sourceTree = "<group>"; };
+		45310AFC2E8A9880005B2614 /* LogLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLevel.swift; sourceTree = "<group>"; };
 		454412C22E89D70D004B33BB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		454412C42E89D8C0004B33BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		454412D42E89DEC2004B33BB /* EndpointProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointProtocol.swift; sourceTree = "<group>"; };
@@ -290,8 +298,6 @@
 		459B01D92E86C4B90039952E /* QA.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = QA.xcconfig; sourceTree = "<group>"; };
 		459B01DC2E86C4B90039952E /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		459B01DD2E86C4B90039952E /* EnvironmentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentManager.swift; sourceTree = "<group>"; };
-		459B01E52E86C6930039952E /* Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Dev.plist"; sourceTree = "<group>"; };
-		459B01E62E86C6930039952E /* Info-QA.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-QA.plist"; sourceTree = "<group>"; };
 		459B01F62E86C7730039952E /* Info-Prod.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Prod.plist"; sourceTree = "<group>"; };
 		459B02032E86D0630039952E /* AnalyticsTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsTracker.swift; sourceTree = "<group>"; };
 		459B02082E86D0630039952E /* RemoteConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigManager.swift; sourceTree = "<group>"; };
@@ -333,6 +339,9 @@
 		45FE7A942E8A85AF003552C4 /* AlertViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewData.swift; sourceTree = "<group>"; };
 		45FE7A952E8A85AF003552C4 /* GenericAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericAlertView.swift; sourceTree = "<group>"; };
 		45FE7A9F2E8A8728003552C4 /* UIViewController+GenericAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+GenericAlert.swift"; sourceTree = "<group>"; };
+		45FE7AA32E8A8C79003552C4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		45FE7AB72E8A8E21003552C4 /* Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Dev.plist"; sourceTree = "<group>"; };
+		45FE7AC62E8A9398003552C4 /* Info-QA.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-QA.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -340,12 +349,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45FE7AAC2E8A8CAC003552C4 /* PulseProxy in Frameworks */,
 				4518F61B2AA5248C00332DB6 /* Kingfisher in Frameworks */,
 				45FE7A762E8A7B46003552C4 /* Lottie in Frameworks */,
 				459B01FE2E86CE3B0039952E /* FirebaseCrashlytics in Frameworks */,
 				459B01C62E86A16B0039952E /* Swinject in Frameworks */,
 				459B02022E86CE3B0039952E /* FirebaseRemoteConfig in Frameworks */,
+				45FE7AAE2E8A8CAC003552C4 /* PulseUI in Frameworks */,
 				459B02002E86CE3B0039952E /* FirebaseFirestore in Frameworks */,
+				45FE7AAA2E8A8CAC003552C4 /* Pulse in Frameworks */,
 				459B01FC2E86CE3B0039952E /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -592,6 +604,7 @@
 		4518F6782AA6A60D00332DB6 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				45FE7AA32E8A8C79003552C4 /* BaseViewController.swift */,
 				454412DD2E89E4B4004B33BB /* UseCase.swift */,
 				4518F6792AA6A61400332DB6 /* BaseViewModel.swift */,
 			);
@@ -744,6 +757,7 @@
 		459B01DE2E86C4B90039952E /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
+				45310AFC2E8A9880005B2614 /* LogLevel.swift */,
 				454412C42E89D8C0004B33BB /* AppDelegate.swift */,
 				454412C22E89D70D004B33BB /* SceneDelegate.swift */,
 				459B01F52E86C7650039952E /* Plist */,
@@ -757,9 +771,9 @@
 		459B01F52E86C7650039952E /* Plist */ = {
 			isa = PBXGroup;
 			children = (
+				45FE7AC62E8A9398003552C4 /* Info-QA.plist */,
+				45FE7AB72E8A8E21003552C4 /* Info-Dev.plist */,
 				459B01F62E86C7730039952E /* Info-Prod.plist */,
-				459B01E52E86C6930039952E /* Info-Dev.plist */,
-				459B01E62E86C6930039952E /* Info-QA.plist */,
 				459B02102E86D6870039952E /* GoogleService-Info.plist */,
 			);
 			path = Plist;
@@ -1046,6 +1060,9 @@
 				459B01FF2E86CE3B0039952E /* FirebaseFirestore */,
 				459B02012E86CE3B0039952E /* FirebaseRemoteConfig */,
 				45FE7A752E8A7B46003552C4 /* Lottie */,
+				45FE7AA92E8A8CAC003552C4 /* Pulse */,
+				45FE7AAB2E8A8CAC003552C4 /* PulseProxy */,
+				45FE7AAD2E8A8CAC003552C4 /* PulseUI */,
 			);
 			productName = UsersApp;
 			productReference = 450438682AA295A100E44E89 /* UsersApp.app */;
@@ -1103,9 +1120,9 @@
 				459B01C42E86A16B0039952E /* XCRemoteSwiftPackageReference "Swinject" */,
 				459B01D62E86A50E0039952E /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
 				459B01FA2E86CE3B0039952E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				459B02AB2E8987380039952E /* XCRemoteSwiftPackageReference "Pulse" */,
 				4544136C2E89F90E004B33BB /* XCRemoteSwiftPackageReference "Cuckoo" */,
 				45FE7A742E8A7B46003552C4 /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				45FE7AA82E8A8CAC003552C4 /* XCRemoteSwiftPackageReference "Pulse" */,
 			);
 			productRefGroup = 450438692AA295A100E44E89 /* Products */;
 			projectDirPath = "";
@@ -1187,6 +1204,7 @@
 				4518F6232AA5366800332DB6 /* UserDetailsViewModel.swift in Sources */,
 				454412D52E89DEC2004B33BB /* EndpointProtocol.swift in Sources */,
 				4518F5EE2AA4958D00332DB6 /* TabBarCoordinator.swift in Sources */,
+				45FE7AA42E8A8C79003552C4 /* BaseViewController.swift in Sources */,
 				454412E82E89E635004B33BB /* BookmarksNavigation.swift in Sources */,
 				454413102E89E72D004B33BB /* AppDestination.swift in Sources */,
 				459B01D12E86A25E0039952E /* PresentationAssembly.swift in Sources */,
@@ -1211,6 +1229,7 @@
 				454412DF2E89E4B4004B33BB /* UseCase.swift in Sources */,
 				45FE7A702E8A7A8C003552C4 /* LottieLoadingView.swift in Sources */,
 				459B02882E874EC40039952E /* LoggingInterceptor.swift in Sources */,
+				45310AFE2E8A9880005B2614 /* LogLevel.swift in Sources */,
 				459B02892E874EC40039952E /* NetworkClientProtocol.swift in Sources */,
 				4544130D2E89E726004B33BB /* TabDestination.swift in Sources */,
 				45FE7A912E8A844C003552C4 /* String+Localization.swift in Sources */,
@@ -1283,6 +1302,7 @@
 				454413BD2E8A06E1004B33BB /* LoggingInterceptor.swift in Sources */,
 				454413BE2E8A06E1004B33BB /* APIClient.swift in Sources */,
 				45FE7A6F2E8A7A8C003552C4 /* LottieLoadingView.swift in Sources */,
+				45FE7AA52E8A8C79003552C4 /* BaseViewController.swift in Sources */,
 				454413BF2E8A06E1004B33BB /* InterceptorProtocol.swift in Sources */,
 				454413C02E8A06E1004B33BB /* HTTPMethod.swift in Sources */,
 				454413C12E8A06E1004B33BB /* UserEndpoint.swift in Sources */,
@@ -1333,6 +1353,7 @@
 				454413142E89E78F004B33BB /* NavigationCoordinator.swift in Sources */,
 				454413C82E8A06E8004B33BB /* URLSessionTransport.swift in Sources */,
 				459B02B12E898C2C0039952E /* TabConfiguration.swift in Sources */,
+				45310AFD2E8A9880005B2614 /* LogLevel.swift in Sources */,
 				45FE7A332E8A687A003552C4 /* UsersRemoteDataSourceTests.swift in Sources */,
 				459B02A52E875EB70039952E /* UsersApp.xcdatamodeld in Sources */,
 				4518F6AE2AA71DA000332DB6 /* UsersListCoordinator.swift in Sources */,
@@ -1519,7 +1540,7 @@
 				DEVELOPMENT_TEAM = RNN4Y9Z58L;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "${inherited}";
-				INFOPLIST_KEY_CFBundleDisplayName = "UsersApp Dev";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(APP_NAME)";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
@@ -1556,7 +1577,7 @@
 				DEVELOPMENT_TEAM = RNN4Y9Z58L;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "${inherited}";
-				INFOPLIST_KEY_CFBundleDisplayName = "UsersApp Dev";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(APP_NAME)";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
@@ -1695,7 +1716,7 @@
 				DEVELOPMENT_TEAM = RNN4Y9Z58L;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "${inherited}";
-				INFOPLIST_KEY_CFBundleDisplayName = "UsersApp Dev";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(APP_NAME)";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
@@ -1814,7 +1835,7 @@
 				DEVELOPMENT_TEAM = RNN4Y9Z58L;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "${inherited}";
-				INFOPLIST_KEY_CFBundleDisplayName = "UsersApp Dev";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(APP_NAME)";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
@@ -1927,7 +1948,7 @@
 				DEVELOPMENT_TEAM = RNN4Y9Z58L;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "${inherited}";
-				INFOPLIST_KEY_CFBundleDisplayName = "UsersApp Dev";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(APP_NAME)";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
@@ -2040,7 +2061,7 @@
 				DEVELOPMENT_TEAM = RNN4Y9Z58L;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "${inherited}";
-				INFOPLIST_KEY_CFBundleDisplayName = "UsersApp Dev";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(APP_NAME)";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
@@ -2171,20 +2192,20 @@
 				minimumVersion = 12.3.0;
 			};
 		};
-		459B02AB2E8987380039952E /* XCRemoteSwiftPackageReference "Pulse" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kean/Pulse";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.1.4;
-			};
-		};
 		45FE7A742E8A7B46003552C4 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.5.2;
+			};
+		};
+		45FE7AA82E8A8CAC003552C4 /* XCRemoteSwiftPackageReference "Pulse" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Pulse";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.4;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -2234,6 +2255,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 45FE7A742E8A7B46003552C4 /* XCRemoteSwiftPackageReference "lottie-spm" */;
 			productName = Lottie;
+		};
+		45FE7AA92E8A8CAC003552C4 /* Pulse */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45FE7AA82E8A8CAC003552C4 /* XCRemoteSwiftPackageReference "Pulse" */;
+			productName = Pulse;
+		};
+		45FE7AAB2E8A8CAC003552C4 /* PulseProxy */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45FE7AA82E8A8CAC003552C4 /* XCRemoteSwiftPackageReference "Pulse" */;
+			productName = PulseProxy;
+		};
+		45FE7AAD2E8A8CAC003552C4 /* PulseUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45FE7AA82E8A8CAC003552C4 /* XCRemoteSwiftPackageReference "Pulse" */;
+			productName = PulseUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 

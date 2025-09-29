@@ -20,7 +20,6 @@ final class GetSavedUsersUseCaseTests: XCTestCase {
     }
 
     func test_execute_returnsUsers() async throws {
-        // Arrange
         let users = [UserEntity(id: UUID(), gender: nil, name: nil,
                                 dateOfBirth: nil, phone: nil,
                                 picture: nil, nationality: nil)]
@@ -28,10 +27,8 @@ final class GetSavedUsersUseCaseTests: XCTestCase {
             when(stub.getSavedUsers()).thenReturn(users)
         }
 
-        // Act
         let result = try await sut.execute()
 
-        // Assert
         XCTAssertEqual(result.count, 1)
         verify(mockRepository).getSavedUsers()
     }

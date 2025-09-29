@@ -35,7 +35,6 @@ final class UsersListViewModelTests: XCTestCase {
     }
 
     func test_onAppear_fetchesUsers() async throws {
-        // Arrange
         let response = UsersResponse(users: [UserEntity(id: UUID(),
                                                         gender: nil,
                                                         name: nil,
@@ -48,11 +47,9 @@ final class UsersListViewModelTests: XCTestCase {
             when(stub.execute(pageNumber: any())).thenReturn(response)
         }
 
-        // Act
         sut.onAppear()
-        try await Task.sleep(nanoseconds: 200_000_000) // küçük delay
+        try await Task.sleep(nanoseconds: 200_000_000)
 
-        // Assert
         XCTAssertEqual(sut.users.count, 1)
         verify(mockGetUsers).execute(pageNumber: any())
     }
@@ -75,7 +72,6 @@ final class UsersListViewModelTests: XCTestCase {
             when(stub.execute(pageNumber: equal(to: "2"))).thenReturn(secondResponse)
         }
 
-        // İlk fetch
         let exp1 = expectation(description: "First fetch done")
         let cancellable1 = sut.$users.dropFirst().sink { _ in exp1.fulfill() }
         sut.fetchUsers(isPagination: false, isRefreshing: false)
@@ -84,11 +80,10 @@ final class UsersListViewModelTests: XCTestCase {
 
         XCTAssertEqual(sut.users.count, 1)
 
-        // Pagination
         let exp2 = expectation(description: "Pagination fetch done")
         let cancellable2 = sut.$users.dropFirst(1).sink { _ in exp2.fulfill() }
         sut.fetchUsers(isPagination: true, isRefreshing: false)
-        await fulfillment(of: [exp2], timeout: 2.0) // timeout'u 2 yap
+        await fulfillment(of: [exp2], timeout: 2.0)
         cancellable2.cancel()
 
         XCTAssertEqual(sut.users.count, 2)
@@ -140,8 +135,17 @@ final class UsersListViewModelTests: XCTestCase {
             when(stub.execute(any())).thenDoNothing()
         }
 
+        let expectation = expectation(description: "User should be added to saved users")
+        let cancellable = sut.$savedUsers.dropFirst().sink { savedUsers in
+            if savedUsers.count == 1 {
+                expectation.fulfill()
+            }
+        }
+
         sut.favouriteButtonAction(index: 0)
-        try await Task.sleep(nanoseconds: 200_000_000)
+
+        await fulfillment(of: [expectation], timeout: 2.0)
+        cancellable.cancel()
 
         XCTAssertTrue(sut.users.first?.isSaved == true)
         XCTAssertEqual(sut.savedUsers.count, 1)

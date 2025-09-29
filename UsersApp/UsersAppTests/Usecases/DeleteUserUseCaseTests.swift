@@ -20,16 +20,13 @@ final class DeleteUserUseCaseTests: XCTestCase {
     }
 
     func test_execute_callsRepository() async throws {
-        // Arrange
         let userId = UUID()
         stub(mockRepository) { stub in
             when(stub.deleteUser(withId: any())).thenDoNothing()
         }
 
-        // Act
         try await sut.execute(userId: userId)
 
-        // Assert
         verify(mockRepository).deleteUser(withId: equal(to: userId))
     }
 

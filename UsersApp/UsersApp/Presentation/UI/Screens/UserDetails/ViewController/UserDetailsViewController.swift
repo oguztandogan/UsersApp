@@ -10,7 +10,7 @@ import Foundation
 import Kingfisher
 import UIKit
 
-class UserDetailsViewController: UIViewController {
+class UserDetailsViewController: BaseViewController {
     var viewModel: UserDetailsViewModel!
     var cancellables: Set<AnyCancellable> = []
     private lazy var contentView: UserDetailsContentView = {

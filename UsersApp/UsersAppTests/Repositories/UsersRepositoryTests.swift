@@ -22,7 +22,6 @@ final class UsersRepositoryTests: XCTestCase {
     }
 
     func test_getUsers_setsIsSavedFromLocal() async throws {
-        // Arrange
         let user = UserEntity(
             id: UUID(),
             gender: "male",
@@ -41,10 +40,8 @@ final class UsersRepositoryTests: XCTestCase {
             when(stub.isUserSaved(withId: any())).thenReturn(true)
         }
 
-        // Act
         let result = try await sut.getUsers(pageNumber: "1")
 
-        // Assert
         XCTAssertTrue(result.users.first?.isSaved == true)
     }
 

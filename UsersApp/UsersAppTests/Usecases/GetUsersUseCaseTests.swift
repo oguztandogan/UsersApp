@@ -20,16 +20,13 @@ final class GetUsersUseCaseTests: XCTestCase {
     }
 
     func test_execute_returnsResponse() async throws {
-        // Arrange
         let response = UsersResponse(users: [], info: ResponseInfo(seed: "s", results: 1, page: 1, version: "1"))
         stub(mockRepository) { stub in
             when(stub.getUsers(pageNumber: any())).thenReturn(response)
         }
 
-        // Act
         let result = try await sut.execute(pageNumber: "1")
 
-        // Assert
         XCTAssertEqual(result.info.page, 1)
         verify(mockRepository).getUsers(pageNumber: equal(to: "1"))
     }
