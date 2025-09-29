@@ -15,6 +15,7 @@ class BookmarksViewController: UIViewController {
     private lazy var usersTableView: UsersTableView = {
         let tableView = UsersTableView(configuration: .bookmarks)
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.accessibilityIdentifier = "BookmarksTableView"
         tableView.delegate = self
         return tableView
     }()
@@ -33,6 +34,7 @@ class BookmarksViewController: UIViewController {
 
     private func setupUI() {
         view.backgroundColor = .appBackground
+        view.accessibilityIdentifier = "BookmarksViewController"
         view.addSubview(usersTableView)
         setupConstraints()
     }

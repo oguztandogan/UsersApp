@@ -31,30 +31,35 @@ class UserDetailsContentView: UIView {
         imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = 40
         imageView.clipsToBounds = true
+        imageView.accessibilityIdentifier = "UserDetailsImageView"
         return imageView
     }()
 
     lazy var username: LabelView = {
         let username = LabelView(data: .largeTitle())
         username.translatesAutoresizingMaskIntoConstraints = false
+        username.accessibilityIdentifier = "UserDetailsUsername"
         return username
     }()
 
     lazy var nationality: LabelView = {
         let nationality = LabelView(data: .secondary())
         nationality.translatesAutoresizingMaskIntoConstraints = false
+        nationality.accessibilityIdentifier = "UserDetailsNationality"
         return nationality
     }()
 
     lazy var age: LabelView = {
         let age = LabelView(data: .secondary())
         age.translatesAutoresizingMaskIntoConstraints = false
+        age.accessibilityIdentifier = "UserDetailsAge"
         return age
     }()
 
     lazy var phoneNumber: LabelView = {
         let phoneNumber = LabelView(data: .secondary())
         phoneNumber.translatesAutoresizingMaskIntoConstraints = false
+        phoneNumber.accessibilityIdentifier = "UserDetailsPhoneNumber"
         return phoneNumber
     }()
 
@@ -70,6 +75,7 @@ class UserDetailsContentView: UIView {
     func setupViews() {
         addSubview(imageView)
         addSubview(stackView)
+        accessibilityIdentifier = "UserDetailsContentView"
 
         username.data = data?.username
         nationality.data = data?.nationality

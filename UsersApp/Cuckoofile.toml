@@ -15,7 +15,8 @@ sources = [
     "UsersApp/Domain/Repositories/**/*.swift",
     "UsersApp/Domain/UseCases/**/*.swift",
     "UsersApp/Presentation/Navigation/**/*.swift",
-    "UsersApp/Presentation/Coordinator/**/*.swift"
+    "UsersApp/Presentation/Coordinator/**/*.swift",
+    "UsersApp/Presentation/UI/Screens/Users/Navigation/**/*.swift"
 ]
 
 [modules.UsersApp.options]

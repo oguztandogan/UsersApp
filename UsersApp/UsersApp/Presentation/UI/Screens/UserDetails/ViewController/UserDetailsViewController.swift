@@ -16,6 +16,7 @@ class UserDetailsViewController: UIViewController {
     private lazy var contentView: UserDetailsContentView = {
         let contentView = UserDetailsContentView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.accessibilityIdentifier = "UserDetailsContentView"
         return contentView
     }()
 
@@ -35,6 +36,7 @@ class UserDetailsViewController: UIViewController {
 
     private func setupViews() {
         view.backgroundColor = .appBackground
+        view.accessibilityIdentifier = "UserDetailsViewController"
         view.addSubview(contentView)
         contentView.data = viewModel.getContentViewData()
     }

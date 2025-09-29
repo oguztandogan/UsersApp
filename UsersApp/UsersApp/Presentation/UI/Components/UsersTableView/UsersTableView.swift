@@ -72,6 +72,7 @@ class UsersTableView: UIView {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .appBackground
         tableView.delegate = self
+        tableView.accessibilityIdentifier = "UsersTableView"
         tableView.register(UserTableViewCell.self, forCellReuseIdentifier: UserTableViewCell.reuseID)
 
         tableView.separatorStyle = .singleLine
@@ -86,6 +87,7 @@ class UsersTableView: UIView {
 
         if configuration.showPullToRefresh {
             let refreshControl = UIRefreshControl()
+            refreshControl.accessibilityIdentifier = "RefreshControl"
             refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
             tableView.refreshControl = refreshControl
         }

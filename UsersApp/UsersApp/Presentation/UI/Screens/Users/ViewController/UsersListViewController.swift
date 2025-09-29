@@ -15,6 +15,7 @@ class UsersListViewController: UIViewController {
     private lazy var usersTableView: UsersTableView = {
         let tableView = UsersTableView(configuration: .default)
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.accessibilityIdentifier = "UsersTableView"
         tableView.delegate = self
         return tableView
     }()
@@ -34,6 +35,7 @@ class UsersListViewController: UIViewController {
 
     private func setupUI() {
         view.backgroundColor = .appBackground
+        view.accessibilityIdentifier = "UsersListViewController"
         view.addSubview(usersTableView)
         setupConstraints()
     }
