@@ -22,7 +22,7 @@ class UserDetailsViewController: UIViewController {
     private lazy var bookmarkButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Bookmark", for: .normal)
+        button.setTitle("button.bookmark".localized, for: .normal)
         button.backgroundColor = .appPrimary
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
@@ -37,7 +37,7 @@ class UserDetailsViewController: UIViewController {
         setupViews()
         setupConstraints()
         bindViewModel()
-        navigationItem.title = "User Details"
+        navigationItem.title = "navigation.user_details".localized
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -83,10 +83,10 @@ class UserDetailsViewController: UIViewController {
 
     private func updateBookmarkButtonState() {
         if viewModel.user.isSaved {
-            bookmarkButton.setTitle("Remove Bookmark", for: .normal)
+            bookmarkButton.setTitle("button.remove_bookmark".localized, for: .normal)
             bookmarkButton.backgroundColor = .systemRed
         } else {
-            bookmarkButton.setTitle("Bookmark", for: .normal)
+            bookmarkButton.setTitle("button.bookmark".localized, for: .normal)
             bookmarkButton.backgroundColor = .appPrimary
         }
     }

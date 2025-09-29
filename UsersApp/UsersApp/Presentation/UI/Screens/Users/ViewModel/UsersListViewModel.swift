@@ -88,7 +88,7 @@ class UsersListViewModel: BaseViewModel {
             } catch {
                 await MainActor.run {
                     analyticsTracker.trackError(error, context: "fetch_users")
-                    setError("Failed to load users. Please try again.")
+                    setError("error.failed_to_load_users".localized)
                     setLoading(false)
                     print("Error fetching users: \(error)")
                 }

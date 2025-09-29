@@ -23,7 +23,7 @@ class BookmarksViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         bindViewModel()
-        navigationItem.title = "Saved Users"
+        navigationItem.title = "navigation.saved_users".localized
     }
 
     override func viewWillAppear(_ animated: Bool) {

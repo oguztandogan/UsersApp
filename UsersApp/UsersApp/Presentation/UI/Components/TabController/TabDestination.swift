@@ -10,8 +10,8 @@ enum TabDestination: Int, CaseIterable {
     case bookmarks = 1
     var title: String {
         switch self {
-        case .users: return "Users"
-        case .bookmarks: return "Bookmarks"
+        case .users: return "tab.users".localized
+        case .bookmarks: return "tab.bookmarks".localized
         }
     }
 

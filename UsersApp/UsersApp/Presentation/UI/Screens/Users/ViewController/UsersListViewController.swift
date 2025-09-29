@@ -31,7 +31,7 @@ class UsersListViewController: UIViewController {
         setupUI()
         bindViewModel()
         viewModel.onAppear()
-        navigationItem.title = "Users"
+        navigationItem.title = "navigation.users".localized
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -90,8 +90,8 @@ class UsersListViewController: UIViewController {
     }
 
     private func showErrorAlert(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+        let alert = UIAlertController(title: "error.title".localized, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "button.ok".localized, style: .default) { [weak self] _ in
             self?.viewModel.clearError()
         })
         present(alert, animated: true)

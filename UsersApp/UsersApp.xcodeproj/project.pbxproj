@@ -200,6 +200,10 @@
 		45FE7A762E8A7B46003552C4 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 45FE7A752E8A7B46003552C4 /* Lottie */; };
 		45FE7A7F2E8A7C37003552C4 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 45FE7A7E2E8A7C37003552C4 /* loading.json */; };
 		45FE7A802E8A7C37003552C4 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 45FE7A7E2E8A7C37003552C4 /* loading.json */; };
+		45FE7A8C2E8A83DE003552C4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45FE7A8B2E8A83DE003552C4 /* Localizable.strings */; };
+		45FE7A8D2E8A83DE003552C4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45FE7A8B2E8A83DE003552C4 /* Localizable.strings */; };
+		45FE7A902E8A844C003552C4 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE7A8F2E8A844C003552C4 /* String+Localization.swift */; };
+		45FE7A912E8A844C003552C4 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE7A8F2E8A844C003552C4 /* String+Localization.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -318,6 +322,8 @@
 		45FE7A4B2E8A6985003552C4 /* UsersListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListViewModelTests.swift; sourceTree = "<group>"; };
 		45FE7A6E2E8A7A8C003552C4 /* LottieLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieLoadingView.swift; sourceTree = "<group>"; };
 		45FE7A7E2E8A7C37003552C4 /* loading.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
+		45FE7A8B2E8A83DE003552C4 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		45FE7A8F2E8A844C003552C4 /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -466,6 +472,7 @@
 		4518F6162AA505A100332DB6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				45FE7A8B2E8A83DE003552C4 /* Localizable.strings */,
 				45FE7A792E8A7B75003552C4 /* Lottie */,
 				4518F6172AA505B000332DB6 /* ColorAssets.swift */,
 			);
@@ -594,6 +601,7 @@
 		454412DA2E89E3A6004B33BB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				45FE7A8F2E8A844C003552C4 /* String+Localization.swift */,
 				454412DB2E89E3AC004B33BB /* DateFormatter+Extensions.swift */,
 			);
 			path = Extensions;
@@ -1099,6 +1107,7 @@
 				459B02112E86D6870039952E /* GoogleService-Info.plist in Resources */,
 				459B01E22E86C4B90039952E /* Development.xcconfig in Resources */,
 				45FE7A802E8A7C37003552C4 /* loading.json in Resources */,
+				45FE7A8D2E8A83DE003552C4 /* Localizable.strings in Resources */,
 				459B01E32E86C4B90039952E /* Production.xcconfig in Resources */,
 				459B01E42E86C4B90039952E /* QA.xcconfig in Resources */,
 			);
@@ -1109,6 +1118,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45FE7A7F2E8A7C37003552C4 /* loading.json in Resources */,
+				45FE7A8C2E8A83DE003552C4 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1183,6 +1193,7 @@
 				459B02882E874EC40039952E /* LoggingInterceptor.swift in Sources */,
 				459B02892E874EC40039952E /* NetworkClientProtocol.swift in Sources */,
 				4544130D2E89E726004B33BB /* TabDestination.swift in Sources */,
+				45FE7A912E8A844C003552C4 /* String+Localization.swift in Sources */,
 				4544131A2E89E7FB004B33BB /* TabBuilder.swift in Sources */,
 				459B028B2E874EC40039952E /* HTTPMethod.swift in Sources */,
 				459B028C2E874EC40039952E /* APIClient.swift in Sources */,
@@ -1253,6 +1264,7 @@
 				454413C22E8A06E1004B33BB /* EndpointProtocol.swift in Sources */,
 				454413C32E8A06E1004B33BB /* NetworkTransportProtocol.swift in Sources */,
 				454413C42E8A06E1004B33BB /* BaseEndpoint.swift in Sources */,
+				45FE7A902E8A844C003552C4 /* String+Localization.swift in Sources */,
 				454413C52E8A06E1004B33BB /* NetworkClientProtocol.swift in Sources */,
 				454413072E89E716004B33BB /* NavigationData.swift in Sources */,
 				4518F6B82AA71DBE00332DB6 /* UserDetailsContentViewData.swift in Sources */,

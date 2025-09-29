@@ -33,9 +33,9 @@ class UserDetailsViewModel: BaseViewModel {
 
     func getContentViewData() -> UserDetailsContentViewData {
         let usernameData = LabelViewData.largeTitle(text: user.fullName)
-        let nationalityData = LabelViewData.secondary(text: "Nationality: \(user.nationality ?? "Not specified")")
-        let ageData = LabelViewData.secondary(text: "Age: \(user.dateOfBirth?.age?.description ?? "Not specified")")
-        let phoneNumberData = LabelViewData.secondary(text: "Phone: \(user.phone ?? "Not specified")")
+        let nationalityData = LabelViewData.secondary(text: "user_details.nationality".localized(user.nationality ?? "user_details.not_specified".localized))
+        let ageData = LabelViewData.secondary(text: "user_details.age".localized(user.dateOfBirth?.age?.description ?? "user_details.not_specified".localized))
+        let phoneNumberData = LabelViewData.secondary(text: "user_details.phone".localized(user.phone ?? "user_details.not_specified".localized))
         let contentViewData = UserDetailsContentViewData(
             imageUrl: user.picture?.large ?? "",
             username: usernameData,
@@ -70,7 +70,7 @@ class UserDetailsViewModel: BaseViewModel {
             } catch {
                 await MainActor.run {
                     print("Error deleting user: \(error)")
-                    setError("Failed to remove user from favorites. Please try again.")
+                    setError("error.failed_to_remove_user".localized)
                     user.isSaved = true
                     setLoading(false)
                 }
@@ -92,7 +92,7 @@ class UserDetailsViewModel: BaseViewModel {
             } catch {
                 await MainActor.run {
                     print("Error saving user: \(error)")
-                    setError("Failed to save user to favorites. Please try again.")
+                    setError("error.failed_to_save_user".localized)
                     user.isSaved = false
                     setLoading(false)
                 }

@@ -11,14 +11,14 @@ class TabFactory {
     static func createDefaultTabConfigurations() -> [TabConfiguration] {
         return [
             TabConfiguration(
-                title: "Users",
+                title: "tab.users".localized,
                 iconName: "person.3",
                 selectedIconName: "person.3.fill"
             ) { navigationController in
                 UsersListCoordinator(navigationController: navigationController)
             },
             TabConfiguration(
-                title: "Bookmarks",
+                title: "tab.bookmarks".localized,
                 iconName: "heart.circle",
                 selectedIconName: "heart.circle.fill"
             ) { navigationController in
