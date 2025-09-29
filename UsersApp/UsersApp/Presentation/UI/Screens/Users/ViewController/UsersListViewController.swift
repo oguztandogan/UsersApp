@@ -90,11 +90,17 @@ class UsersListViewController: UIViewController {
     }
 
     private func showErrorAlert(message: String) {
-        let alert = UIAlertController(title: "error.title".localized, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "button.ok".localized, style: .default) { [weak self] _ in
-            self?.viewModel.clearError()
-        })
-        present(alert, animated: true)
+        showErrorAlertWithRetry(
+            title: "error.title".localized,
+            subtitle: message,
+            retryAction: { [weak self] in
+                self?.viewModel.clearError()
+                self?.viewModel.fetchUsers(isPagination: false, isRefreshing: false)
+            },
+            cancelAction: { [weak self] in
+                self?.viewModel.clearError()
+            }
+        )
     }
 }
 

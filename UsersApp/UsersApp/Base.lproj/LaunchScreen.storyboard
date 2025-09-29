@@ -21,7 +21,7 @@
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" name="PrimaryBackgroundColor"/>
+                        <color key="backgroundColor" name="WarningColor"/>
                         <constraints>
                             <constraint firstItem="VRD-lI-l9q" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="ACG-dx-NJR"/>
                             <constraint firstItem="VRD-lI-l9q" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="rDj-zX-sAx"/>
@@ -35,8 +35,8 @@
     </scenes>
     <resources>
         <image name="logo" width="170.66667175292969" height="170.66667175292969"/>
-        <namedColor name="PrimaryBackgroundColor">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="WarningColor">
+            <color red="0.94999998807907104" green="0.64999997615814209" blue="0.10000000149011612" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

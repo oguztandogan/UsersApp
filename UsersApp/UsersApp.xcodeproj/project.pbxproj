@@ -204,6 +204,12 @@
 		45FE7A8D2E8A83DE003552C4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45FE7A8B2E8A83DE003552C4 /* Localizable.strings */; };
 		45FE7A902E8A844C003552C4 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE7A8F2E8A844C003552C4 /* String+Localization.swift */; };
 		45FE7A912E8A844C003552C4 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE7A8F2E8A844C003552C4 /* String+Localization.swift */; };
+		45FE7A982E8A85AF003552C4 /* GenericAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE7A952E8A85AF003552C4 /* GenericAlertView.swift */; };
+		45FE7A992E8A85AF003552C4 /* AlertViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE7A942E8A85AF003552C4 /* AlertViewData.swift */; };
+		45FE7A9B2E8A85AF003552C4 /* GenericAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE7A952E8A85AF003552C4 /* GenericAlertView.swift */; };
+		45FE7A9C2E8A85AF003552C4 /* AlertViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE7A942E8A85AF003552C4 /* AlertViewData.swift */; };
+		45FE7AA02E8A8728003552C4 /* UIViewController+GenericAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE7A9F2E8A8728003552C4 /* UIViewController+GenericAlert.swift */; };
+		45FE7AA12E8A8728003552C4 /* UIViewController+GenericAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE7A9F2E8A8728003552C4 /* UIViewController+GenericAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -324,6 +330,9 @@
 		45FE7A7E2E8A7C37003552C4 /* loading.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		45FE7A8B2E8A83DE003552C4 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		45FE7A8F2E8A844C003552C4 /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
+		45FE7A942E8A85AF003552C4 /* AlertViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewData.swift; sourceTree = "<group>"; };
+		45FE7A952E8A85AF003552C4 /* GenericAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericAlertView.swift; sourceTree = "<group>"; };
+		45FE7A9F2E8A8728003552C4 /* UIViewController+GenericAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+GenericAlert.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -601,6 +610,7 @@
 		454412DA2E89E3A6004B33BB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				45FE7A9F2E8A8728003552C4 /* UIViewController+GenericAlert.swift */,
 				45FE7A8F2E8A844C003552C4 /* String+Localization.swift */,
 				454412DB2E89E3AC004B33BB /* DateFormatter+Extensions.swift */,
 			);
@@ -933,6 +943,7 @@
 		459B02C92E89965E0039952E /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				45FE7A962E8A85AF003552C4 /* GenericAlert */,
 				45FE7A6C2E8A7A89003552C4 /* LottieView */,
 				45866CF62E89A8BB00AC44AA /* LabelView */,
 				459B02A62E897D040039952E /* UsersTableView */,
@@ -999,6 +1010,15 @@
 				45FE7A7E2E8A7C37003552C4 /* loading.json */,
 			);
 			path = Lottie;
+			sourceTree = "<group>";
+		};
+		45FE7A962E8A85AF003552C4 /* GenericAlert */ = {
+			isa = PBXGroup;
+			children = (
+				45FE7A942E8A85AF003552C4 /* AlertViewData.swift */,
+				45FE7A952E8A85AF003552C4 /* GenericAlertView.swift */,
+			);
+			path = GenericAlert;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1195,6 +1215,8 @@
 				4544130D2E89E726004B33BB /* TabDestination.swift in Sources */,
 				45FE7A912E8A844C003552C4 /* String+Localization.swift in Sources */,
 				4544131A2E89E7FB004B33BB /* TabBuilder.swift in Sources */,
+				45FE7A9B2E8A85AF003552C4 /* GenericAlertView.swift in Sources */,
+				45FE7A9C2E8A85AF003552C4 /* AlertViewData.swift in Sources */,
 				459B028B2E874EC40039952E /* HTTPMethod.swift in Sources */,
 				459B028C2E874EC40039952E /* APIClient.swift in Sources */,
 				459B028D2E874EC40039952E /* UserEndpoint.swift in Sources */,
@@ -1222,6 +1244,7 @@
 				4518F6772AA69CFF00332DB6 /* UserDetailsContentView.swift in Sources */,
 				454412EB2E89E63D004B33BB /* UserDetailsNavigation.swift in Sources */,
 				4518F5FA2AA4AB7400332DB6 /* BookmarksViewController.swift in Sources */,
+				45FE7AA12E8A8728003552C4 /* UIViewController+GenericAlert.swift in Sources */,
 				4518F5EC2AA48E8D00332DB6 /* TabBarController.swift in Sources */,
 				4518F6182AA505B000332DB6 /* ColorAssets.swift in Sources */,
 				454412F82E89E697004B33BB /* UserDetailsDestination.swift in Sources */,
@@ -1244,6 +1267,8 @@
 				4518F6B32AA71DB200332DB6 /* BookmarksViewController.swift in Sources */,
 				454413B02E8A06B2004B33BB /* RemoteConfigManager.swift in Sources */,
 				45FE7A172E8A669A003552C4 /* APIEnvironment.swift in Sources */,
+				45FE7A982E8A85AF003552C4 /* GenericAlertView.swift in Sources */,
+				45FE7A992E8A85AF003552C4 /* AlertViewData.swift in Sources */,
 				454413B32E8A06BD004B33BB /* SaveUserUseCase.swift in Sources */,
 				454413B42E8A06BD004B33BB /* GetSavedUsersUseCase.swift in Sources */,
 				454413B52E8A06BD004B33BB /* GetUsersUseCase.swift in Sources */,
@@ -1277,6 +1302,7 @@
 				459B02A12E875E030039952E /* CoreDataService.swift in Sources */,
 				454413A52E8A0685004B33BB /* DomainAssembly.swift in Sources */,
 				454413A62E8A0685004B33BB /* PresentationAssembly.swift in Sources */,
+				45FE7AA02E8A8728003552C4 /* UIViewController+GenericAlert.swift in Sources */,
 				454413A72E8A0685004B33BB /* DataAssembly.swift in Sources */,
 				4518F6B52AA71DB800332DB6 /* UserDetailsViewModel.swift in Sources */,
 				454413B92E8A06C4004B33BB /* UsersRepository.swift in Sources */,

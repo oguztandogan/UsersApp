@@ -18,6 +18,9 @@
 "button.bookmark" = "Bookmark";
 "button.remove_bookmark" = "Remove Bookmark";
 "button.ok" = "OK";
+"button.retry" = "Retry";
+"button.cancel" = "Cancel";
+"button.confirm" = "Confirm";
 
 // MARK: - User Details
 "user_details.nationality" = "Nationality: %@";
@@ -30,6 +33,19 @@
 "error.failed_to_load_users" = "Failed to load users. Please try again.";
 "error.failed_to_save_user" = "Failed to save user to favorites. Please try again.";
 "error.failed_to_remove_user" = "Failed to remove user from favorites. Please try again.";
+
+// MARK: - Success Messages
+"success.title" = "Success";
+"success.user_saved" = "User saved to favorites successfully!";
+"success.user_removed" = "User removed from favorites successfully!";
+
+// MARK: - Warning Messages
+"warning.title" = "Warning";
+"warning.no_internet" = "No internet connection. Please check your network settings.";
+
+// MARK: - Info Messages
+"info.title" = "Information";
+"info.loading_data" = "Loading data, please wait...";
 
 // MARK: - Loading
 "loading.loading" = "Loading...";

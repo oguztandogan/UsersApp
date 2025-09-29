@@ -79,6 +79,28 @@ class UserDetailsViewController: UIViewController {
                 self.updateBookmarkButtonState()
             }
             .store(in: &cancellables)
+
+        viewModel.$errorMessage
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] errorMessage in
+                guard let self = self, let errorMessage = errorMessage else { return }
+                self.showErrorAlert(message: errorMessage)
+            }
+            .store(in: &cancellables)
+    }
+
+    private func showErrorAlert(message: String) {
+        showErrorAlertWithRetry(
+            title: "error.title".localized,
+            subtitle: message,
+            retryAction: { [weak self] in
+                self?.viewModel.clearError()
+                self?.viewModel.favouriteButtonAction()
+            },
+            cancelAction: { [weak self] in
+                self?.viewModel.clearError()
+            }
+        )
     }
 
     private func updateBookmarkButtonState() {
