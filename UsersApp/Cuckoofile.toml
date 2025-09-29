@@ -1,0 +1,23 @@
+[modules.UsersApp]
+output = "UsersAppTests/Generated/GeneratedMocks.swift"
+imports = ["Foundation"]
+testableImports = ["UsersApp"]
+
+sources = [
+    "UsersApp/Networking/Protocols/**/*.swift",
+    "UsersApp/Networking/Services/**/*.swift",
+    "UsersApp/Configuration/**/*",
+    "UsersApp/Base/**/*.swift",
+    "UsersApp/CoreDate/Generic/**/*.swift",
+    "UsersApp/Data/DataSources/Local/**/*.swift",
+    "UsersApp/Data/DataSources/Remote/**/*.swift",
+    "UsersApp/Data/Mappers/**/*.swift",
+    "UsersApp/Domain/Repositories/**/*.swift",
+    "UsersApp/Domain/UseCases/**/*.swift",
+    "UsersApp/Presentation/Navigation/**/*.swift",
+    "UsersApp/Presentation/Coordinator/**/*.swift",
+    "UsersApp/Presentation/UI/Screens/Users/Navigation/**/*.swift"
+]
+
+[modules.UsersApp.options]
+keepDocumentation = false
